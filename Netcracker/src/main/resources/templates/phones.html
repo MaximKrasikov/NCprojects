@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Choose your phone</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
+</head>
+<header>
+    <h1>Phones</h1>
+</header>
+<body>
+<div class="col-1-2">
+    <div class="content">
+        <h2>Функционал репозитория</h2>
+            <a th:href="@{/addphone}">Добавить новый продукт</a>
+            <a th:href="@{/modifyphone}">модифицировать</a>
+    </div>
+</div>
+<h2 align="middle">All Phones</h2>
+<div align="middle" , overflow="scroll">
+    <table border="0">
+        <tr>
+            <th>id</th>
+            <th>model</th>
+            <th>color</th>
+            <th>price</th>
+            <th>size</th>
+            <th>diagonal</th>
+            <th>description</th>
+            <th>creation date</th>
+            <th>picture</th>
+        </tr>
+        <tr th:each="phone : ${phones}">
+            <td th:utext="${phone.getPhone_id()}">...</td>
+            <td th:utext="${phone.getModelName()}">...</td>
+            <td th:utext="${phone.getColor()}">...</td>
+            <td th:utext="${phone.getPrice()}">...</td>
+            <td th:utext="${phone.getSize()}">...</td>
+            <td th:utext="${phone.getDiagonal()}">...</td>
+            <td th:utext="${phone.getDescription()}">...</td>
+            <td th:utext="${phone.getCreation_date()}">...</td>
+            <td>
+                <img width="100" height="100" th:src="@{'data:image/jpeg;base64,'+${phone.getPictures().getBytes()}}"
+                     alt=""/>
+                <form th:action="@{/deletephone}" th:object="${phoneForm}" method="POST">
+                    <input id="delete" name="delete" type="hidden" th:attr="value=${phone.getPhone_id()}"/>
+                    <input type="submit" class="button" value="Delete" onClick="return confirm('Delete this phone?')"/>
+                </form>
+                <form th:action="@{/modifyphone}" th:object="${modify}" method="POST">
+                    <input id="modify" name="modify" type="hidden" th:attr="value=${phone.getPhone_id()}"/>
+                    <input type="submit" class="button" value="Modify" onClick="return confirm('Modify this phone?')"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
