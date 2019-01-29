@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Repository
 public interface PhoneRepository extends JpaRepository<Phones,Long>{
-
     Phones findByPrice(Double price);
     Phones findByColor(String color);
     Phones findByModel(Model_Char model);

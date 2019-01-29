@@ -30,7 +30,7 @@ public class Pictures implements Serializable{
     private String name;
 
     @Lob
-    @Column(name = "PICTURE",columnDefinition = "BLOB", nullable = true)
+    @Column(name = "PICTURE",columnDefinition = "BLOB", nullable = false)
     private String bytes;
 
     public Pictures( Model_Char model,String color,String name, String bytes) {
@@ -39,14 +39,12 @@ public class Pictures implements Serializable{
         this.name=name;
         this.bytes =bytes;
     }
-
     public Pictures( Model_Char model,String color) {
         this.color = color;
         this.model = model;
     }
     public Pictures() {
     }
-
     public String getModelName(){
         return model.getName();
     }

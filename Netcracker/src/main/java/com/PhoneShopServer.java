@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @RequiredArgsConstructor
-
 public class PhoneShopServer {
        public static void main(String [] args){
            SpringApplication.run(PhoneShopServer.class, args);

@@ -17,5 +17,4 @@ public interface ModelRepository extends JpaRepository<Model_Char,Long> {
     List<Model_Char> findByDescription(String descroptional);
     Model_Char findModelByName(String name);
     Model_Char findModelById(Long model_Id);
-
 }

@@ -4,14 +4,18 @@ import com.entities.Model_Char;
 import com.entities.Phones;
 import com.entities.Pictures;
 import com.forms.PhoneForm;
+import com.repository.ModelRepository;
+import com.repository.PhoneRepository;
+import com.repository.PictureService.PictureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.repository.ModelRepository;
-import com.repository.PhoneRepository;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * Created by Admin on 22.01.2019.
@@ -23,6 +27,8 @@ public class AddPhone {
     private PhoneRepository phoneRepository;
     @Autowired
     private ModelRepository modelRepository;
+    @Autowired
+    private PictureServiceImpl picturesRepository;
 
     @RequestMapping(value = {"/addphone"}, method = RequestMethod.GET)
     public String addphone(Model model) {
@@ -30,23 +36,23 @@ public class AddPhone {
         model.addAttribute("phoneForm", phoneForm);
         return "addphone";
     }
+
     @RequestMapping(value = {"/addphone"}, method = RequestMethod.POST)
-    public String savePhone(Model model, @ModelAttribute("phoneForm") PhoneForm phoneForm) {
+    public String savePhone(Model model, @ModelAttribute("phoneForm") PhoneForm phoneForm) throws IOException, URISyntaxException {
         String model_name = phoneForm.getModel_name();
         String color_name = phoneForm.getColor_name();
         Double price = phoneForm.getPrice();
         Double size = phoneForm.getSize();
         Double diagonal = phoneForm.getDiagonal();
         String description = phoneForm.getDescription();
-        Pictures picture = phoneForm.getPictures();
-
         Model_Char m;
-        Phones p;
-        if (modelRepository.findByName(model_name).isEmpty() && modelRepository.findByDiagonal(diagonal).isEmpty()
-                && modelRepository.findBySize(size).isEmpty() && modelRepository.findByDescription(description).isEmpty()) {
+        Phones p;;
+        if (modelRepository.findModelById(phoneForm.getPhone_id())==null) {
             m = new Model_Char(model_name,diagonal, size, description);
-            p= new Phones(m, price, color_name, picture);
             modelRepository.save(m);
+            Pictures pic= new Pictures(m,color_name,model_name,picturesRepository.useImageFromBase("/images/"+phoneForm.getPictures().getPath()));
+            picturesRepository.addPictures(pic);
+            p= new Phones(m, price, color_name,pic);
             phoneRepository.save(p);
         } else {
             m = modelRepository.findByName(model_name).get(0);
@@ -54,4 +60,5 @@ public class AddPhone {
         }
         return "redirect:/phones";
     }
+
 }

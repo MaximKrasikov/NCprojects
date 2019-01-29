@@ -18,6 +18,9 @@
             <form th:action="@{/modifyphone}"
                   th:object="${phoneForm}" method="POST">
                 <table>
+                    ModelId:
+                    <input type="text" th:field="*{phone_id}"/>
+                    <br/>
                     Model:
                     <input type="text" th:field="*{model_name}"/>
                     <br/>
@@ -35,6 +38,9 @@
                     <br/>
                     Description:
                     <input type="text" th:field="*{description}"/>
+                    <br/>
+                    Picture:
+                    <input type="file" multiple accept="image/*,image/jpeg" th:field="*{pictures}"/>
                     <br/>
                     <input type="submit" value="Modify"/>
                 </table>

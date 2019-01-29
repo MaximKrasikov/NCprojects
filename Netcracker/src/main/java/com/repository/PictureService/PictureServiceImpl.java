@@ -2,9 +2,9 @@ package com.repository.PictureService;
 
 import com.entities.Model_Char;
 import com.entities.Pictures;
+import com.repository.PictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.repository.PictureRepository;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -52,11 +52,10 @@ public class PictureServiceImpl implements PictureService {
     }
 
     public String useImageFromBase(String filePath) throws IOException, URISyntaxException {
-        byte [] image= loadImage(filePath);
-        String file= Base64.getEncoder().encodeToString(image);
+        byte[] image = loadImage(filePath);
+        String file = Base64.getEncoder().encodeToString(image);
         return file;
     }
-
     public void save(Pictures picture) {
         repository.save(picture);
     }
