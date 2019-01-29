@@ -26,7 +26,7 @@ body {
   font-family: 'Calibri', serif;
   font-size: 100%;
   background: url('https://opt-226598.ssl.1c-bitrix-cdn.ru/upload/content/2018/08/erg54h465.jpg?153572759434295') no-repeat;
-            background-size: 100%; /* Современные браузеры */
+            background-size:  cover;/* Современные браузеры */
   padding-bottom: 40px;
   min-height: 100%;
 }
