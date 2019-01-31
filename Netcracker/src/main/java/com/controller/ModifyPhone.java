@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 25.01.2019.
@@ -58,16 +60,21 @@ public class ModifyPhone {
             m.setSize(size);
             m.setDescription(description);
 
+            List<Pictures> picList= new ArrayList<>();
             Pictures pic = new Pictures(m,color_name,model_name,picturesRepository.useImageFromBase("/images/"+phoneForm.getPictures().getPath()));
-            picturesRepository.addPictures(pic);
+            picList.add(pic);
+            for(Pictures picture:picList){
+                picturesRepository.addPictures(picture);
+            }
             p.setModel(m);
             p.setPrice(price);
             p.setColor(color_name);
-            p.setPictures( pic);
+            p.setPictures(picList);
 
             modelRepository.save(m);
             phoneRepository.save(p);
         }
         return "redirect:/phones";
     }
+
 }

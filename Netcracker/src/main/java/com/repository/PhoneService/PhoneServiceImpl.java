@@ -3,9 +3,9 @@ package com.repository.PhoneService;
 
 import com.entities.Model_Char;
 import com.entities.Phones;
+import com.repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.repository.PhoneRepository;
 
 import java.util.List;
 
@@ -35,6 +35,13 @@ public class PhoneServiceImpl implements PhoneService {
             phoneRep.delete(phone);
         }
     }
+    @Override
+    public void deletePhoneFromPhone(Long phoneId) {
+        List<Phones> listOfPhones= phoneRep.findListByPhone(phoneId);
+        for(Phones phone:listOfPhones){
+            phoneRep.delete(phone);
+        }
+    }
 
     @Override
     public void deletePhone(Phones phone) {
@@ -52,4 +59,13 @@ public class PhoneServiceImpl implements PhoneService {
         phoneRep.save(phone);
     }
 
+
+    @Override
+    public Phones findPhoneById(Long phone) {
+        return phoneRep.findPhoneById(phone);
+    }
+
+    public Phones findPhoneByModel(Model_Char model){
+        return phoneRep.findPhoneByModel(model);
+    }
 }

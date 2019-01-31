@@ -1,6 +1,5 @@
 package com.repository.PictureService;
 
-import com.entities.Model_Char;
 import com.entities.Pictures;
 
 import java.util.List;
@@ -14,6 +13,6 @@ public interface PictureService {
 
     public Pictures addPictures(Pictures picture);
 
-    void deletePictureFromModel(Model_Char picture);
+    //void deletePictureFromPhones(Phones picture);
 
 }

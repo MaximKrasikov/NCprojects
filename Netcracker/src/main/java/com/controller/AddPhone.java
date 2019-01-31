@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 22.01.2019.
@@ -46,18 +48,25 @@ public class AddPhone {
         Double diagonal = phoneForm.getDiagonal();
         String description = phoneForm.getDescription();
         Model_Char m;
-        Phones p;;
-        if (modelRepository.findModelById(phoneForm.getPhone_id())==null) {
-            m = new Model_Char(model_name,diagonal, size, description);
+        Phones p;
+        List<Pictures> picList = new ArrayList<>();
+        if (modelRepository.findModelById(phoneForm.getPhone_id()) == null) {
+            m = new Model_Char(model_name, diagonal, size, description);
             modelRepository.save(m);
-            Pictures pic= new Pictures(m,color_name,model_name,picturesRepository.useImageFromBase("/images/"+phoneForm.getPictures().getPath()));
-            picturesRepository.addPictures(pic);
-            p= new Phones(m, price, color_name,pic);
+            Pictures pic = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
+            picList.add(pic);
+            for (Pictures picture : picList) {
+                picturesRepository.addPictures(picture);
+            }
+            p = new Phones(m, price, color_name);
+            picturesRepository.searchForPicturesList(picList, p);
             phoneRepository.save(p);
         } else {
             m = modelRepository.findByName(model_name).get(0);
             phoneRepository.findByModel(m);
+            return "redirect:/addmistake";
         }
+
         return "redirect:/phones";
     }
 

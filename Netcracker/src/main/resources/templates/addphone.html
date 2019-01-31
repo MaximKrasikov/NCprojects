@@ -40,7 +40,7 @@
                     <input type="text" th:field="*{description}"/>
                     <br/>
                     Picture:
-                    <input type="file" th:field="*{pictures}"/>
+                    <input type="file" multiple accept="image/*,image/jpeg" th:field="*{pictures}"/>
                     <br/>
                     <input type="submit" value="Create"/>
                 </table>

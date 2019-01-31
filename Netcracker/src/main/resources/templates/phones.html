@@ -38,8 +38,8 @@
             <td th:utext="${phone.getDescription()}">...</td>
             <td th:utext="${phone.getCreation_date()}">...</td>
             <td>
-                <img width="100" height="100" th:src="@{'data:image/jpeg;base64,'+${phone.getPictures().getBytes()}}"
-                     alt=""/>
+                   <img width="100" height="100"
+                         th:src="@{'data:image/jpeg;base64,'+${phone.getPictures().iterator().next().getBytes()}}" alt=""/>
                 <form th:action="@{/deletephone}" th:object="${phoneForm}" method="POST">
                     <input id="delete" name="delete" type="hidden" th:attr="value=${phone.getPhone_id()}"/>
                     <input type="submit" class="button" value="Delete" onClick="return confirm('Delete this phone?')"/>

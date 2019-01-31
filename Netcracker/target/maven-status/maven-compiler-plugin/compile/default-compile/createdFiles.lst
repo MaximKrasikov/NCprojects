@@ -13,6 +13,7 @@ com\repository\PhoneService\PhoneServiceImpl.class
 com\controller\ServerController.class
 com\repository\PhoneRepository.class
 com\Init\DataInit.class
+com\controller\SliderPhone.class
 com\controller\DeletePhone.class
 com\forms\PhoneForm.class
 com\repository\PictureRepository.class

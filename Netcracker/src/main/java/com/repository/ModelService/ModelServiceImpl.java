@@ -1,6 +1,7 @@
 package com.repository.ModelService;
 
 import com.entities.Model_Char;
+import com.entities.Phones;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.repository.ModelRepository;
@@ -48,5 +49,9 @@ public class ModelServiceImpl implements ModelService {
 
     public void save(Model_Char model) {
         modelRep.save(model);
+    }
+
+    public Model_Char findModelByPhone(Phones phone){
+        return phone.getModel();
     }
 }

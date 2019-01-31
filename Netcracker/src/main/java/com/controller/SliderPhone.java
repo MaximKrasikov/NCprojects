@@ -17,8 +17,8 @@ public class SliderPhone {
     private PictureServiceImpl picturesRepository;
 
     @RequestMapping(value = {"/sliderphoto"}, method = RequestMethod.GET)
-    public String sliderPhoto(Model model, @ModelAttribute("slider") Long  countOfPhotos) {
-
+    public String sliderPhoto(Model model, @ModelAttribute("slider") Long  modelId) {
+        picturesRepository.findByCount(modelId);//возврат листа картинок по id телефона
         return "phones";
     }
 }

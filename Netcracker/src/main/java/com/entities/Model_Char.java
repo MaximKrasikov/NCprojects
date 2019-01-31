@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Admin on 29.11.2018.
@@ -25,7 +24,7 @@ public class Model_Char {
     private String name;
 
     @OneToMany(mappedBy = "model", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private Set<Phones> phones;
+    private List<Phones> phones;
 
     @OneToMany(mappedBy = "model", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Pictures> pictures;

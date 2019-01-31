@@ -1,15 +1,14 @@
 package com.controller;
 
-import com.entities.Model_Char;
 import com.forms.PhoneForm;
+import com.repository.ModelService.ModelServiceImpl;
+import com.repository.PhoneService.PhoneServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.repository.ModelService.ModelServiceImpl;
-import com.repository.PhoneService.PhoneServiceImpl;
 
 /**
  * Created by Admin on 22.01.2019.
@@ -30,9 +29,8 @@ public class DeletePhone {
     }
 
     @RequestMapping(value = {"/deletephone"}, method = RequestMethod.POST)
-    public String deletePhone(@ModelAttribute("delete") Long phone) {
-        Model_Char model_char = modelRepository.findModelById(phone);
-        phoneRepository.deletePhoneFromModel(model_char);
+    public String deletePhone(@ModelAttribute("delete") Long phoneId) {
+        phoneRepository.deletePhoneFromPhone(phoneId);
         return "redirect:/phones";
     }
 }

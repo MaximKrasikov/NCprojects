@@ -17,6 +17,8 @@ public interface PhoneService {
 
      void deletePhone(Phones phone);
 
+     Phones findPhoneById(Long phone);
 
+     void deletePhoneFromPhone(Long phoneId);
 
 }

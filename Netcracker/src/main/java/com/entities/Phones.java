@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,13 +28,9 @@ public class Phones implements Serializable{
     @JoinColumn(name = "MODEL_ID", nullable = false)
     private Model_Char model;
 
-    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "PICTURE_ID", nullable = true)
-    private Pictures pictures;
-/*
-    @OneToMany(mappedBy = "phone", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "phones", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Pictures> pictures;
-*/
+
     @Column(name = "PRICE")
     private Double price;
 
@@ -45,11 +42,17 @@ public class Phones implements Serializable{
     @Column(name = "CREATION_DATE")
     private Date creation_date;
 
-    public Phones( Model_Char model, Double price, String color,Pictures pictures) {
+    public Phones( Model_Char model, Double price, String color,List<Pictures> pictures) {
         this.model = model;
         this.price = price;
         this.color = color;
         this.pictures=pictures;
+        this.creation_date = new Date();
+    }
+    public Phones( Model_Char model, Double price, String color){
+        this.model = model;
+        this.price = price;
+        this.color = color;
         this.creation_date = new Date();
     }
 
@@ -69,9 +72,7 @@ public class Phones implements Serializable{
     public Double getDiagonal(){
         return this.model.getDiagonal();
     }
-    public String getDescription(){
+    public String getDescription() {
         return this.model.getDescription();
     }
-    public Pictures getPicture(){return pictures;}
-
 }

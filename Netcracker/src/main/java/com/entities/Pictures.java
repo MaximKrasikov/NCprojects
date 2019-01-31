@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "PICTURES")
-public class Pictures implements Serializable{
+public class Pictures implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,29 +23,38 @@ public class Pictures implements Serializable{
     private String color;
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "MODEL", nullable = false)
+    @JoinColumn(name = "PHONES_ID", nullable = true)
+    private Phones phones;
+
+    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "MODEL_ID", nullable = false)
     private Model_Char model;
 
     @Column(name = "NAME")
     private String name;
 
     @Lob
-    @Column(name = "PICTURE",columnDefinition = "BLOB", nullable = false)
+    @Column(name = "PICTURE", columnDefinition = "BLOB", nullable = false)
     private String bytes;
 
-    public Pictures( Model_Char model,String color,String name, String bytes) {
+    public Pictures(Phones phones, String color, String name, String bytes) {
+        this.color = color;
+        this.phones = phones;
+        this.name = name;
+        this.bytes = bytes;
+    }
+
+    public Pictures(Model_Char model, String color, String name, String bytes) {
         this.color = color;
         this.model = model;
-        this.name=name;
-        this.bytes =bytes;
+        this.name = name;
+        this.bytes = bytes;
     }
-    public Pictures( Model_Char model,String color) {
-        this.color = color;
-        this.model = model;
-    }
+
     public Pictures() {
     }
-    public String getModelName(){
-        return model.getName();
+
+    public String getModelName() {
+        return phones.getModelName();
     }
 }
