@@ -50,8 +50,4 @@ public class ModelServiceImpl implements ModelService {
     public void save(Model_Char model) {
         modelRep.save(model);
     }
-
-    public Model_Char findModelByPhone(Phones phone){
-        return phone.getModel();
-    }
 }

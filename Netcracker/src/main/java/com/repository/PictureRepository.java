@@ -13,8 +13,5 @@ import java.util.List;
 @Repository
 public interface PictureRepository extends JpaRepository<Pictures,Long> {
     List<Pictures> findAllById(Long modelId);
-    @Query(value="SELECT * FROM PICTURES p where p.name like %?1%",nativeQuery = true)//%?1%
-    List<Pictures> findByModel(String modelName);
-    //List<Pictures> findListByPhone(Long phoneId);
 }
 

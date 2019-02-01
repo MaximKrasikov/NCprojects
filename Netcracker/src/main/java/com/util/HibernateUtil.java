@@ -25,11 +25,6 @@ public class HibernateUtil {
             SessionFactory sessionFactory = configuration
                     .buildSessionFactory(serviceRegistry);
             return sessionFactory;
-
-            /*
-            return new AnnotationConfiguration().configure(new File("D:\\Netcracker-master\\springjpapostgres" +
-                    "\\springjpapostgres-master\\src\\main\\resources\\hibernate.cfg.xml")).buildSessionFactory();
-            */
         }
         catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
