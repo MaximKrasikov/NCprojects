@@ -47,25 +47,17 @@ public class PhoneServiceImpl implements PhoneService {
     public void deletePhone(Phones phone) {
        phoneRep.delete(phone);
     }
-
     @Override
     public List<Phones> findAllPhones() {
         List<Phones> res = phoneRep.findAll();
         System.out.println(res);
         return res;
     }
-
     public void save(Phones phone) {
         phoneRep.save(phone);
     }
-
-
     @Override
     public Phones findPhoneById(Long phone) {
         return phoneRep.findPhoneById(phone);
-    }
-
-    public Phones findPhoneByModel(Model_Char model){
-        return phoneRep.findPhoneByModel(model);
     }
 }

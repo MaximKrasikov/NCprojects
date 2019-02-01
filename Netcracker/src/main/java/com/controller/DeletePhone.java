@@ -33,4 +33,16 @@ public class DeletePhone {
         phoneRepository.deletePhoneFromPhone(phoneId);
         return "redirect:/phones";
     }
+
+    @RequestMapping(value = {"/deletesomephone"}, method = RequestMethod.POST)
+    public String deleteSomePhone(@ModelAttribute("deleteSome") Long phoneId) {
+        phoneRepository.deletePhoneFromPhone(phoneId);
+        return "redirect:/phones";
+    }
+    @RequestMapping(value = {"/deletesomephone"}, method = RequestMethod.GET)
+    public String deleteSomePhone(Model model) {
+        PhoneForm phoneForm = new PhoneForm();
+        model.addAttribute("phoneForm", phoneForm);
+        return "deletesomephone";
+    }
 }
