@@ -43,6 +43,13 @@ public class PhoneServiceImpl implements PhoneService {
         }
     }
 
+    public void deletePhoneFromListId(List<Long> phoneId) {
+        List<Phones> listOfPhones= phoneRep.findListByListId(phoneId);
+        for(Phones phone:listOfPhones){
+            phoneRep.delete(phone);
+        }
+    }
+
     @Override
     public void deletePhone(Phones phone) {
        phoneRep.delete(phone);

@@ -66,8 +66,6 @@ public class AddPhone {
             phoneRepository.findByModel(m);
             return "redirect:/addmistake";
         }
-
         return "redirect:/phones";
     }
-
 }
