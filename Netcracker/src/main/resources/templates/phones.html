@@ -16,6 +16,10 @@
     </script>
 </head>
 <header>
+    < p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+    </form>
     <h1>Phones</h1>
 </header>
 <body>
