@@ -16,6 +16,7 @@
              });
         });
 
+
     </script>
 </head>
 <header>
@@ -33,7 +34,7 @@
 <h2 align="middle">All Phones</h2>
 <div align="middle" , overflow="scroll">
 
-    <form th:action="@{/deletesomephone}"  method="POST">
+    <form th:action="@{/deletesomephone}" method="POST">
         <input type="submit" class="button" value="DeleteAll" onClick="return confirm('Delete this phone?')"/>
         <br/>
         <table border="0">

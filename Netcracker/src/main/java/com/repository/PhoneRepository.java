@@ -23,6 +23,7 @@ public interface PhoneRepository extends JpaRepository<Phones,Long>{
     List<Phones> findListByListId(List<Long> phoneId);
 
     List<Phones> findListByModel(Model_Char model);
+
     @Query(value="SELECT * FROM Phones WHERE Phones.id like %?1%",nativeQuery = true)
     Phones findPhoneById(Long phone);
 }

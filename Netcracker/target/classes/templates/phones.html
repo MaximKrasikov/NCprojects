@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Choose your phone</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}"/>
+    <!--<script type="text/javascript"
+            src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#checkBoxAll').click(function() {
+            if($(this).is(":checked"))
+                $('.chkCheckBoxId').prop('checked',true);
+                else
+                    $('.chkCheckBoxId').prop('checked',false);
+             });
+        });
+
+
+    </script>
+</head>
+<header>
+    <h1>Phones</h1>
+</header>
+<body>
+<div class="col-1-2">
+    <div class="content">
+        <h2>Функционал репозитория</h2>
+        <ul>
+            <li><a th:href="@{/addphone}">Добавить новый продукт</a></li>
+        </ul>
+    </div>
+</div>
+<h2 align="middle">All Phones</h2>
+<div align="middle" , overflow="scroll">
+
+    <form th:action="@{/deletesomephone}" method="POST">
+        <input type="submit" class="button" value="DeleteAll" onClick="return confirm('Delete this phone?')"/>
+        <br/>
+        <table border="0">
+            <tr>
+                <th><input type="checkbox" id="checkBoxAll"/></th>
+                <th>id</th>
+                <th>model</th>
+                <th>color</th>
+                <th>price</th>
+                <th>size</th>
+                <th>diagonal</th>
+                <th>description</th>
+                <th>creation date</th>
+                <th>picture</th>
+            </tr>
+            <tr th:each="phone : ${phones}">
+                <td>
+                    <input type="checkbox" class="chkCheckBoxId" th:attr="value=${phone.getPhone_id()}" name="phoneId"/>
+                </td>
+                <td th:utext="${phone.getPhone_id()}">...</td>
+                <td th:utext="${phone.getModelName()}">...</td>
+                <td th:utext="${phone.getColor()}">...</td>
+                <td th:utext="${phone.getPrice()}">...</td>
+                <td th:utext="${phone.getSize()}">...</td>
+                <td th:utext="${phone.getDiagonal()}">...</td>
+                <td th:utext="${phone.getDescription()}">...</td>
+                <td th:utext="${phone.getCreation_date()}">...</td>
+                <td>
+                    <img width="100" height="100"
+                         th:src="@{'data:image/jpeg;base64,'+${phone.getPictures().iterator().next().getBytes()}}"
+                         alt=""/>
+
+                    <form th:action="@{/deletephone}" th:object="${phoneForm}" method="POST">
+                        <input id="delete" name="delete" type="hidden" th:attr="value=${phone.getPhone_id()}"/>
+                        <input type="submit" class="button" value="Delete"
+                               onClick="return confirm('Delete this phone?')"/>
+                    </form>
+                    <form th:action="@{/modifyphone}" th:object="${modify}" method="GET">
+                        <input id="modify" name="modify" type="hidden" th:attr="value=${phone.getPhone_id()}"/>
+                        <input type="submit" class="button" value="Modify"
+                               onClick="return confirm('Modify this phone?')"/>
+                    </form>
+                    <form th:action="@{/sliderphoto}" th:object="${slider}" method="GET">
+                        <label for="customRange2">Photo</label>
+                        <input id="slidercustom" name="slidercustom" type="hidden"
+                               th:attr="value=${phone.getPhone_id()}"/>
+                        <input type="range" class="custom-range" value="Slider" min="0" max="4" id="customRange2">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

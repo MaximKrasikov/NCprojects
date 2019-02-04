@@ -12,7 +12,4 @@ public interface PictureService {
     public List<Pictures> findAllPictures();
 
     public Pictures addPictures(Pictures picture);
-
-    //void deletePictureFromPhones(Phones picture);
-
 }

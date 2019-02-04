@@ -50,18 +50,20 @@ public class AddPhone {
         Model_Char m;
         Phones p;
         List<Pictures> picList = new ArrayList<>();
-        if (modelRepository.findModelById(phoneForm.getPhone_id()) == null) {
+        if (phoneRepository.findPhoneById(phoneForm.getPhone_id()) == null) {//если телефон по id телефона не найден
             m = new Model_Char(model_name, diagonal, size, description);
             modelRepository.save(m);
-            Pictures pic = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
-            picList.add(pic);
+            Pictures pic1 = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
+            Pictures pic2 = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
+            picList.add(pic1);
+            picList.add(pic2);
             for (Pictures picture : picList) {
                 picturesRepository.addPictures(picture);
             }
             p = new Phones(m, price, color_name);
             picturesRepository.searchForPicturesList(picList, p);
             phoneRepository.save(p);
-        } else {
+        }else {
             m = modelRepository.findByName(model_name).get(0);
             phoneRepository.findByModel(m);
             return "redirect:/addmistake";

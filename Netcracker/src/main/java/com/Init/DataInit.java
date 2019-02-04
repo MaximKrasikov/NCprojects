@@ -1,8 +1,7 @@
 package com.Init;
 
-import com.entities.Model_Char;
-import com.entities.Phones;
-import com.entities.Pictures;
+import com.entities.*;
+import com.repository.UserService.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -18,6 +17,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -31,20 +31,27 @@ public class DataInit implements ApplicationRunner {
     public static PhoneServiceImpl servicePhone;
     public static PictureServiceImpl servicePicture;
     public static ModelServiceImpl serviceModel;
+    public static UserServiceImpl serviceUser;
 
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    public DataInit(PhoneServiceImpl servicePhone, PictureServiceImpl servicePicture, ModelServiceImpl serviceModel) {
+    public DataInit(PhoneServiceImpl servicePhone, PictureServiceImpl servicePicture, ModelServiceImpl serviceModel, UserServiceImpl serviceUser) {
         this.servicePhone = servicePhone;
         this.servicePicture = servicePicture;
         this.serviceModel=serviceModel;
+        this.serviceUser= serviceUser;
     }
 
     public static List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {
         List<Model_Char> models = new ArrayList<>();
         List<Phones> phones = new ArrayList<>();
         List<Pictures> pics= new ArrayList<>();
+
+        User user = new User("admin", "admin");
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        serviceUser.save(user);
 
         Model_Char m_1 = new  Model_Char("Alcatel",170.0,68.0,"Телефон хороший");// создаем отдельную модель телефона
         Model_Char m_2 = new  Model_Char("Meizu",120.0,57.0,"Отличное качество, надо брать");
