@@ -1,4 +1,4 @@
-package com.javamaster.springjpapostgres.util;
+package com.util;
 
 /**
  * Created by Admin on 09.12.2018.

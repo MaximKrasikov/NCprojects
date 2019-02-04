@@ -1,12 +1,9 @@
 package com.entities;
 
-import org.springframework.data.annotation.Id;
-
-import javax.management.relation.Role;
-import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Set;
 
 @Getter

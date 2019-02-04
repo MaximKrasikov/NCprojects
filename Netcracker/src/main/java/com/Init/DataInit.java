@@ -1,14 +1,14 @@
 package com.Init;
 
 import com.entities.*;
+import com.repository.ModelService.ModelServiceImpl;
+import com.repository.PhoneService.PhoneServiceImpl;
+import com.repository.PictureService.PictureServiceImpl;
 import com.repository.UserService.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import com.repository.ModelService.ModelServiceImpl;
-import com.repository.PhoneService.PhoneServiceImpl;
-import com.repository.PictureService.PictureServiceImpl;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -33,14 +33,16 @@ public class DataInit implements ApplicationRunner {
     public static ModelServiceImpl serviceModel;
     public static UserServiceImpl serviceUser;
 
+
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    public DataInit(PhoneServiceImpl servicePhone, PictureServiceImpl servicePicture, ModelServiceImpl serviceModel, UserServiceImpl serviceUser) {
+    public DataInit(PhoneServiceImpl servicePhone, PictureServiceImpl servicePicture, ModelServiceImpl serviceModel,UserServiceImpl serviceUser) {
         this.servicePhone = servicePhone;
         this.servicePicture = servicePicture;
         this.serviceModel=serviceModel;
         this.serviceUser= serviceUser;
+
     }
 
     public static List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {
@@ -52,6 +54,7 @@ public class DataInit implements ApplicationRunner {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         serviceUser.save(user);
+
 
         Model_Char m_1 = new  Model_Char("Alcatel",170.0,68.0,"Телефон хороший");// создаем отдельную модель телефона
         Model_Char m_2 = new  Model_Char("Meizu",120.0,57.0,"Отличное качество, надо брать");

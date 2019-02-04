@@ -9,11 +9,7 @@
 <header>
     <div class="header-row">
         <div class="header-left">
-            <img th:src="@{/img/anchor.png}" width="100" height="70" align="left"/>
             <p>Добро пожаловать!</p>
-            <p>
-                Телефонов в базе: <span th:text="${size}">...</span>
-            </p>
         </div>
         <div class="header-middle">
             <h1>Phones</h1>
@@ -21,7 +17,6 @@
         <div class="header-right"></div>
     </div>
 </header>
-
 
 <body>
 <div class="row">
@@ -40,16 +35,10 @@
                 <input type="submit" value="Sign In"/>
             </form>
             <p>
-                Первый раз здесь? <a th:href="@{/registration}">Регистрация</a>
+                Зарегистрируйтесь: <a th:href="@{/registration}">Регистрация</a>
             </p>
         </div>
     </div>
-    <div class="col-2-2">
-        <div class="content">
-            <hr>
-        </div>
-    </div>
 </div>
-</body>
 </body>
 </html>

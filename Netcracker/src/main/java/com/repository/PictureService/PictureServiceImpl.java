@@ -40,15 +40,6 @@ public class PictureServiceImpl implements PictureService {
         Pictures savedPicture = pictureRepository.saveAndFlush(picture);
         return savedPicture;
     }
-/*
-    @Override
-    public void deletePictureFromPhones(Phones phone) {
-        List<Pictures> listOfPictures = pictureRepository.findListByPhone(phone.getPhone_id());// находит телефоны по имени модели
-        for (Pictures picture : listOfPictures) {
-            pictureRepository.delete(picture);
-        }
-    }
-*/
 
     @Override
     public List<Pictures> findAllPictures() {
