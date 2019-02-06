@@ -25,6 +25,7 @@
             <h2>Регистрация нового пользователя.</h2>
             <div th:if="${param.error}">Invalid username and password.</div>
             <div th:if="${param.logout}">You have been logged out.</div>
+            <div th:if="${checkDb}">Пользователь с таким именем уже существует.</div>
             <form th:action="@{/registration}" method="post">
                 Логин: <br>
                 <input type="text" name="username" placeholder="username" /> <br>

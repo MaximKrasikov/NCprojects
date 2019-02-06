@@ -2,8 +2,6 @@ package com.repository.PictureService;
 
 import com.entities.Phones;
 import com.entities.Pictures;
-import com.repository.ModelService.ModelServiceImpl;
-import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +23,6 @@ public class PictureServiceImpl implements PictureService {
 
     @Autowired
     private PictureRepository pictureRepository;
-    @Autowired
-    private PhoneServiceImpl phoneRepository;
-    @Autowired
-    private ModelServiceImpl modelRepository;
-
 
     public PictureServiceImpl(PictureRepository repository) {
         this.pictureRepository = repository;
@@ -55,10 +48,6 @@ public class PictureServiceImpl implements PictureService {
         byte[] image = loadImage(filePath);
         String file = Base64.getEncoder().encodeToString(image);
         return file;
-    }
-
-    public void getByteFromPicture(Phones phone) {
-        phone.getPictures().forEach(Pictures::getBytes);
     }
 
     public void save(Pictures picture) {

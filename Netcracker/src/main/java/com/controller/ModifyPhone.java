@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Admin on 25.01.2019.
@@ -30,50 +31,54 @@ public class ModifyPhone {
     private ModelRepository modelRepository;
     @Autowired
     private PictureServiceImpl picturesRepository;
+    Phones phone;
 
     @RequestMapping(value = {"/modifyphone"}, method = RequestMethod.GET)
-    public String modifyPhone(Model model,@ModelAttribute("modify") Long modelId) {
+    public String modifyPhone(Model model, @ModelAttribute("modify") Long modelId) {
+        Optional<Phones> pre_phone = phoneRepository.findById(modelId);
+        phone = pre_phone.get();
+
         PhoneForm phoneForm = new PhoneForm();
-        phoneForm.setPhone_id(modelId);
+        phoneForm.setPhone_id(phone.getPhone_id());
+        phoneForm.setModel_name(phone.getModelName());
+        phoneForm.setColor_name(phone.getColor());
+        phoneForm.setDescription(phone.getDescription());
+        phoneForm.setDiagonal(phone.getDiagonal());
+        phoneForm.setPrice(phone.getPrice());
+        phoneForm.setSize(phone.getSize());
+
         model.addAttribute("phoneForm", phoneForm);
         return "modifyphone";
     }
 
-    //,@ModelAttribute("phoneForm") PhoneForm phoneForm
     @RequestMapping(value = {"/modifyphone"}, method = RequestMethod.POST)
-    public String modifyPhone(Model model,@ModelAttribute("phoneForm") PhoneForm phoneForm) throws IOException, URISyntaxException {
-        Model_Char m;
-        Phones p;
-        if (modelRepository.findModelById(phoneForm.getPhone_id())!=null) {
-            m = modelRepository.findModelById(phoneForm.getPhone_id());
-            p= phoneRepository.findByModel(m);
+    public String modifyPhone(Model model, @ModelAttribute("phoneForm") PhoneForm phoneForm) throws IOException, URISyntaxException {
 
-            String model_name = phoneForm.getModel_name();
-            String color_name = phoneForm.getColor_name();
-            Double price = phoneForm.getPrice();
-            Double size = phoneForm.getSize();
-            Double diagonal = phoneForm.getDiagonal();
-            String description = phoneForm.getDescription();
+        Optional<Phones> pre_phones = phoneRepository.findById(phoneForm.getPhone_id());
+        Phones p = pre_phones.get();
 
-            m.setName(model_name);
-            m.setDiagonal(diagonal);
-            m.setSize(size);
-            m.setDescription(description);
+        String model_name = phoneForm.getModel_name();
+        String color_name = phoneForm.getColor_name();
+        Double price = phoneForm.getPrice();
+        Double size = phoneForm.getSize();
+        Double diagonal = phoneForm.getDiagonal();
+        String description = phoneForm.getDescription();
 
-            List<Pictures> picList= new ArrayList<>();
-            Pictures pic = new Pictures(m,color_name,model_name,picturesRepository.useImageFromBase("/images/"+phoneForm.getPictures().getPath()));
-            picList.add(pic);
-            for(Pictures picture:picList){
-                picturesRepository.addPictures(picture);
-            }
-            p.setModel(m);
-            p.setPrice(price);
-            p.setColor(color_name);
-            p.setPictures(picList);
+        Model_Char m = new Model_Char(model_name, diagonal, size, description);
+        modelRepository.save(m);
 
-            modelRepository.save(m);
-            phoneRepository.save(p);
+        List<Pictures> picList = new ArrayList<>();
+        Pictures pic = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
+        picList.add(pic);
+        for (Pictures picture : picList) {
+            picturesRepository.addPictures(picture);
         }
+        p.setModel(m);
+        p.setPrice(price);
+        p.setColor(color_name);
+        p.setPictures(picList);
+
+        phoneRepository.save(p);
         return "redirect:/phones";
     }
 

@@ -22,9 +22,6 @@
             <form th:action="@{/addphone}"
                   th:object="${phoneForm}" method="POST">
                 <table>
-                    ModelId:
-                    <input type="text" th:field="*{phone_id}"/>
-                    <br/>
                     Model:
                     <input type="text" th:field="*{model_name}"/>
                     <br/>

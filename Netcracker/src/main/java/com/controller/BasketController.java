@@ -72,7 +72,9 @@ public class BasketController {
             alreadyThere = false;
             user.addPhone(phone);
         }
+
         users.save(user);
+        model.addAttribute("phones",user);
         return "redirect:/basket";
     }
 }

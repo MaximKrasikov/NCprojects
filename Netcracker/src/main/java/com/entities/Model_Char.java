@@ -21,7 +21,7 @@ public class Model_Char {
     private Long id;
 
     @Column(name = "NAME", length = 64, nullable = false)
-    private String name;
+    private String  name;
 
     @OneToMany(mappedBy = "model", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Phones> phones;

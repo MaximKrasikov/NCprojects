@@ -2,7 +2,6 @@ package com.repository;
 
 import com.entities.Model_Char;
 import com.entities.Phones;
-import com.entities.Pictures;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,6 +13,7 @@ import java.util.List;
  */
 @Repository
 public interface PhoneRepository extends JpaRepository<Phones,Long>{
+
     Phones findByModel(Model_Char model);
 
     @Query(value="SELECT * FROM Phones WHERE Phones.id like %?1%",nativeQuery = true)

@@ -48,7 +48,6 @@ public class User {
     public void deletePhone(Phones phone) {
         this.phones.remove(phone);
     }
-
     public long getNumberOfPhones() {
         return phones.size();
     }

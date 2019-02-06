@@ -47,6 +47,7 @@ public class AddPhone {
         Double size = phoneForm.getSize();
         Double diagonal = phoneForm.getDiagonal();
         String description = phoneForm.getDescription();
+
         Model_Char m;
         Phones p;
         List<Pictures> picList = new ArrayList<>();
@@ -54,9 +55,7 @@ public class AddPhone {
             m = new Model_Char(model_name, diagonal, size, description);
             modelRepository.save(m);
             Pictures pic1 = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
-            Pictures pic2 = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
             picList.add(pic1);
-            picList.add(pic2);
             for (Pictures picture : picList) {
                 picturesRepository.addPictures(picture);
             }
