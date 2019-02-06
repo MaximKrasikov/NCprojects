@@ -45,6 +45,11 @@ public class DataInit implements ApplicationRunner {
 
     }
 
+    public static void autentication(){
+        serviceUser.save(new User("user","user",Collections.singleton(Role.USER),true));
+        serviceUser.save(new User("admin", "admin", Collections.singleton(Role.ADMIN),true));
+        serviceUser.save(new User("anonimous", "anonimous", Collections.singleton(Role.ANONYMOUS),true));
+    }
     public static List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {
         List<Model_Char> models = new ArrayList<>();
         List<Phones> phones = new ArrayList<>();
@@ -112,6 +117,7 @@ public class DataInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
+        autentication();
         getModelsAndPhones();
     }
 

@@ -13,29 +13,44 @@
                     $('.chkCheckBoxId').prop('checked',false);
              });
         });
+
+
+
+
     </script>
 </head>
 <header>
-    < p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out" />
-    </form>
+    <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
     <h1>Phones</h1>
 </header>
 <body>
 <div class="col-1-2">
     <div class="content">
         <h2>Функционал репозитория</h2>
-        <ul>
-            <li><a th:href="@{/addphone}">Добавить новый продукт</a></li>
-        </ul>
+        <div class="header-right">
+            <p>
+                <a th:href="@{/addphone}">Добавить новый продукт</a>
+            </p>
+            <p>
+                <a th:href="@{/users}">Список пользователей</a>
+            </p>
+            <p>
+                <a th:href="@{/basket}">Корзина</a>
+            </p>
+            <p>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+            </p>
+        </div>
+        <p th:if="${alreadyThere}">Данная позиция уже лежит в корзине.</p>
     </div>
 </div>
 <h2 align="middle">All Phones</h2>
 <div align="middle" , overflow="scroll">
 
     <form th:action="@{/deletesomephone}" method="POST">
-        <input type="submit" class="button" value="DeleteAll" onClick="return confirm('Delete this phone?')"/>
+        <input type="submit" class="button" value="DeleteAll" onClick="return confirm('Delete this phones?')"/>
         <br/>
         <table border="0">
             <tr>
@@ -66,6 +81,9 @@
                     <img width="100" height="100"
                          th:src="@{'data:image/jpeg;base64,'+${phone.getPictures().iterator().next().getBytes()}}"
                          alt=""/>
+
+                    <a th:href="@{basket/addtobasket(phoneId=${phone.getPhone_id()})}"
+                       class="btn btn-danger">AddToBasket</a>
 
                     <form th:action="@{/deletephone}" th:object="${phoneForm}" method="POST">
                         <input id="delete" name="delete" type="hidden" th:attr="value=${phone.getPhone_id()}"/>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Modify phone</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/css/styles.css}"/>
+</head>
+
+<header>
+    <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
+    <h1>Изменение продукта</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+    </form>
+    <div class="header-right">
+        <p>
+            <a th:href="@{/users}">Список пользователей</a>
+        </p>
+        <p>
+            <a th:href="@{/phonerepo}">Магазин</a>
+        </p>
+        <p>
+            <a th:href="@{/basket}">Корзина</a>
+        </p>
+    </div>
+</header>
+<body>
+<div class="row">
+    <div class="col-1-2">
+        <div class="content">
+            <h2>Изменение позиции</h2>
+            <form th:action="@{/modifyphone}"
+                  th:object="${phoneForm}" method="POST">
+                <table>
+                    ModelId:
+                    <input type="text" th:field="*{phone_id}"/>
+                    <br/>
+                    Model:
+                    <input type="text" th:field="*{model_name}"/>
+                    <br/>
+                    Color:
+                    <input type="text" th:field="*{color_name}"/>
+                    <br/>
+                    Price:
+                    <input type="text" th:field="*{price}"/>
+                    <br/>
+                    Size:
+                    <input type="text" th:field="*{size}"/>
+                    <br/>
+                    Diagonal:
+                    <input type="text" th:field="*{diagonal}"/>
+                    <br/>
+                    Description:
+                    <input type="text" th:field="*{description}"/>
+                    <br/>
+                    Picture:
+                    <input type="file" multiple accept="image/*,image/jpeg" th:field="*{pictures}"/>
+                    <br/>
+                    <input type="submit" value="Modify"/>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</body>
+</html>

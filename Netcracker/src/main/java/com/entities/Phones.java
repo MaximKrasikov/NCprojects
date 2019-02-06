@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,6 +42,9 @@ public class Phones implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATION_DATE")
     private Date creation_date;
+
+    @ManyToMany
+    private Set<User> users;
 
     public Phones( Model_Char model, Double price, String color,List<Pictures> pictures) {
         this.model = model;

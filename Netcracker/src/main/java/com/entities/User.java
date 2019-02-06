@@ -27,11 +27,32 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @ManyToMany
+    private Set<Phones> phones;
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
+    public User(String username, String password, Set<Role> roles, boolean active) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.active = active;
+    }
+
     public User() {
+    }
+
+    public void deletePhone(Phones phone) {
+        this.phones.remove(phone);
+    }
+
+    public long getNumberOfPhones() {
+        return phones.size();
+    }
+    public void addPhone(Phones phone) {
+        this.phones.add(phone);
     }
 }

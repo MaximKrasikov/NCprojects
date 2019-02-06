@@ -10,9 +10,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 import javax.sql.DataSource;
 
-/**
- * Created by Admin on 04.02.2019.
- */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -21,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**", "/img/**", "/", "/index", "/registration").permitAll().anyRequest()
+        http.authorizeRequests().antMatchers("/css/**", "/img/**", "/", "/index", "/registration", "/h2-console/**").permitAll().anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
     }
 
