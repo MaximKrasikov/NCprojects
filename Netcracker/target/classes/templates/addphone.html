@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add phone</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/css/styles.css}"/>
+</head>
+
+<header>
+    <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
+    <h1>Добавление продукта</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+    </form>
+</header>
+<body>
+<div class="row">
+    <div class="col-1-2">
+        <div class="content">
+            <h2>Добавление позиции</h2>
+            <form th:action="@{/addphone}"
+                  th:object="${phoneForm}" method="POST">
+                <table>
+                    Model:
+                    <input type="text" th:field="*{model_name}"/>
+                    <br/>
+                    Color:
+                    <input type="text" th:field="*{color_name}"/>
+                    <br/>
+                    Price:
+                    <input type="text" th:field="*{price}"/>
+                    <br/>
+                    Size:
+                    <input type="text" th:field="*{size}"/>
+                    <br/>
+                    Diagonal:
+                    <input type="text" th:field="*{diagonal}"/>
+                    <br/>
+                    Description:
+                    <input type="text" th:field="*{description}"/>
+                    <br/>
+                    Picture:
+                    <input type="file" multiple accept="image/*,image/jpeg" th:field="*{pictures}"/>
+                    <br/>
+                    <input type="submit" value="Create"/>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</body>
+</html>

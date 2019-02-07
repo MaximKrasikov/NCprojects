@@ -63,6 +63,7 @@
                         <td th:utext="${phone.getDiagonal()}">...</td>
                         <td th:utext="${phone.getDescription()}">...</td>
                         <td th:utext="${phone.getCreation_date()}">...</td>
+
                         <td><a
                                 th:href="@{deletefrombasket(userId=${user.getId()}, phoneId=${phone.getPhone_id()})}"
                                 class="btn btn-danger">Delete</a></td>

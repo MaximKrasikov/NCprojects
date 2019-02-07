@@ -63,8 +63,7 @@ public class BasketController {
         User user = users.findByUsername(principal.getName());
         Optional<Phones> pre_phone = phones.findById(phoneId);
         Phones phone = pre_phone.get();
-        pictureService.searchForPicturesList(pictureService.findAllPictures(), phone);
-        phoneRepository.save(phone);
+        phoneRepository.save(pictureService.searchForPicturesList(pictureService.findAllPictures(), phone));
         if (user.getPhones().contains(phone)) {
             alreadyThere = true;
             return "redirect:/phones";
@@ -72,9 +71,7 @@ public class BasketController {
             alreadyThere = false;
             user.addPhone(phone);
         }
-
         users.save(user);
-        model.addAttribute("phones",user);
         return "redirect:/basket";
     }
 }
