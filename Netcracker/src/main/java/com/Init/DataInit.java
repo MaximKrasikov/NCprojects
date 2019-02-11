@@ -8,6 +8,7 @@ import com.repository.UserService.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,9 +17,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -27,25 +26,38 @@ import java.util.List;
 //класс инициализации
 @Component
 public class DataInit implements ApplicationRunner {
+    @Autowired
     public static PhoneServiceImpl servicePhone;
+    @Autowired
     public static PictureServiceImpl servicePicture;
+    @Autowired
     public static ModelServiceImpl serviceModel;
+    @Autowired
     public static UserServiceImpl serviceUser;
+    @Autowired
+    public  static PasswordEncoder passwordEncoder;
 
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    public DataInit(PhoneServiceImpl servicePhone, PictureServiceImpl servicePicture, ModelServiceImpl serviceModel, UserServiceImpl serviceUser) {
+    public DataInit(PhoneServiceImpl servicePhone, PictureServiceImpl servicePicture, ModelServiceImpl serviceModel, UserServiceImpl serviceUser,PasswordEncoder passwordEncoder) {
         this.servicePhone = servicePhone;
         this.servicePicture = servicePicture;
         this.serviceModel = serviceModel;
         this.serviceUser = serviceUser;
-
+        this.passwordEncoder= passwordEncoder;
     }
 
     public static void autentication() {
-        serviceUser.save(new User("user", "user", Collections.singleton(Role.USER), true));
-        serviceUser.save(new User("admin", "admin", Collections.singleton(Role.ADMIN), true));
+        String hashedPasswordAdmin =passwordEncoder.encode("admin");
+
+        User user = new User("admin", hashedPasswordAdmin);
+        user.setActive(true);
+        Set<Role> roles = new HashSet<Role>();
+        user.setRoles(roles);
+        user.addRole(Role.ADMIN);
+
+        serviceUser.save(user);
     }
 
     public static List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {
@@ -103,7 +115,6 @@ public class DataInit implements ApplicationRunner {
             servicePhone.addPhone(p);
             servicePhone.save(p);
         }
-
         return phones;
     }
 

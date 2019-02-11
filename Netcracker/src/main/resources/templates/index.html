@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Index page</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/styles.css}" />
+          th:href="@{/css/style.css}" />
 </head>
 
 <header>
@@ -16,6 +16,8 @@
         <div class="content">
             <h2>Добро пожаловать!</h2>
             <p>Для перехода на главную страницу <a th:href="@{/phones}"> по ссылке</a>.</p>
+            <p> <a th:href="@{/login}">Войти</a> </p>
+            <p> <a th:href="@{/registration}">Регистрация</a> </p>
         </div>
     </div>
     <div class="col-2-2">

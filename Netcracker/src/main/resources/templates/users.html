@@ -27,22 +27,35 @@
         <div class="content">
             <hr>
             <h2>Список пользователей</h2>
+            <p th:if="${deletingAdmin}">Удаление прав главного админа невозможно.</p>
             <div>
-                    <table border="0">
-                        <tr>
-                            <th>id</th>
-                            <th>username</th>
-                            <th>role</th>
-                            <th>basket</th>
-                        </tr>
-                        <tr th:each="user : ${users}">
-                            <td th:utext="${user.getId()}">...</td>
-                            <td th:utext="${user.getUsername()}">...</td>
-                            <td th:utext="${user.getRoles()}">...</td>
-                            <td><a th:href="@{/basket/user(userId=${user.getId()})}"
-                                   class="btn btn-danger" th:text="${user.getNumberOfPhones()}">...</a></td>
-                        </tr>
-                    </table>
+                <table border="0">
+                    <tr>
+                        <th>id</th>
+                        <th>username</th>
+                        <th>role</th>
+                        <th>basket</th>
+                    </tr>
+                    <tr th:each="user : ${users}">
+                        <td th:utext="${user.getId()}">...</td>
+                        <td th:utext="${user.getUsername()}">...</td>
+                        <td th:utext="${user.getRoles()}">...</td>
+                        <td><a th:href="@{/basket/user(userId=${user.getId()})}"
+                               class="btn btn-danger" th:text="${user.getNumberOfPhones()}">...</a></td>
+                        <td th:if="${!user.isAdmin()}"><a
+                                th:href="@{/setAdmin(userId=${user.getId()})}"
+                                class="btn btn-danger">set ADMIN</a></td>
+                        <td th:if="${user.isUser()}"><a
+                                th:href="@{/rmUser(userId=${user.getId()})}"
+                                class="btn btn-danger">rm USER</a></td>
+                        <td th:if="${user.isAdmin()}"><a
+                                th:href="@{/rmAdmin(userId=${user.getId()})}"
+                                class="btn btn-danger">rm ADMIN</a></td>
+                        <td th:if="${!user.isUser()}"><a
+                                th:href="@{/setUser(userId=${user.getId()})}"
+                                class="btn btn-danger">set USER</a></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

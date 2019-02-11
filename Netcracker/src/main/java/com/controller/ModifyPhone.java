@@ -8,6 +8,7 @@ import com.repository.ModelRepository;
 import com.repository.PhoneRepository;
 import com.repository.PictureService.PictureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,7 @@ import java.util.Optional;
  * Created by Admin on 25.01.2019.
  */
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 public class ModifyPhone {
     @Autowired
     private PhoneRepository phoneRepository;
@@ -31,6 +33,7 @@ public class ModifyPhone {
     private ModelRepository modelRepository;
     @Autowired
     private PictureServiceImpl picturesRepository;
+
     Phones phone;
 
     @RequestMapping(value = {"/modifyphone"}, method = RequestMethod.GET)

@@ -4,8 +4,7 @@ package com.entities;
  * Created by Admin on 28.11.2018.
  */
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,8 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
+
+@Data
 @Entity
 @Table(name = "PHONES")
 public class Phones implements Serializable{
