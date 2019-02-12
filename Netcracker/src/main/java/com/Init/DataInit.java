@@ -49,15 +49,20 @@ public class DataInit implements ApplicationRunner {
     }
 
     public static void autentication() {
-        String hashedPasswordAdmin =passwordEncoder.encode("admin");
-
-        User user = new User("admin", hashedPasswordAdmin);
+        User user = new User("admin", passwordEncoder.encode("admin"));
         user.setActive(true);
         Set<Role> roles = new HashSet<Role>();
         user.setRoles(roles);
         user.addRole(Role.ADMIN);
 
+        User userCli = new User("cli", passwordEncoder.encode("cli"));
+        userCli.setActive(true);
+        Set<Role> rolesCli = new HashSet<Role>();
+        userCli.setRoles(rolesCli);
+        userCli.addRole(Role.USER);
+
         serviceUser.save(user);
+        serviceUser.save(userCli);
     }
 
     public static List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {

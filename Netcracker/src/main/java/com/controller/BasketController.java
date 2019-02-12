@@ -7,7 +7,6 @@ import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureService.PictureServiceImpl;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +35,6 @@ public class BasketController {
     private boolean alreadyThere = false;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER')")
     public String basket(Model model, Principal principal) {
         User user = users.findByUsername(principal.getName());
         model.addAttribute("user", user);
@@ -45,7 +43,6 @@ public class BasketController {
         return "redirect:/basket/user?userId="+user.getId();
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = { "/deletefrombasket" }, method = RequestMethod.GET)
     public String deletephone(Model model, @RequestParam(name="phoneId")long phoneId, @RequestParam(name="userId")long userId) {
         User user = users.findById(userId).get();
@@ -67,7 +64,6 @@ public class BasketController {
         return "basket";
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @RequestMapping(value = { "/addtobasket" }, method = RequestMethod.GET)
     public String addtobasket(Model model, @RequestParam(name="phoneId")long phoneId, Principal principal) {
         User user = users.findByUsername(principal.getName());

@@ -13,6 +13,13 @@
                     $('.chkCheckBoxId').prop('checked',false);
              });
         });
+
+
+
+
+
+
+
     </script>
 </head>
 <header>
@@ -45,11 +52,11 @@
 <h2 align="middle">All Phones</h2>
 <div align="middle" , overflow="scroll">
 
-    <form th:action="@{/deletesomephone}" method="POST">
+    <form  th:action="@{/deletesomephone}" method="POST">
         <br/>
         <table border="0">
             <tr>
-                <th><input type="checkbox" id="checkBoxAll"/></th>
+                <th th:if="${isAdmin}"><input type="checkbox" id="checkBoxAll"/></th>
                 <th>id</th>
                 <th>model</th>
                 <th>color</th>
@@ -61,7 +68,7 @@
                 <th>picture</th>
             </tr>
             <tr th:each="phone : ${phones}">
-                <td>
+                <td th:if="${isAdmin}">
                     <input type="checkbox" class="chkCheckBoxId" th:attr="value=${phone.getPhone_id()}" name="phoneId"/>
                 </td>
                 <td th:utext="${phone.getPhone_id()}">...</td>
@@ -88,21 +95,15 @@
                     </form>
                 </td>
                 <td th:if="${isAdmin}">
-                    <form th:action="@{/modifyphone}" th:object="${modify}" method="GET">
+                    <form th:if="${isAdmin}" th:action="@{/modifyphone}" th:object="${modify}" method="GET">
                         <input id="modify" name="modify" type="hidden" th:attr="value=${phone.getPhone_id()}"/>
                         <input type="submit" class="button" value="Modify"
                                onClick="return confirm('Modify this phone?')"/>
                     </form>
                 </td>
-                    <form th:action="@{/sliderphoto}" th:object="${slider}" method="GET">
-                        <label for="customRange2">Photo</label>
-                        <input id="slidercustom" name="slidercustom" type="hidden"
-                               th:attr="value=${phone.getPhone_id()}"/>
-                        <input type="range" class="custom-range" value="Slider" min="0" max="4" id="customRange2">
-                    </form>
             </tr>
         </table>
-        <input type="submit" class="button" value="DeleteAll" onClick="return confirm('Delete this phones?')"/>
+            <input th:if="${isAdmin}" type="submit" class="button" value="DeleteAll" onClick="return confirm('Delete this phones?')"/>
     </form>
 </div>
 </body>
