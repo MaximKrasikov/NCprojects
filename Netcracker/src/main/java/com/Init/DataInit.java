@@ -72,8 +72,9 @@ public class DataInit implements ApplicationRunner {
 
         Model_Char m_1 = new Model_Char("Alcatel", 170.0, 68.0, "Телефон хороший");// создаем отдельную модель телефона
         Model_Char m_2 = new Model_Char("Meizu", 120.0, 57.0, "Отличное качество, надо брать");
-        Model_Char m_3 = new Model_Char("Xiaomi", 115.0, 59.0, "Скидочка 20проц");
-        Model_Char m_4 = new Model_Char("Nokia", 115.0, 59.0, "Скидочка 20проц");
+        Model_Char m_3 = new Model_Char("Xiaomi", 115.0, 59.0, "Скидочка 20 проц");
+        Model_Char m_4 = new Model_Char("Nokia", 115.0, 59.0, "Скидочка 30 проц");
+
 
         models.add(m_1);
         models.add(m_2);
@@ -90,6 +91,7 @@ public class DataInit implements ApplicationRunner {
         Pictures pic_3 = new Pictures(m_3, "yellow", m_3.getName(), servicePicture.loadImage("/images/xiaomi.jpeg"));
         Pictures pic_4 = new Pictures(m_4, "white", m_4.getName(), servicePicture.loadImage("/images/nokia.jpg"));
         Pictures pic_5 = new Pictures(m_4, "black", m_4.getName(), servicePicture.loadImage("/images/nokia-black.jpg"));
+        Pictures pic_6 = new Pictures(m_4, "black", m_4.getName(), servicePicture.loadImage("/images/iphoneX.jpg"));
 
         // добавление картинок в общий контейнер
         pics.add(pic_1);
@@ -97,6 +99,7 @@ public class DataInit implements ApplicationRunner {
         pics.add(pic_3);
         pics.add(pic_4);
         pics.add(pic_5);
+        pics.add(pic_6);
 
         for (Pictures picture : pics) {
             servicePicture.addPictures(picture);
