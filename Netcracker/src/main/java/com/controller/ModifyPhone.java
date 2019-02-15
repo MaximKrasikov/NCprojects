@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -71,11 +72,15 @@ public class ModifyPhone {
         modelRepository.save(m);
 
         List<Pictures> picList = new ArrayList<>();
-        Pictures pic = new Pictures(m, color_name, model_name, picturesRepository.useImageFromBase("/images/" + phoneForm.getPictures().getPath()));
-        picList.add(pic);
+        List<MultipartFile> files= phoneForm.getPictures();
+        for(MultipartFile picture: files){
+            byte[] b = picturesRepository.loadImage("/images/" + picture.getResource().getFilename());
+            picList.add(new Pictures(m, color_name, model_name, b));
+        }
         for (Pictures picture : picList) {
             picturesRepository.addPictures(picture);
         }
+        picturesRepository.searchForPicturesList(picList, p);
         p.setModel(m);
         p.setPrice(price);
         p.setColor(color_name);
@@ -84,5 +89,4 @@ public class ModifyPhone {
         phoneRepository.save(p);
         return "redirect:/phones";
     }
-
 }

@@ -24,10 +24,6 @@ public class PictureServiceImpl implements PictureService {
     @Autowired
     private PictureRepository pictureRepository;
 
-    public PictureServiceImpl(PictureRepository repository) {
-        this.pictureRepository = repository;
-    }
-
     @Override
     public Pictures addPictures(Pictures picture) {
         Pictures savedPicture = pictureRepository.saveAndFlush(picture);
@@ -40,8 +36,13 @@ public class PictureServiceImpl implements PictureService {
         return pictures;
     }
 
+    //loading image
     public byte[] loadImage(String filePath) throws URISyntaxException, IOException {
+        try {
         return Files.readAllBytes(Paths.get(this.getClass().getResource(filePath).toURI()));
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String useImageFromBase(String filePath) throws IOException, URISyntaxException {
@@ -52,10 +53,6 @@ public class PictureServiceImpl implements PictureService {
 
     public void save(Pictures picture) {
         pictureRepository.save(picture);
-    }
-
-    public List<Pictures> findByCount(Long modelId) {//возврат листа картинок по id телефона
-        return pictureRepository.findAllById(modelId);
     }
 
     public Phones searchForPicturesList(List<Pictures> pictures, Phones phone) {

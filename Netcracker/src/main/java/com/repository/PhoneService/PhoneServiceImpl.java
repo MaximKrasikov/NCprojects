@@ -1,7 +1,6 @@
 package com.repository.PhoneService;
 
 
-import com.entities.Model_Char;
 import com.entities.Phones;
 import com.repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +13,10 @@ import java.util.List;
  */
 @Service
 public class PhoneServiceImpl implements PhoneService {
-
     @Autowired
     private PhoneRepository phoneRep;
 
-    public PhoneServiceImpl(PhoneRepository phoneRep) {
-        this.phoneRep = phoneRep;
-    }
-
+    //добавление телефона
     @Override
     public Phones addPhone(Phones phone) {
         Phones savedPhone = phoneRep.saveAndFlush(phone);
@@ -29,42 +24,14 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
-    public void deletePhoneFromModel(Model_Char model_char) {
-        List<Phones> listOfPhones= phoneRep.findListByModel(model_char);
-        for(Phones phone:listOfPhones){
-            phoneRep.delete(phone);
-        }
-    }
-    @Override
     public void deletePhoneFromPhone(Long phoneId) {
         List<Phones> listOfPhones= phoneRep.findListByPhone(phoneId);
         for(Phones phone:listOfPhones){
             phoneRep.delete(phone);
         }
     }
-
-    public void deletePhoneFromListId(List<Long> phoneId) {
-        List<Phones> listOfPhones= phoneRep.findListByListId(phoneId);
-        for(Phones phone:listOfPhones){
-            phoneRep.delete(phone);
-        }
-    }
-
-    @Override
-    public void deletePhone(Phones phone) {
-       phoneRep.delete(phone);
-    }
-    @Override
-    public List<Phones> findAllPhones() {
-        List<Phones> res = phoneRep.findAll();
-        System.out.println(res);
-        return res;
-    }
+    //сохранение телефона
     public void save(Phones phone) {
         phoneRep.save(phone);
-    }
-    @Override
-    public Phones findPhoneById(Long phone) {
-        return phoneRep.findPhoneById(phone);
     }
 }

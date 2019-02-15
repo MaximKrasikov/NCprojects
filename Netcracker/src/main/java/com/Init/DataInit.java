@@ -85,11 +85,11 @@ public class DataInit implements ApplicationRunner {
             serviceModel.save(model);
         }
 
-        Pictures pic_1 = new Pictures(m_1, "black", m_1.getName(), servicePicture.useImageFromBase("/images/alcatel.jpeg"));
-        Pictures pic_2 = new Pictures(m_2, "white", m_2.getName(), servicePicture.useImageFromBase("/images/meizu.jpeg"));
-        Pictures pic_3 = new Pictures(m_3, "yellow", m_3.getName(), servicePicture.useImageFromBase("/images/xiaomi.jpeg"));
-        Pictures pic_4 = new Pictures(m_4, "white", m_4.getName(), servicePicture.useImageFromBase("/images/nokia.jpg"));
-        Pictures pic_5 = new Pictures(m_4, "black", m_4.getName(), servicePicture.useImageFromBase("/images/nokia-black.jpg"));
+        Pictures pic_1 = new Pictures(m_1, "black", m_1.getName(), servicePicture.loadImage("/images/alcatel.jpeg"));
+        Pictures pic_2 = new Pictures(m_2, "white", m_2.getName(), servicePicture.loadImage("/images/meizu.jpeg"));
+        Pictures pic_3 = new Pictures(m_3, "yellow", m_3.getName(), servicePicture.loadImage("/images/xiaomi.jpeg"));
+        Pictures pic_4 = new Pictures(m_4, "white", m_4.getName(), servicePicture.loadImage("/images/nokia.jpg"));
+        Pictures pic_5 = new Pictures(m_4, "black", m_4.getName(), servicePicture.loadImage("/images/nokia-black.jpg"));
 
         // добавление картинок в общий контейнер
         pics.add(pic_1);

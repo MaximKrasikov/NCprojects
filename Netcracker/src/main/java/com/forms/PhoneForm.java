@@ -2,8 +2,8 @@ package com.forms;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ public class PhoneForm {
     private String model_name;
     private String color_name;
     private Double price;
-    private File pictures;
+    private List<MultipartFile> pictures;
     private Double size;
     private Double diagonal;
     private String description;

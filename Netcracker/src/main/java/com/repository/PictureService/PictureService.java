@@ -9,7 +9,7 @@ import java.util.List;
  */
 // для реализации своих методов
 public interface PictureService {
-    public List<Pictures> findAllPictures();
+     List<Pictures> findAllPictures();
 
-    public Pictures addPictures(Pictures picture);
+     Pictures addPictures(Pictures picture);
 }

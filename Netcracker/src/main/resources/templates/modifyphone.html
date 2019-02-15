@@ -31,7 +31,7 @@
         <div class="content">
             <h2>Изменение позиции</h2>
             <form th:action="@{/modifyphone}"
-                  th:object="${phoneForm}" method="POST">
+                  th:object="${phoneForm}" method="POST" enctype="multipart/form-data">
                 <table>
                     ModelId:
                     <input type="text" th:field="*{phone_id}"/>
