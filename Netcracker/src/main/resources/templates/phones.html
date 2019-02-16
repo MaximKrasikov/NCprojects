@@ -79,10 +79,21 @@
                 <td th:utext="${phone.getDiagonal()}">...</td>
                 <td th:utext="${phone.getDescription()}">...</td>
                 <td th:utext="${phone.getCreation_date()}">...</td>
+                <section th:each="phone:${phones}">
+                    <ul>
+                        <li th:each="phone:${phone.getPictures()}">
+                            <img width="70" height="70"
+                                 th:src="@{'data:image/jpeg;base64,'+${phone.encodeImage()}}"
+                                 alt=""/>
+                        </li>
+                    </ul>
+                </section>
+                <!--
                 <td>
                     <img width="100" height="100"
                          th:src="@{'data:image/jpeg;base64,'+${phone.getPictures().iterator().next().encodeImage()}}"
                          alt=""/></td>
+                         -->
                 <td th:if="${isUser}">
                     <a th:href="@{basket/addtobasket(phoneId=${phone.getPhone_id()})}"
                        class="btn btn-danger">AddToBasket</a>

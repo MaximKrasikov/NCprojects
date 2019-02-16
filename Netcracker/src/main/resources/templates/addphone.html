@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Add phone</title>
@@ -23,6 +23,9 @@
     </div>
 </header>
 <body>
+<!--Добавление ролей-->
+<div sec:authorize="isAuthenticated()">
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
 <div class="row">
     <div class="col-1-2">
         <div class="content">
@@ -56,6 +59,8 @@
             </form>
         </div>
     </div>
+</div>
+</div>
 </div>
 </body>
 </body>
