@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="393914c9-675e-4af8-b57e-3f6ffc5f3ed0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springjpapostgres.iml" beforeDir="false" afterPath="$PROJECT_DIR$/springjpapostgres.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/controller/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/forms/PhoneForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/forms/PhoneForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/repository/PictureService/PictureServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/repository/PictureService/PictureServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/addphone.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/addphone.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/basket.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/basket.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/modifyphone.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/modifyphone.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/phones.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/phones.html" afterDir="false" />
     </list>
     <ignored path="springjpapostgres.iws" />
@@ -71,11 +62,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/phones.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="85" column="77" selection-start-line="85" selection-start-column="77" selection-end-line="85" selection-end-column="77" />
+            <state relative-caret-position="255">
+              <caret line="83" column="38" lean-forward="true" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/basket.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="233">
+              <caret line="68" column="61" selection-start-line="68" selection-start-column="61" selection-end-line="68" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -112,15 +112,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="172">
               <caret line="97" column="28" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/users.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="46" column="74" selection-start-line="46" selection-start-column="74" selection-end-line="46" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -172,7 +163,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/util/ImageUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/repository/PictureService/PictureServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/modifyphone.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/basket.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/configs/MultipartFileConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/configs/MVCConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/configs/MultipartConfig.java" />
@@ -193,6 +183,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/Init/DataInit.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/phones.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/basket.html" />
       </list>
     </option>
   </component>
@@ -557,7 +548,7 @@
       <window_info id="Favorites" order="7" sideWeight="0.5099502" side_tool="true" weight="0.2996965" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.22875817" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3398693" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15196079" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.08006536" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -711,14 +702,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/basket.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="66" column="38" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -955,8 +938,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/phones.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="85" column="77" selection-start-line="85" selection-start-column="77" selection-end-line="85" selection-end-column="77" />
+        <state relative-caret-position="255">
+          <caret line="83" column="38" lean-forward="true" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/basket.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="68" column="61" selection-start-line="68" selection-start-column="61" selection-end-line="68" selection-end-column="61" />
         </state>
       </provider>
     </entry>
