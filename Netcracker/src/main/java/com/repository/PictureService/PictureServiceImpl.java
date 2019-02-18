@@ -65,5 +65,4 @@ public class PictureServiceImpl implements PictureService {
         phone.setPictures(picListForPhone);
         return phone;
     }
-
 }
