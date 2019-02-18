@@ -1,11 +1,13 @@
 package com.controller;
 
 import com.entities.Phones;
+import com.entities.Pictures;
 import com.entities.User;
 import com.repository.PhoneRepository;
 import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureService.PictureServiceImpl;
 import com.repository.UserRepository;
+import com.repository.UserService.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by Admin on 06.02.2019.
@@ -25,6 +30,8 @@ import java.util.Optional;
 public class BasketController {
     @Autowired
     private UserRepository users;
+    @Autowired
+    private UserServiceImpl userService;
     @Autowired
     private PhoneRepository phones;
     @Autowired
@@ -37,6 +44,11 @@ public class BasketController {
     @GetMapping
     public String basket(Model model, Principal principal) {
         User user = users.findByUsername(principal.getName());
+        Set<Phones> phones = user.getPhones();
+        for (Phones phone : phones) {
+            phoneRepository.save(pictureService.searchForPicturesList(pictureService.findAllPictures(), phone));
+        }
+        users.save(user);
         model.addAttribute("user", user);
         model.addAttribute("isAdmin", user.isAdmin());
         model.addAttribute("isUser", user.isUser());
