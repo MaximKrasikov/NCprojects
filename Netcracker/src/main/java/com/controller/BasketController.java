@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.security.Principal;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by Admin on 06.02.2019.
@@ -35,8 +38,13 @@ public class BasketController {
     private boolean alreadyThere = false;
 
     @GetMapping
-    public String basket(Model model, Principal principal) {
+    public String basket(Model model, Principal principal) throws IOException, URISyntaxException {
         User user = users.findByUsername(principal.getName());
+        Set<Phones> phones= user.getPhones();
+        for(Phones phone: phones){
+            phoneRepository.save(pictureService.searchForPicturesList(pictureService.findAllPictures(),phone));
+        }
+        users.save(user);
         model.addAttribute("user", user);
         model.addAttribute("isAdmin", user.isAdmin());
         model.addAttribute("isUser", user.isUser());
@@ -65,7 +73,7 @@ public class BasketController {
     }
 
     @RequestMapping(value = { "/addtobasket" }, method = RequestMethod.GET)
-    public String addtobasket(Model model, @RequestParam(name="phoneId")long phoneId, Principal principal) {
+    public String addtobasket(Model model, @RequestParam(name="phoneId")long phoneId, Principal principal) throws IOException, URISyntaxException {
         User user = users.findByUsername(principal.getName());
         Optional<Phones> pre_phone = phones.findById(phoneId);
         Phones phone = pre_phone.get();
