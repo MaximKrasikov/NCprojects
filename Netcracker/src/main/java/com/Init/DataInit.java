@@ -27,28 +27,19 @@ import java.util.*;
 @Component
 public class DataInit implements ApplicationRunner {
     @Autowired
-    public static PhoneServiceImpl servicePhone;
+    private PhoneServiceImpl servicePhone;
     @Autowired
-    public static PictureServiceImpl servicePicture;
+    private PictureServiceImpl servicePicture;
     @Autowired
-    public static ModelServiceImpl serviceModel;
+    private ModelServiceImpl serviceModel;
     @Autowired
-    public static UserServiceImpl serviceUser;
+    private UserServiceImpl serviceUser;
     @Autowired
-    public  static PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-    @Autowired
-    public DataInit(PhoneServiceImpl servicePhone, PictureServiceImpl servicePicture, ModelServiceImpl serviceModel, UserServiceImpl serviceUser,PasswordEncoder passwordEncoder) {
-        this.servicePhone = servicePhone;
-        this.servicePicture = servicePicture;
-        this.serviceModel = serviceModel;
-        this.serviceUser = serviceUser;
-        this.passwordEncoder= passwordEncoder;
-    }
-
-    public static void autentication() {
+    public void autentication() {
         User user = new User("admin", passwordEncoder.encode("admin"));
         user.setActive(true);
         Set<Role> roles = new HashSet<Role>();
@@ -65,7 +56,7 @@ public class DataInit implements ApplicationRunner {
         serviceUser.save(userCli);
     }
 
-    public static List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {
+    public  List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {
         List<Model_Char> models = new ArrayList<>();
         List<Phones> phones = new ArrayList<>();
         List<Pictures> pics = new ArrayList<>();
