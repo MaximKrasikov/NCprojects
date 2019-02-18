@@ -28,57 +28,59 @@
 </header>
 <body>
 <div sec:authorize="isAuthenticated()">
-<div sec:authorize="hasRole('ROLE_USER')">
-<div class="row">
-    <div class="col-1-2">
-        <div class="content">
-            <hr>
-            <h2>Личный кабинет</h2>
-            <p th:utext="${user.getUsername()}">...</p>
-            <p>Покупок в корзине:
-            <p th:utext="${user.getNumberOfPhones()}">0</p>
-        </div>
-    </div>
-    <div class="col-2-2">
-        <div class="content">
-            <hr>
-            <h2>Корзина</h2>
-            <div>
-                <table border="0">
-                    <tr>
-                        <th>id</th>
-                        <th>model</th>
-                        <th>color</th>
-                        <th>price</th>
-                        <th>size</th>
-                        <th>diagonal</th>
-                        <th>description</th>
-                        <th>creation date</th>
-                        <th>picture</th>
-                        <th>delete</th>
-                    </tr>
-                    <tr th:each="phone : ${user.getPhones()}">
-                        <td th:utext="${phone.getPhone_id()}">...</td>
-                        <td th:utext="${phone.getModelName()}">...</td>
-                        <td th:utext="${phone.getColor()}">...</td>
-                        <td th:utext="${phone.getPrice()}">...</td>
-                        <td th:utext="${phone.getSize()}">...</td>
-                        <td th:utext="${phone.getDiagonal()}">...</td>
-                        <td th:utext="${phone.getDescription()}">...</td>
-                        <td th:utext="${phone.getCreation_date()}">...</td>
-                        <td th:each="phone:${phone.getPictures()}"><img width="20" height="20"
-                                   th:src="@{'data:image/jpeg;base64,'+${phone.encodeImage()}}"
-                                   alt=""/></td>
-                        <td><a
-                                th:href="@{deletefrombasket(userId=${user.getId()}, phoneId=${phone.getPhone_id()})}"
-                                class="btn btn-danger">Delete</a></td>
-                    </tr>
-                </table>
+    <div sec:authorize="hasRole('ROLE_USER')">
+        <div class="row">
+            <div class="col-1-2">
+                <div class="content">
+                    <hr>
+                    <h2>Личный кабинет</h2>
+                    <p th:utext="${user.getUsername()}">...</p>
+                    <p>Покупок в корзине:
+                    <p th:utext="${user.getNumberOfPhones()}">0</p>
+                </div>
+            </div>
+            <div class="col-2-2">
+                <div class="content">
+                    <hr>
+                    <h2>Корзина</h2>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <th>id</th>
+                                <th>model</th>
+                                <th>color</th>
+                                <th>price</th>
+                                <th>size</th>
+                                <th>diagonal</th>
+                                <th>description</th>
+                                <th>creation date</th>
+                                <th>delete</th>
+                                <th>picture</th>
+                            </tr>
+                            <tr th:each="phone : ${user.getPhones()}">
+                                <td th:utext="${phone.getPhone_id()}">...</td>
+                                <td th:utext="${phone.getModelName()}">...</td>
+                                <td th:utext="${phone.getColor()}">...</td>
+                                <td th:utext="${phone.getPrice()}">...</td>
+                                <td th:utext="${phone.getSize()}">...</td>
+                                <td th:utext="${phone.getDiagonal()}">...</td>
+                                <td th:utext="${phone.getDescription()}">...</td>
+                                <td th:utext="${phone.getCreation_date()}">...</td>
+                                <td><a
+                                        th:href="@{deletefrombasket(userId=${user.getId()}, phoneId=${phone.getPhone_id()})}"
+                                        class="btn btn-danger">Delete</a></td>
+                                <td>
+                                <td th:each="phone:${phone.getPictures()}">
+                                    <img width="70" height="70"
+                                         th:src="@{'data:image/jpeg;base64,'+${phone.encodeImage()}}" alt=""/>
+                                </td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 </body>
 </html>

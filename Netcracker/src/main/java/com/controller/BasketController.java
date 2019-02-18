@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Created by Admin on 06.02.2019.
@@ -40,9 +40,9 @@ public class BasketController {
     @GetMapping
     public String basket(Model model, Principal principal) throws IOException, URISyntaxException {
         User user = users.findByUsername(principal.getName());
-        Set<Phones> phones= user.getPhones();
-        for(Phones phone: phones){
-            phoneRepository.save(pictureService.searchForPicturesList(pictureService.findAllPictures(),phone));
+        List<Phones> phoneList= phones.findAll();
+        for(Phones phone: phoneList){
+            phoneRepository.save(pictureService.searchForPicturesList(pictureService.findAllPictures(), phone));
         }
         users.save(user);
         model.addAttribute("user", user);
@@ -54,8 +54,8 @@ public class BasketController {
     @RequestMapping(value = { "/deletefrombasket" }, method = RequestMethod.GET)
     public String deletephone(Model model, @RequestParam(name="phoneId")long phoneId, @RequestParam(name="userId")long userId) {
         User user = users.findById(userId).get();
-        Optional<Phones> pre_phone = phones.findById(phoneId);
-        Phones phone = pre_phone.get();
+        Optional<Phones> prePhone = phones.findById(phoneId);
+        Phones phone = prePhone.get();
         user.deletePhone(phone);
         users.save(user);
         return "redirect:/basket/user?userId="+userId;
@@ -65,7 +65,10 @@ public class BasketController {
     public String basket(Model model, @RequestParam(name="userId")long userId, Principal principal) {
         User user = users.findById(userId).get();
         model.addAttribute("user", user);
-
+        List<Phones> phoneList= phones.findAll();
+        for(Phones phone: phoneList){
+            phoneRepository.save(pictureService.searchForPicturesList(pictureService.findAllPictures(), phone));
+        }
         User whatUser = users.findByUsername(principal.getName());
         model.addAttribute("isAdmin", whatUser.isAdmin());
         model.addAttribute("isUser", whatUser.isUser());
@@ -75,8 +78,8 @@ public class BasketController {
     @RequestMapping(value = { "/addtobasket" }, method = RequestMethod.GET)
     public String addtobasket(Model model, @RequestParam(name="phoneId")long phoneId, Principal principal) throws IOException, URISyntaxException {
         User user = users.findByUsername(principal.getName());
-        Optional<Phones> pre_phone = phones.findById(phoneId);
-        Phones phone = pre_phone.get();
+        Optional<Phones> prePhone = phones.findById(phoneId);
+        Phones phone = prePhone.get();
         phoneRepository.save(pictureService.searchForPicturesList(pictureService.findAllPictures(), phone));
         if (user.getPhones().contains(phone)) {
             alreadyThere = true;

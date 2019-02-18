@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -31,7 +32,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @ManyToMany
-    private Set<Phones> phones;
+    private List<Phones> phones;
 
     public User(String username, String password) {
         this.username = username;

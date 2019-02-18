@@ -2,6 +2,7 @@ package com.repository.PhoneService;
 
 
 import com.entities.Phones;
+import com.entities.Pictures;
 import com.repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRep;
 
+    public Pictures getPicture(Phones phone){
+        return phone.getPictures().get(0);
+    }
     //добавление телефона
     @Override
     public Phones addPhone(Phones phone) {

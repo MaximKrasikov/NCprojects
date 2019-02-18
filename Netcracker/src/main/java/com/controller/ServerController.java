@@ -51,9 +51,7 @@ public class ServerController {
         List<Phones> phones = phoneRepository.findAll();
         for (Phones phone : phones) {
             pictureService.searchForPicturesList(pictureService.findAllPictures(), phone);
-            //phone.getPictures().iterator().next().encodeImage();
         }
-
         model.addAttribute("alreadyThere", alreadyThere);
         User user = users.findByUsername(principal.getName());
         model.addAttribute("isAdmin", user.isAdmin());
