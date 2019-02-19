@@ -1,10 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Index page</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/style.css}" />
+          th:href="@{/css/style.css}"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="pwstrength.js"></script>
 </head>
 <header>
     <div class="header-row">
@@ -28,14 +30,36 @@
             <div th:if="${checkDb}">Пользователь с таким именем уже существует.</div>
             <form th:action="@{/registration}" method="post">
                 Логин: <br>
-                <input type="text" name="username" placeholder="username" /> <br>
+                <input type="text" name="username" placeholder="username"/> <br>
                 Пароль: <br>
-                <input type="password"	name="password" placeholder="password"/> <br>
+                <input type="password" name="password" placeholder="password"/>
+                <script type="text/javascript">
+                        $(document).ready(function () {
+                            options = {
+                                common: {minChar:8},
+                                ui: {
+                                    showVerdictsInsideProgressBar:true,
+                                    showErrors:true,
+                                    errorMessages:{
+                                        wordLength: '<spring:message code="error.wordLength"/>',
+                                        wordNotEmail: '<spring:message code="error.wordNotEmail"/>',
+                                        wordSequences: '<spring:message code="error.wordSequences"/>',
+                                        wordLowercase: '<spring:message code="error.wordLowercase"/>',
+                                        wordUppercase: '<spring:message code="error.wordUppercase"/>',
+                                        wordOneNumber: '<spring:message code="error.wordOneNumber"/>',
+                                        wordOneSpecialChar: '<spring:message code="error.wordOneSpecialChar"/>'
+                                    }
+                                }
+                            };
+                            $('#password').pwstrength(options);
+                        });
+                </script>
                 <br>
-                <input type="submit" value="Sign In" />
+                <br>
+                <input type="submit" value="Sign In"/>
             </form>
             <form th:action="@{/login}">
-                <input type="submit" value="login" />
+                <input type="submit" value="login"/>
             </form>
         </div>
     </div>

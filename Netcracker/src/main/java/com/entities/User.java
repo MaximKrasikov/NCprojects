@@ -1,5 +1,6 @@
 package com.entities;
 
+import com.entities.domains.ValidPassword;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,8 +22,11 @@ public class User implements UserDetails {
     private Long id;
     @Column(name = "USERNAME", nullable = false)
     private String username;
+
+    @ValidPassword
     @Column(name = "PASSWORD", nullable = false)
     private String password;
+
     @Column(name = "ACTIVE", nullable = false)
     private boolean active;
 

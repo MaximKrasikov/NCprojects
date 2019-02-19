@@ -35,7 +35,6 @@ public class RegistrationController {
             model.put("checkDb", true);
             return "registration";
         }
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         user.setActive(true);
