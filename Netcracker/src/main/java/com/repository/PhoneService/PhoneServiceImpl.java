@@ -7,8 +7,6 @@ import com.repository.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * Created by Admin on 02.12.2018.
  */
@@ -29,10 +27,9 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Override
     public void deletePhoneFromPhone(Long phoneId) {
-        List<Phones> listOfPhones= phoneRep.findListByPhone(phoneId);
-        for(Phones phone:listOfPhones){
-            phoneRep.delete(phone);
-        }
+        Phones phone= phoneRep.findListByPhone(phoneId);
+        phoneRep.delete(phone);
+
     }
     //сохранение телефона
     public void save(Phones phone) {

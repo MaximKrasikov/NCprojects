@@ -1,4 +1,4 @@
-package com.entities.domains;
+package com.entities.domains.password;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 /**
  * Created by Admin on 19.02.2019.
  */

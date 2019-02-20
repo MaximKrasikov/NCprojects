@@ -40,13 +40,13 @@ public class DataInit implements ApplicationRunner {
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     public void autentication() {
-        User user = new User("admin", passwordEncoder.encode("admin"));
+        User user = new User("admin", passwordEncoder.encode("admin123A"));
         user.setActive(true);
         Set<Role> roles = new HashSet<Role>();
         user.setRoles(roles);
         user.addRole(Role.ADMIN);
 
-        User userCli = new User("cli", passwordEncoder.encode("cli"));
+        User userCli = new User("cli", passwordEncoder.encode("cli123A"));
         userCli.setActive(true);
         Set<Role> rolesCli = new HashSet<Role>();
         userCli.setRoles(rolesCli);

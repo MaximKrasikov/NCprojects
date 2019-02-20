@@ -1,12 +1,12 @@
 package com.entities;
 
-import com.entities.domains.ValidPassword;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -20,10 +20,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", nullable = false)
     private Long id;
+
     @Column(name = "USERNAME", nullable = false)
     private String username;
 
-    @ValidPassword
+    //@ValidPassword
+    @NotNull(message = "password can not be null.")
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
@@ -104,4 +106,5 @@ public class User implements UserDetails {
     public void addRole(Role role) {
         this.roles.add(role);
     }
+
 }
