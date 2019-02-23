@@ -6,7 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,10 +20,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", nullable = false)
     private Long id;
+
     @Column(name = "USERNAME", nullable = false)
     private String username;
+
+    //@ValidPassword
+    @NotNull(message = "password can not be null.")
     @Column(name = "PASSWORD", nullable = false)
     private String password;
+
     @Column(name = "ACTIVE", nullable = false)
     private boolean active;
 
@@ -31,7 +38,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @ManyToMany
-    private Set<Phones> phones;
+    private List<Phones> phones;
 
     public User(String username, String password) {
         this.username = username;
@@ -99,4 +106,5 @@ public class User implements UserDetails {
     public void addRole(Role role) {
         this.roles.add(role);
     }
+
 }

@@ -55,7 +55,7 @@
                                 <th>description</th>
                                 <th>creation date</th>
                                 <th>delete</th>
-                                <th>pictures</th>
+                                <th>picture</th>
                             </tr>
                             <tr th:each="phone : ${user.getPhones()}">
                                 <td th:utext="${phone.getPhone_id()}">...</td>
@@ -69,12 +69,12 @@
                                 <td><a
                                         th:href="@{deletefrombasket(userId=${user.getId()}, phoneId=${phone.getPhone_id()})}"
                                         class="btn btn-danger">Delete</a></td>
-
                                 <td>
+                                <td th:each="phone:${phone.getPictures()}">
                                     <img width="70" height="70"
-                                         th:src="@{'data:image/jpeg;base64,'+${phone.getPictures().get(0).encodeImage()}}"
-                                         alt=""/></td>
-                            </tr>
+                                         th:src="@{'data:image/jpeg;base64,'+${phone.encodeImage()}}" alt=""/>
+                                </td>
+                        </tr>
                         </table>
                     </div>
                 </div>

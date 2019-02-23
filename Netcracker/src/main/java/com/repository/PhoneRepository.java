@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * Created by Admin on 02.12.2018.
  */
@@ -17,7 +15,7 @@ public interface PhoneRepository extends JpaRepository<Phones,Long>{
     Phones findByModel(Model_Char model);
 
     @Query(value="SELECT * FROM Phones WHERE Phones.id like %?1%",nativeQuery = true)
-    List<Phones> findListByPhone(Long phoneId);
+    Phones findListByPhone(Long phoneId);
 
     @Query(value="SELECT * FROM Phones WHERE Phones.id like %?1%",nativeQuery = true)
     Phones findPhoneById(Long phone);

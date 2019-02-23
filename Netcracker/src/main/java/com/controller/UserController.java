@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
     @Autowired
     private UserRepository users;
+
     private boolean deletingAdmin = false;
 
     private static final Logger log = LoggerFactory.getLogger(ServerController.class);
@@ -52,9 +53,11 @@ public class UserController {
     @GetMapping("/rmAdmin")
     public String rmAdmin(Model model, @RequestParam(name="userId")long userId) {
         User user = users.findById(userId).get();
+        //если админ остался не один, то удаляем роль
         if (user.getId() != 1) {
             user.removeRole(Role.ADMIN);
         } else {
+            // нельзя удалять админа
             deletingAdmin = true;
         }
         users.save(user);
