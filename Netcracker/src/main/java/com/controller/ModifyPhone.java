@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -50,6 +51,25 @@ public class ModifyPhone {
         phoneForm.setDiagonal(phone.getDiagonal());
         phoneForm.setPrice(phone.getPrice());
         phoneForm.setSize(phone.getSize());
+
+        model.addAttribute("phoneForm", phoneForm);
+        return "modifyphone";
+    }
+
+    @RequestMapping(value = {"/modifyphonefrompage"}, method = RequestMethod.GET)
+    public String modifyPhoneByPhone(Model model, @RequestParam(name="phoneId")long phoneId) {
+        Optional<Phones> pre_phone = phoneRepository.findById(phoneId);
+        phone = pre_phone.get();
+
+        PhoneForm phoneForm = new PhoneForm();
+        phoneForm.setPhone_id(phone.getPhone_id());
+        phoneForm.setModel_name(phone.getModelName());
+        phoneForm.setColor_name(phone.getColor());
+        phoneForm.setDescription(phone.getDescription());
+        phoneForm.setDiagonal(phone.getDiagonal());
+        phoneForm.setPrice(phone.getPrice());
+        phoneForm.setSize(phone.getSize());
+        phoneForm.setComment(phone.getComment());
 
         model.addAttribute("phoneForm", phoneForm);
         return "modifyphone";

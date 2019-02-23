@@ -31,6 +31,9 @@ public class PhoneServiceImpl implements PhoneService {
         phoneRep.delete(phone);
 
     }
+    public void deletePhone(Phones phone) {
+        phoneRep.delete(phone);
+    }
     //сохранение телефона
     public void save(Phones phone) {
         phoneRep.save(phone);

@@ -37,6 +37,9 @@ public class Phones implements Serializable{
     @Column(name = "COLOR")
     private String color;
 
+    @Column(name = "COMMENT", nullable = true)
+    private String comment;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATION_DATE")
@@ -45,17 +48,19 @@ public class Phones implements Serializable{
     @ManyToMany
     private Set<User> users;
 
-    public Phones( Model_Char model, Double price, String color,List<Pictures> pictures) {
+    public Phones( Model_Char model, Double price, String color,String comment,List<Pictures> pictures) {
         this.model = model;
         this.price = price;
         this.color = color;
         this.pictures=pictures;
+        this.comment= comment;
         this.creation_date = new Date();
     }
-    public Phones( Model_Char model, Double price, String color){
+    public Phones( Model_Char model, Double price, String color, String comment){
         this.model = model;
         this.price = price;
         this.color = color;
+        this.comment= comment;
         this.creation_date = new Date();
     }
 
