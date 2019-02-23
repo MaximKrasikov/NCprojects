@@ -8,4 +8,5 @@ import com.forms.UserDto;
  */
 public interface IUserService {
     User registerNewUserAccount(UserDto accountDto);
+    boolean checkIfValidPassword(User user, String password);
 }

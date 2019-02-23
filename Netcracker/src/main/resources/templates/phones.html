@@ -13,6 +13,7 @@
                     $('.chkCheckBoxId').prop('checked',false);
              });
         });
+
     </script>
 </head>
 <header>
@@ -35,7 +36,7 @@
             </p>
             <p>
             <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
+                <input type="submit" value="SignOut"/>
             </form>
             </p>
         </div>
@@ -45,7 +46,7 @@
 <h2 align="middle">All Phones</h2>
 <div align="middle" , overflow="scroll">
 
-    <form  th:action="@{/deletesomephone}" method="POST">
+    <form th:action="@{/deletesomephone}" method="POST">
         <br/>
         <table border="0">
             <tr>
@@ -96,7 +97,8 @@
                 </td>
             </tr>
         </table>
-            <input th:if="${isAdmin}" type="submit" class="button" value="DeleteAll" onClick="return confirm('Delete this phones?')"/>
+        <input th:if="${isAdmin}" type="submit" class="button" value="DeleteAll"
+               onClick="return confirm('Delete this phones?')"/>
     </form>
 </div>
 </body>

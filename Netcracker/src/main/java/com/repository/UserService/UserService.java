@@ -5,6 +5,7 @@ import com.entities.User;
 import com.forms.UserDto;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     @Override
     public User registerNewUserAccount(UserDto accountDto){
@@ -30,5 +34,10 @@ public class UserService implements IUserService {
         user.setRoles(roles);
         user.addRole(Role.ADMIN);
         return repository.save(user);
+    }
+
+    @Override
+    public boolean checkIfValidPassword(User user, String password) {
+        return passwordEncoder.matches(password, user.getPassword());
     }
 }

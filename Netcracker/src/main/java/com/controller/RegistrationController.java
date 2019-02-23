@@ -3,24 +3,28 @@ package com.controller;
 import com.entities.Role;
 import com.entities.User;
 import com.entities.domains.password.PasswordConstraintValidator;
+import com.error.InvalidPasswordException;
 import com.forms.UserDto;
 import com.repository.UserRepository;
+import com.repository.UserService.IUserService;
 import com.repository.UserService.UserService;
 import com.repository.UserService.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -37,6 +41,10 @@ public class RegistrationController extends PasswordConstraintValidator {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UserService userService;
+    @Autowired
+    private IUserService iUserService;
+
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(WebRequest request, Model model) {
@@ -47,7 +55,7 @@ public class RegistrationController extends PasswordConstraintValidator {
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("user") @Valid UserDto userDto,
-                          Map<String, Object> model, BindingResult result, WebRequest request, Errors errors) {
+                          Map<String, Object> model, BindingResult result, WebRequest request, Errors errors)throws InvalidPasswordException{
         User userFromDb = users.findByUsername(userDto.getUsername());
         User user= new User();
 
@@ -63,31 +71,19 @@ public class RegistrationController extends PasswordConstraintValidator {
 
         return "redirect:/login";
     }
-    @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-    public ModelAndView registerUserAccount(
-            @ModelAttribute("user") @Valid UserDto accountDto,
-            BindingResult result, WebRequest request, Errors errors) {
-        User registered = new User();
-        if (!result.hasErrors()) {
-            registered = createUserAccount(accountDto, result);
-        }
-        if (registered == null) {
-            result.rejectValue("email", "message.regError");
-        }if (result.hasErrors()) {
-            return new ModelAndView("registration", "user", accountDto);
-        }
-        else {
-            return new ModelAndView("successRegister", "user", accountDto);
-        }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "IOException exception! check arguments!")
+    @ExceptionHandler(value= {IOException.class, SQLException.class})
+    public void handleIOException() {
+        logger.error("IOException handler executed");
     }
 
-    private User createUserAccount(UserDto accountDto, BindingResult result) {
-        User registered = null;
-        try {
-            registered = userService.registerNewUserAccount(accountDto);
-        } catch (Exception e) {
-            return null;
-        }
-        return registered;
+    //перехват ошибки по паролю
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ModelAndView handleBadPasswordException(Exception ex) {
+        logger.error("IOException handler executed");
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject("error", ex.getMessage());
+        return modelAndView;
     }
 }

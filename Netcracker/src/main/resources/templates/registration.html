@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" media="all"
           th:href="@{/css/style.css}"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="pwstrength.js"></script>
+    <script th:src="@{/css/pwstrength.js}"></script>
 </head>
 <header>
     <div class="header-row">
@@ -25,9 +25,12 @@
         <div class="content">
             <hr>
             <h2>Регистрация нового пользователя.</h2>
-            <div th:if="${param.error}">Invalid username and password.</div>
-            <div th:if="${param.logout}">You have been logged out.</div>
+            <div th:if="${param.error}">Неправильный логин или пароль</div>
+            <div th:if="${param.logout}">Вы вышли из системы</div>
             <div th:if="${checkDb}">Пользователь с таким именем уже существует.</div>
+            <div>Пароль должен содержать 8-30 символов.
+                Пароль не должен содержать пробелов и должен содержать минимум 1 цифру
+            </div>
             <form th:action="@{/registration}" method="post">
                 Login: <br>
                 <input type="text" name="username" placeholder="username"/> <br>

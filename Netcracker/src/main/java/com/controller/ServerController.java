@@ -10,8 +10,7 @@ import com.repository.ModelRepository;
 import com.repository.PhoneRepository;
 import com.repository.PictureService.PictureServiceImpl;
 import com.repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.repository.UserService.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,18 +34,23 @@ public class ServerController {
     PictureServiceImpl pictureService;
     @Autowired
     private UserRepository users;
+    @Autowired
+    private UserServiceImpl userService;
 
     private boolean alreadyThere = false;
 
-    private static final Logger log = LoggerFactory.getLogger(ServerController.class);
-
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
     public String index(Model model) {
+        List<Phones> phones = phoneRepository.findAll();
+        for (Phones phone : phones) {
+            pictureService.searchForPicturesList(pictureService.findAllPictures(), phone);
+        }
+        model.addAttribute("phones", phones);
         return "index";
     }
 
     //отображение всех телефонов
-    @RequestMapping(value = {"/phones", "/phone"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/phones", "/phone"}, method = RequestMethod.GET)
     public String phones(Model model, Principal principal) {
         List<Phones> phones = phoneRepository.findAll();
         for (Phones phone : phones) {

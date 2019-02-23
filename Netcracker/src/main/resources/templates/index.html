@@ -1,30 +1,68 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Index page</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/style.css}" />
+          th:href="@{/css/style.css}"/>
 </head>
-
 <header>
-    <h1>Интернет-магазин телефонов</h1>
+    <p>Добро пожаловать в магазин телефонов</p>
+    <h1>Phones</h1>
 </header>
+
 <body>
-<div class="row">
-    <div class="col-1-2">
-        <div class="content">
-            <h2>Добро пожаловать!</h2>
-            <p>Для перехода на главную страницу <a th:href="@{/phones}"> по ссылке</a>.</p>
-            <p> <a th:href="@{/login}">Войти</a> </p>
-            <p> <a th:href="@{/registration}">Регистрация</a> </p>
-        </div>
-    </div>
-    <div class="col-2-2">
-        <div class="content">
+<div class="col-1-2">
+    <div class="content">
+        <h2>Функционал репозитория</h2>
+        <div class="header-right">
+            <p>
+                Чтобы совершить покупку, вам необходимо войти!
+            </p>
+            <p>
+                Если вы зарегистрированы, нажмите кнопку ВОЙТИ
+            </p>
+            <p>
+                <a th:href="@{/phones}">Войти</a>
+            </p>
         </div>
     </div>
 </div>
-</body>
+<h2 align="middle">All Phones</h2>
+<div align="middle" , overflow="scroll">
+    <table border="0">
+        <tr>
+            <th>id</th>
+            <th>model</th>
+            <th>color</th>
+            <th>price</th>
+            <th>size</th>
+            <th>diagonal</th>
+            <th>description</th>
+            <th>creation date</th>
+            <th>picture</th>
+        </tr>
+        <tr th:each="phone : ${phones}">
+            <td th:utext="${phone.getPhone_id()}">...</td>
+            <td th:utext="${phone.getModelName()}">...</td>
+            <td th:utext="${phone.getColor()}">...</td>
+            <td th:utext="${phone.getPrice()}">...</td>
+            <td th:utext="${phone.getSize()}">...</td>
+            <td th:utext="${phone.getDiagonal()}">...</td>
+            <td th:utext="${phone.getDescription()}">...</td>
+            <td th:utext="${phone.getCreation_date()}">...</td>
+            <td th:each="phone:${phone.getPictures()}">
+                <img width="100" height="100"
+                     th:src="@{'data:image/jpeg;base64,'+${phone.encodeImage()}}"
+                     alt=""/></td>
+            <td>
+                <form th:action="@{/login}" th:object="${phoneForm}" method="POST">
+                    <a th:href="@{basket/addtobasket(phoneId=${phone.getPhone_id()})}"
+                       class="btn btn-danger">AddToBasket</a>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
