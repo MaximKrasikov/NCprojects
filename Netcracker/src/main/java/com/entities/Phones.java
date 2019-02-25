@@ -8,7 +8,6 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +16,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "PHONES")
-public class Phones implements Serializable{
+public class Phones{
 
     @Id
     @Column(name = "ID",nullable = false)

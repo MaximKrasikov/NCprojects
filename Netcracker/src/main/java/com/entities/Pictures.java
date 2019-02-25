@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.Base64;
 
@@ -16,7 +15,7 @@ import java.util.Base64;
 @Setter
 @Entity
 @Table(name = "PICTURES")
-public class Pictures implements Serializable {
+public class Pictures {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

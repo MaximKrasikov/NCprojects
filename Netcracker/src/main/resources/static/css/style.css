@@ -41,8 +41,12 @@ body {
 	width: 65%;
 	float: right;
 }
-
-
+.header-between{
+  margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 7%;
+    float: right;
+}
 .contents {
     margin-left: 10%;
     margin-right: 10%;
