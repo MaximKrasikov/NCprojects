@@ -1,5 +1,7 @@
 package com.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +16,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "USER")
 public class User implements UserDetails {
     @Id
@@ -37,6 +40,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @JsonIgnore
     @ManyToMany
     private List<Phones> phones;
 

@@ -19,6 +19,6 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "IOException occured")
     @ExceptionHandler(IOException.class)
     public void handleIOException() {
-        logger.error("Invalid password");
+        logger.error("Not found)");
     }
 }

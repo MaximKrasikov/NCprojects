@@ -4,6 +4,8 @@ package com.entities;
  * Created by Admin on 28.11.2018.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +17,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "PHONES")
 public class Phones{
 
@@ -23,6 +26,7 @@ public class Phones{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long phone_id;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "MODEL_ID", nullable = false)
     private Model_Char model;

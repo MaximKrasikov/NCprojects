@@ -1,5 +1,7 @@
 package com.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +16,7 @@ import java.util.Base64;
 @Getter
 @Setter
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "PICTURES")
 public class Pictures {
     @Id
@@ -24,10 +27,12 @@ public class Pictures {
     @Column(name = "COLOR")
     private String color;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "PHONES_ID", nullable = true)
     private Phones phones;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "MODEL_ID", nullable = false)
     private Model_Char model;

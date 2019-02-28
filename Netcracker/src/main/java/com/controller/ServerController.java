@@ -6,11 +6,9 @@ package com.controller;
 
 import com.entities.Phones;
 import com.entities.User;
-import com.repository.ModelRepository;
 import com.repository.PhoneRepository;
 import com.repository.PictureService.PictureServiceImpl;
 import com.repository.UserRepository;
-import com.repository.UserService.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +27,9 @@ public class ServerController {
     @Autowired
     private PhoneRepository phoneRepository;
     @Autowired
-    private ModelRepository modelRepository;
-    @Autowired
     PictureServiceImpl pictureService;
     @Autowired
     private UserRepository users;
-    @Autowired
-    private UserServiceImpl userService;
 
     private boolean alreadyThere = false;
 
