@@ -66,9 +66,11 @@ public class Pictures {
     public Pictures() {
     }
 
+    /*
     public String getModelName() {
         return phones.getModelName();
     }
+    */
 
     public String encodeImage() throws IOException, URISyntaxException {
         String file = Base64.getEncoder().encodeToString(bytes);

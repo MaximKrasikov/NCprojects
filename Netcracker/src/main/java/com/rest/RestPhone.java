@@ -2,7 +2,6 @@ package com.rest;
 
 import com.entities.Phones;
 import com.repository.PhoneService.PhoneService;
-import com.repository.PictureService.PictureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,8 +20,6 @@ public class RestPhone {
     @Autowired
     PhoneService phoneService;
 
-    @Autowired
-    PictureServiceImpl pictureService;
 
     //-------------------Retrieve All Phones--------------------------------------------------------
 
@@ -44,13 +41,7 @@ public class RestPhone {
     @RequestMapping(value = "/phone/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Phones> getPhone(@PathVariable("id") long id){
         System.out.println("Fetching phone with id :" + id);
-        /*List<Phones> phones = phoneService.findAllPhones();
-        for(Phones phone: phones) {
-            pictureService.searchForPicturesList(pictureService.findAllPictures(), phone);
-        }
-        */
         Phones phone= phoneService.findById(id);
-        //Phones phone = phones.get(id);
         if (phone == null){
             System.out.println("Phone with id :" + id + "not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -59,7 +50,7 @@ public class RestPhone {
     }
 
     //-------------------Create a Phone--------------------------------------------------------
-    @RequestMapping(value = "/phone/createphone/", method = RequestMethod.POST)
+    @RequestMapping(value = "/phone/", method = RequestMethod.POST)
     public ResponseEntity<Void> createPhone(@RequestBody Phones phone, UriComponentsBuilder ucBuilder){
         System.out.println("Creating phone " + phone.getModelName());
 
@@ -75,7 +66,7 @@ public class RestPhone {
     }
     //------------------- Update a Phone --------------------------------------------------------
 
-    @RequestMapping(value = "/phone/updatephone/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/phone/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Phones> updatePhone(@PathVariable("id") long id, @RequestBody Phones phone){
         System.out.println("Updating phone " + id);
         Phones currentPhone = phoneService.findById(id);
@@ -99,7 +90,7 @@ public class RestPhone {
     }
     //------------------- Delete a Phone --------------------------------------------------------
 
-    @RequestMapping(value = "/phone/deletephone/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/phone/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Phones> deletePhone(@PathVariable("id") long id){
         System.out.println("Fetching & deleting phone with id " + id);
 
@@ -115,7 +106,7 @@ public class RestPhone {
 
     //------------------- Delete All Phones --------------------------------------------------------
 
-    @RequestMapping(value = "/phone/deleteall/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/phone/", method = RequestMethod.DELETE)
     public ResponseEntity<Phones> deleteAllPhones(){
         System.out.println("Deleting all phones");
         phoneService.deleteAllPhones();
