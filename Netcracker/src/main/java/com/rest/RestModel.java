@@ -21,7 +21,7 @@ public class RestModel {
     ModelService modelService;
     //-------------------Retrieve All Model--------------------------------------------------------
 
-    @RequestMapping(value = "/models/", method = RequestMethod.POST)
+    @RequestMapping(value = "/models/", method = RequestMethod.GET)
     public ResponseEntity<List<Model_Char>> listAllModels(){
         List<Model_Char> models = modelService.findAllModels();
         if (models.isEmpty()){
@@ -32,7 +32,7 @@ public class RestModel {
 
     //-------------------Retrieve Single Model--------------------------------------------------------
 
-    @RequestMapping(value = "/model/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/model/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Model_Char> getModel(@PathVariable("id") long id){
         System.out.println("Fetching model with id :" + id);
         Model_Char model= modelService.findById(id);
