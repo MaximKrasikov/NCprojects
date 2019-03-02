@@ -1,11 +1,12 @@
 package com.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.Base64;
 
@@ -15,8 +16,9 @@ import java.util.Base64;
 @Getter
 @Setter
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "PICTURES")
-public class Pictures implements Serializable {
+public class Pictures {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +27,12 @@ public class Pictures implements Serializable {
     @Column(name = "COLOR")
     private String color;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "PHONES_ID", nullable = true)
     private Phones phones;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "MODEL_ID", nullable = false)
     private Model_Char model;
@@ -62,9 +66,11 @@ public class Pictures implements Serializable {
     public Pictures() {
     }
 
+    /*
     public String getModelName() {
         return phones.getModelName();
     }
+    */
 
     public String encodeImage() throws IOException, URISyntaxException {
         String file = Base64.getEncoder().encodeToString(bytes);

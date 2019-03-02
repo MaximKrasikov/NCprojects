@@ -4,18 +4,15 @@ import com.entities.Model_Char;
 import com.entities.Phones;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  * Created by Admin on 02.12.2018.
  */
-@Repository
+@RepositoryRestResource
 public interface PhoneRepository extends JpaRepository<Phones,Long>{
 
     Phones findByModel(Model_Char model);
-
-    @Query(value="SELECT * FROM Phones WHERE Phones.id like %?1%",nativeQuery = true)
-    Phones findListByPhone(Long phoneId);
 
     @Query(value="SELECT * FROM Phones WHERE Phones.id like %?1%",nativeQuery = true)
     Phones findPhoneById(Long phone);

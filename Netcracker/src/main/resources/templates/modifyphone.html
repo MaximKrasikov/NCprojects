@@ -10,19 +10,19 @@
 <header>
     <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
     <h1>Изменение продукта</h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out" />
-    </form>
-    <div class="header-right">
+    <div class="header-between">
         <p>
             <a th:href="@{/users}">Список пользователей</a>
         </p>
         <p>
-            <a th:href="@{/phonerepo}">Магазин</a>
+            <a th:href="@{/phones}">Магазин</a>
         </p>
         <p>
             <a th:href="@{/basket}">Корзина</a>
         </p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" />
+        </form>
     </div>
 </header>
 <body>
@@ -53,6 +53,9 @@
                     <br/>
                     Description:
                     <input type="text" th:field="*{description}"/>
+                    <br/>
+                    Comment:
+                    <input type="text" th:field="*{comment}"/>
                     <br/>
                     Picture:
                     <input type="file" multiple accept="image/*,image/jpeg" th:field="*{pictures}"/>

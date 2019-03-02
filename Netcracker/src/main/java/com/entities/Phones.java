@@ -4,11 +4,12 @@ package com.entities;
  * Created by Admin on 28.11.2018.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -16,14 +17,16 @@ import java.util.Set;
 
 @Data
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "PHONES")
-public class Phones implements Serializable{
+public class Phones{
 
     @Id
     @Column(name = "ID",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long phone_id;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "MODEL_ID", nullable = false)
     private Model_Char model;
@@ -37,6 +40,9 @@ public class Phones implements Serializable{
     @Column(name = "COLOR")
     private String color;
 
+    @Column(name = "COMMENT", nullable = true)
+    private String comment;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATION_DATE")
@@ -45,17 +51,19 @@ public class Phones implements Serializable{
     @ManyToMany
     private Set<User> users;
 
-    public Phones( Model_Char model, Double price, String color,List<Pictures> pictures) {
+    public Phones( Model_Char model, Double price, String color,String comment,List<Pictures> pictures) {
         this.model = model;
         this.price = price;
         this.color = color;
         this.pictures=pictures;
+        this.comment= comment;
         this.creation_date = new Date();
     }
-    public Phones( Model_Char model, Double price, String color){
+    public Phones( Model_Char model, Double price, String color, String comment){
         this.model = model;
         this.price = price;
         this.color = color;
+        this.comment= comment;
         this.creation_date = new Date();
     }
 
@@ -77,5 +85,14 @@ public class Phones implements Serializable{
     }
     public String getDescription() {
         return this.model.getDescription();
+    }
+
+    @Override
+    public String toString() {
+        return "Phones{" +
+                "model=" + model +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                '}';
     }
 }

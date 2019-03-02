@@ -20,4 +20,5 @@ public class PhoneForm {
     private Double size;
     private Double diagonal;
     private String description;
+    private String comment;
 }

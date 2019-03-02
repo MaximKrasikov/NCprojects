@@ -55,6 +55,7 @@ public class AddPhone {
         Double size = phoneForm.getSize();
         Double diagonal = phoneForm.getDiagonal();
         String description = phoneForm.getDescription();
+        String comment= phoneForm.getComment();
 
         Model_Char m;
         Phones p;
@@ -71,7 +72,7 @@ public class AddPhone {
             for (Pictures picture : picList) {
                 picturesRepository.addPictures(picture);
             }
-            p = new Phones(m, price, color_name);
+            p = new Phones(m, price, color_name,comment);
             picturesRepository.searchForPicturesList(picList, p);
             phoneRepository.save(p);
         } else {
