@@ -20,17 +20,12 @@ public class RestPhone {
     @Autowired
     PhoneService phoneService;
 
-
     //-------------------Retrieve All Phones--------------------------------------------------------
 
     //картинки гонять по rest не будем
     @RequestMapping(value = "/phones/", method = RequestMethod.GET)
     public ResponseEntity<List<Phones>> listAllPhones(){
         List<Phones> phones = phoneService.findAllPhones();
-        /*for (Phones phone : phones) {
-            pictureService.searchForPicturesList(pictureService.findAllPictures(), phone);
-        }
-        */
         if (phones.isEmpty()){
             return new ResponseEntity<List<Phones>>(HttpStatus.NO_CONTENT);
         }

@@ -86,4 +86,13 @@ public class Phones{
     public String getDescription() {
         return this.model.getDescription();
     }
+
+    @Override
+    public String toString() {
+        return "Phones{" +
+                "model=" + model +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }
