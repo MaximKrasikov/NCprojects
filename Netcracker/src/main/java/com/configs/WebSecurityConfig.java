@@ -28,18 +28,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //"/h2-console/**"
-        http.authorizeRequests().antMatchers("/css/**", "/img/**","/index", "/registration","/h2-console/**","/phonepage/**").permitAll().anyRequest()
+        http.authorizeRequests().antMatchers("/css/**", "/img/**","/index", "/registration","/h2-console/**","/phonepage/**","/models").permitAll().anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //настройка проверки пароля при логине пользователя
         auth.userDetailsService(userSevice)
                 .passwordEncoder(passwordEncoder());
-/*
-        auth.userDetailsService(userSevice)
-                .passwordEncoder(passwordEncoder);*/
     }
 }

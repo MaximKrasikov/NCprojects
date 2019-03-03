@@ -83,7 +83,7 @@ public class ModifyPhone {
 
         String model_name = phoneForm.getModel_name();
         String color_name = phoneForm.getColor_name();
-        Double price = phoneForm.getPrice();
+        long price = phoneForm.getPrice();
         Double size = phoneForm.getSize();
         Double diagonal = phoneForm.getDiagonal();
         String description = phoneForm.getDescription();

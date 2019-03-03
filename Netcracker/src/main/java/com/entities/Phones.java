@@ -35,7 +35,7 @@ public class Phones{
     private List<Pictures> pictures;
 
     @Column(name = "PRICE")
-    private Double price;
+    private long price;
 
     @Column(name = "COLOR")
     private String color;
@@ -51,7 +51,7 @@ public class Phones{
     @ManyToMany
     private Set<User> users;
 
-    public Phones( Model_Char model, Double price, String color,String comment,List<Pictures> pictures) {
+    public Phones( Model_Char model, long price, String color,String comment,List<Pictures> pictures) {
         this.model = model;
         this.price = price;
         this.color = color;
@@ -59,7 +59,7 @@ public class Phones{
         this.comment= comment;
         this.creation_date = new Date();
     }
-    public Phones( Model_Char model, Double price, String color, String comment){
+    public Phones( Model_Char model, long price, String color, String comment){
         this.model = model;
         this.price = price;
         this.color = color;

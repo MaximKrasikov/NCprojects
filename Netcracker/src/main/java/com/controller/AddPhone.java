@@ -51,7 +51,7 @@ public class AddPhone {
     public String savePhone(Model model, @ModelAttribute("phoneForm") PhoneForm phoneForm) throws IOException, URISyntaxException, SQLException {
         String model_name = phoneForm.getModel_name();
         String color_name = phoneForm.getColor_name();
-        Double price = phoneForm.getPrice();
+        long price = phoneForm.getPrice();
         Double size = phoneForm.getSize();
         Double diagonal = phoneForm.getDiagonal();
         String description = phoneForm.getDescription();

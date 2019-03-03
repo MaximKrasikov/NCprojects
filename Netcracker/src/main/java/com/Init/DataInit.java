@@ -98,12 +98,12 @@ public class DataInit implements ApplicationRunner {
             servicePicture.save(picture);
         }
 
-        Phones p1 = new Phones(m_1, 120000.0, "black","брать или не брать хз");
-        Phones p2 = new Phones(m_2, 34000.0, "white","брать или не брать кто знает?");
+        Phones p1 = new Phones(m_1, 120000, "black","брать или не брать хз");
+        Phones p2 = new Phones(m_2, 34000, "white","брать или не брать кто знает?");
         //добавление нескольких телефонов к одной модели
-        Phones p3 = new Phones(m_3, 15000.0, "yellow", "Можно найти и лучше");
-        Phones p4 = new Phones(m_4, 15000.0, "white","крэкер, так сказать");
-        Phones p5 = new Phones(m_4, 15000.0, "black","дешевый, практичный");
+        Phones p3 = new Phones(m_3, 15000, "yellow", "Можно найти и лучше");
+        Phones p4 = new Phones(m_4, 15000, "white","крэкер, так сказать");
+        Phones p5 = new Phones(m_4, 15000, "black","дешевый, практичный");
 
         phones.add(p1);
         phones.add(p2);
