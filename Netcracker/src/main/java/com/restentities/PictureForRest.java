@@ -18,13 +18,13 @@ public class PictureForRest {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id= null;
 
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "COLOR")
-    private String color;
+    private String color=null;
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "PHONE_ID", nullable = true)
@@ -39,14 +39,14 @@ public class PictureForRest {
     private byte[] bytes;
 
     public PictureForRest(PhoneForRest phone, String color, String name, byte[] bytes) {
-        this.color = color;
+       // this.color = color;
         this.phone = phone;
         this.name = name;
         this.bytes = bytes;
     }
 
     public PictureForRest(ModelForRest model, String color, String name, byte[] bytes) {
-        this.color = color;
+        //this.color = color;
         this.model = model;
         this.name = name;
         this.bytes = bytes;

@@ -21,11 +21,11 @@ import java.util.Set;
 @Table(name= "MODELFORREST")
 public class ModelForRest {
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID", nullable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long modelId;
+    private Long modelId= null;
 
-    @Column(name = "NAME", length = 64, nullable = false)
+    @Column(name = "NAME", length = 64, nullable = true)
     private String  modelName;
 
     @OneToMany(mappedBy = "model", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
@@ -49,7 +49,7 @@ public class ModelForRest {
     }
 
     public ModelForRest(Model_Char e) {
-        this.modelId = e.getId();
+        //this.modelId = e.getId();
         this.modelName = e.getName();
         Long maxprice = (long) 0;
         for (Phones p:e.getPhones()) {

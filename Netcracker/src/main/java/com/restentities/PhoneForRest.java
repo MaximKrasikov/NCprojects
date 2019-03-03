@@ -17,10 +17,12 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "PHONEFORREST")
 public class PhoneForRest {
+
     @Id
     @Column(name = "ID",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long phoneId;
+
 
     @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "MODEL_ID", nullable = false)
@@ -32,16 +34,16 @@ public class PhoneForRest {
     @Column(name = "PRICE")
     private long price;
 
-    @Column(name = "LINK",nullable = false)
+    @Column(name = "LINK", nullable = false)
     String link;
 
     @Column(name = "COLOR")
-    private String color;
+    private String color=null;
 
     public PhoneForRest( ModelForRest model, long price, String color) {
         this.model = model;
         this.price = price;
-        this.color = color;
+        //this.color = color;
     }
 
     public PhoneForRest(ModelForRest model, String color) {
@@ -53,7 +55,7 @@ public class PhoneForRest {
     }
 
     public PhoneForRest(Phones p) {
-        this.phoneId = p.getPhone_id();
+        //this.phoneId = p.getPhone_id();
         this.color = p.getColor();
         this.price = p.getPrice();
         //need to set model after
@@ -64,7 +66,7 @@ public class PhoneForRest {
                 "color='" + color + '\'' +
                 ", price=" + price +
                 ", model=" + model +
-                ", phoneId=" + phoneId +
+                //", phoneId=" + phoneId +
                 '}';
     }
 }
