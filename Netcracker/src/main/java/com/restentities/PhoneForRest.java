@@ -32,6 +32,9 @@ public class PhoneForRest {
     @Column(name = "PRICE")
     private long price;
 
+    @Column(name = "LINK",nullable = false)
+    String link;
+
     @Column(name = "COLOR")
     private String color;
 
