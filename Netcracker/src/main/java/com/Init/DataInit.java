@@ -1,6 +1,7 @@
 package com.init;
 
 import com.entities.*;
+import com.repository.ModelRepositoryForRest;
 import com.repository.ModelService.ModelServiceImpl;
 import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureService.PictureServiceImpl;
@@ -17,7 +18,10 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -36,6 +40,8 @@ public class DataInit implements ApplicationRunner {
     private UserServiceImpl serviceUser;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    ModelRepositoryForRest modelRepositoryForRest;
 
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -77,6 +83,7 @@ public class DataInit implements ApplicationRunner {
             serviceModel.save(model);
         }
 
+
         Pictures pic_1 = new Pictures(m_1, "black", m_1.getName(), servicePicture.loadImage("/images/alcatel.jpeg"));
         Pictures pic_2 = new Pictures(m_2, "white", m_2.getName(), servicePicture.loadImage("/images/meizu.jpeg"));
         Pictures pic_3 = new Pictures(m_3, "yellow", m_3.getName(), servicePicture.loadImage("/images/xiaomi.jpeg"));
@@ -115,7 +122,14 @@ public class DataInit implements ApplicationRunner {
             servicePhone.addPhone(p);
             servicePhone.save(p);
         }
+        /*
+        ModelForRest modelForRest= new ModelForRest(m_3);
+        modelRepositoryForRest.save(modelForRest);
+        serviceModel.postAllModels(modelForRest);
+        */
+
         return phones;
+
     }
 
     @Override
