@@ -4,12 +4,12 @@ import com.entities.Model_Char;
 import com.entities.Phones;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Admin on 02.12.2018.
  */
-@RepositoryRestResource
+@Repository
 public interface PhoneRepository extends JpaRepository<Phones,Long>{
 
     Phones findByModel(Model_Char model);
