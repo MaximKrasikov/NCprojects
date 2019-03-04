@@ -35,7 +35,7 @@ public class PhoneForRest {
     private long price;
 
     @Column(name = "LINK", nullable = false)
-    String link= "http://192.168.99.100:8080/index";
+    String link= "http://localhost:8080/index";
 
     @Column(name = "COLOR")
     private String color=null;

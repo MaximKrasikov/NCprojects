@@ -122,14 +122,7 @@ public class DataInit implements ApplicationRunner {
             servicePhone.addPhone(p);
             servicePhone.save(p);
         }
-        /*
-        ModelForRest modelForRest= new ModelForRest(m_3);
-        modelRepositoryForRest.save(modelForRest);
-        serviceModel.postAllModels(modelForRest);
-        */
-
         return phones;
-
     }
 
     @Override

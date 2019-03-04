@@ -1,7 +1,7 @@
 package com.repository.ModelService;
 
 import com.entities.Model_Char;
-import com.restentities.ModelForRest;
+import com.entities.Phones;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface ModelService {
 
     //Rest
     //будем посылать модель, а на главном магазине уже разбирутся какие поля надо брать
-    public void postAllModels(ModelForRest modelForRest);
+    public void postAllModels(Phones phones);
 
 
     Model_Char addModel(Model_Char model);

@@ -22,19 +22,18 @@ public class ModelRest {
     @Autowired
     ModelRepository models;
 
+    static final String URL_MODEL_POST = "http://localhost:5030";//Cracker
+
     //главный магазин запрашивает модель
     @RequestMapping(value = "/models", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.ALL_VALUE )
     public ResponseEntity<List<ModelForRest>> listAllModels(){
         Iterable<Model_Char> allModels = models.findAll();
-
         //сущности для отправки
         List<ModelForRest> modelsForRest = new ArrayList<>();
         for (Model_Char e:allModels) {
             ModelForRest eForRest = new ModelForRest(e);
             modelsForRest.add(eForRest);
         }
-
         return new ResponseEntity<List<ModelForRest>>(modelsForRest, HttpStatus.OK);
     }
-
 }
