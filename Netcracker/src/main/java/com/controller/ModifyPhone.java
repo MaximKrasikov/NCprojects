@@ -6,6 +6,7 @@ import com.entities.Pictures;
 import com.forms.PhoneForm;
 import com.repository.ModelRepository;
 import com.repository.PhoneRepository;
+import com.repository.PhoneService.PhoneService;
 import com.repository.PictureService.PictureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,6 +32,8 @@ import java.util.Optional;
 public class ModifyPhone {
     @Autowired
     private PhoneRepository phoneRepository;
+    @Autowired
+    private PhoneService phoneService;
     @Autowired
     private ModelRepository modelRepository;
     @Autowired
@@ -105,6 +108,8 @@ public class ModifyPhone {
         p.setPrice(price);
         p.setColor(color_name);
         p.setPictures(picList);
+        //изменение на ресте
+        phoneService.updatePhone(p);
 
         phoneRepository.save(p);
         return "redirect:/phones";

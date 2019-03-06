@@ -8,6 +8,8 @@ import com.repository.PhoneRepositoryForRest;
 import com.restentities.PhoneForRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,7 +29,9 @@ public class PhoneServiceImpl implements PhoneService {
     private PhoneRepositoryForRest phoneRepositoryForRest;
 
     static final String URL_PHONE_POST = "http://localhost:5030";//Cracker
-
+    static final String URL_PHONE_UPDATE = "http://localhost:5030/phone";//Cracker
+    static final String  URL_PHONE_PREFIX = "http://localhost:5030/phone";//Cracker
+/*==================================REST================================================*/
     @Override
     public void createPhone(Phones phones) {
         RestTemplate restTemplate = new RestTemplate();
@@ -48,7 +52,6 @@ public class PhoneServiceImpl implements PhoneService {
             }
         }
     }
-//запрос на удаление
     @Override
     public void deletePhone(long phoneId) {
         RestTemplate restTemplate = new RestTemplate();
@@ -56,6 +59,22 @@ public class PhoneServiceImpl implements PhoneService {
         Object[] uriPhoneValues = new Object[] {String.valueOf(phoneId)};
         restTemplate.delete(resourceUrl,uriPhoneValues);
     }
+
+    @Override
+    public void updatePhone(Phones phone) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = "http://localhost:5030/phone/{phoneId}";
+        Object[] uriPhoneValues = new Object[]{String.valueOf(phone.getPhone_id())};
+        PhoneForRest phoneForRest = new PhoneForRest(phone);
+        HttpEntity<PhoneForRest> requestBody = new HttpEntity<>(phoneForRest, headers);
+        //(String url, @Nullable Object request, Object... uriVariables)
+        restTemplate.put(resourceUrl, requestBody, uriPhoneValues);//new Object[]{}
+    }
+
+    /*=========================================REST===============================================*/
     //добавление телефона
     @Override
     public Phones addPhone(Phones phone) {
@@ -105,13 +124,13 @@ public class PhoneServiceImpl implements PhoneService {
     public void savePhone(Phones phone) {
         phoneRep.save(phone);
     }
-
+/*
     @Override
     public void updatePhone(Phones currentPhone) {
         int index = phoneRep.findAll().indexOf(currentPhone);
         phoneRep.findAll().set(index, currentPhone);
     }
-
+*/
     @Override
     public void deletePhoneById(long id) {
         for (Iterator<Phones> iterator = phoneRep.findAll().iterator(); iterator.hasNext(); ) {
