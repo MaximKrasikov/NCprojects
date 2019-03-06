@@ -4,11 +4,17 @@ package com.repository.PhoneService;
 import com.entities.Phones;
 import com.entities.Pictures;
 import com.repository.PhoneRepository;
+import com.repository.PhoneRepositoryForRest;
+import com.restentities.PhoneForRest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Admin on 02.12.2018.
@@ -17,7 +23,45 @@ import java.util.List;
 public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRep;
+    @Autowired
+    private PhoneRepositoryForRest phoneRepositoryForRest;
 
+    static final String URL_PHONE_POST = "http://localhost:5030";//Cracker
+
+    @Override
+    public void createPhone(Phones phones) {
+        RestTemplate restTemplate = new RestTemplate();
+        //ModelForRest modelForRest= new ModelForRest(phones.getModel());
+        PhoneForRest phoneForRest= new PhoneForRest(phones);
+
+        HttpEntity<PhoneForRest> requestBody = new HttpEntity<>(phoneForRest);
+
+        Set<String> urlSet = new HashSet<String>();
+        urlSet.add(URL_PHONE_POST);
+        for (String URL_PHONE : urlSet) {
+            try {
+                PhoneForRest e = restTemplate.postForObject(URL_PHONE_POST, requestBody, PhoneForRest.class);
+                if (e != null)  {
+                    phoneRepositoryForRest.save(e);
+                }
+            } catch (Exception e) {
+                System.out.println("I am falling!");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void deletePhone(long phoneId) {
+        RestTemplate restTemplate = new RestTemplate();
+        // URL with URI-variable
+        String resourceUrl = "http://localhost:5030/phones/{phoneId}";
+        Object[] uriPhoneValues = new Object[] {String.valueOf(phoneId)};
+
+        restTemplate.delete(resourceUrl,uriPhoneValues);
+       // PhoneForRest e = restTemplate.getForObject(resourceUrl, PhoneForRest.class);
+    }
     //добавление телефона
     @Override
     public Phones addPhone(Phones phone) {

@@ -57,6 +57,7 @@ public class PhoneForRest {
     public PhoneForRest(Phones p) {
         //this.phoneId = p.getPhone_id();
         this.color = p.getColor();
+        this.model= new ModelForRest(p.getModelName(),p.getPrice(), p.getPrice());
         this.price = p.getPrice();
         //need to set model after
     }

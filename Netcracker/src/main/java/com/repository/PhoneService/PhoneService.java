@@ -8,10 +8,11 @@ import java.util.List;
  * Created by Admin on 03.12.2018.
  */
 public interface PhoneService {
-    //Сторонний магазин будет посылать запросы на главный магазин с просьбой на создание/изменение/удаление телефона
-    //String modelName,long priceMin,long priceMax
-
+    public void createPhone(Phones phones);
     void updatePhone(Phones currentPhone);
+
+    void deletePhone( long phoneId);
+
     Phones addPhone(Phones phone);
 
     List<Phones> findAllPhones();

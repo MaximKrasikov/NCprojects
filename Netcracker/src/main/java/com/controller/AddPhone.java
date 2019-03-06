@@ -5,8 +5,8 @@ import com.entities.Phones;
 import com.entities.Pictures;
 import com.forms.PhoneForm;
 import com.repository.ModelRepository;
-import com.repository.ModelService.ModelServiceImpl;
 import com.repository.PhoneRepository;
+import com.repository.PhoneService.PhoneService;
 import com.repository.PictureService.PictureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +38,7 @@ public class AddPhone {
     @Autowired
     private PictureServiceImpl picturesRepository;
     @Autowired
-    private ModelServiceImpl modelService;
+    PhoneService phoneService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -79,7 +79,7 @@ public class AddPhone {
             p = new Phones(m, price, color_name,comment);
             picturesRepository.searchForPicturesList(picList, p);
             phoneRepository.save(p);
-            modelService.postAllModels(p);
+            phoneService.createPhone(p);
         } else {
             m = modelRepository.findByName(model_name).get(0);
             phoneRepository.findByModel(m);

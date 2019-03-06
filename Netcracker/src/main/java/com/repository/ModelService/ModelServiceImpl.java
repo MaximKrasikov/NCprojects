@@ -1,20 +1,13 @@
 package com.repository.ModelService;
 
 import com.entities.Model_Char;
-import com.entities.Phones;
 import com.repository.ModelRepository;
 import com.repository.ModelRepositoryForRest;
-import com.restentities.ModelForRest;
-import com.restentities.PhoneForRest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Admin on 07.12.2018.
@@ -26,35 +19,8 @@ public class ModelServiceImpl implements ModelService {
     @Autowired
     ModelRepositoryForRest modelRepositoryForRest;
 
-    static final String URL_MODEL_POST = "http://localhost:5030";//Cracker
+    static final String URL_PHONE_DELETE = "http://localhost:5030";//Cracker
 
-    @Override
-    public void postAllModels(Phones phones) {
-        RestTemplate restTemplate = new RestTemplate();
-
-        Set<PhoneForRest> phonesForRest = new HashSet<>();
-        PhoneForRest phoneForRest= new PhoneForRest(phones);
-        phonesForRest.add(phoneForRest);
-        Model_Char model_char= phones.getModel();
-        ModelForRest modelForRest= new ModelForRest(phones.getModelName(), phones.getPrice(),phones.getPrice());
-        modelForRest.setPhones(phonesForRest);
-        HttpEntity<ModelForRest> requestBody = new HttpEntity<>(modelForRest);
-
-        Set<String> urlSet = new HashSet<String>();
-        urlSet.add(URL_MODEL_POST);
-        for (String URL_MODEL : urlSet) {
-            try {
-                ModelForRest e = restTemplate.postForObject(URL_MODEL_POST, requestBody, ModelForRest.class);
-                if (e != null)  {
-                    modelRepositoryForRest.save(e);
-                }
-            } catch (Exception e) {
-                System.out.println("I am falling!");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-    }
 
     public ModelServiceImpl(ModelRepository modelRep) {
         this.modelRep = modelRep;
