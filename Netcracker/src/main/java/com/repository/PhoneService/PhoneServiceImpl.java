@@ -31,11 +31,8 @@ public class PhoneServiceImpl implements PhoneService {
     @Override
     public void createPhone(Phones phones) {
         RestTemplate restTemplate = new RestTemplate();
-        //ModelForRest modelForRest= new ModelForRest(phones.getModel());
         PhoneForRest phoneForRest= new PhoneForRest(phones);
-
         HttpEntity<PhoneForRest> requestBody = new HttpEntity<>(phoneForRest);
-
         Set<String> urlSet = new HashSet<String>();
         urlSet.add(URL_PHONE_POST);
         for (String URL_PHONE : urlSet) {
@@ -51,16 +48,13 @@ public class PhoneServiceImpl implements PhoneService {
             }
         }
     }
-
+//запрос на удаление
     @Override
     public void deletePhone(long phoneId) {
         RestTemplate restTemplate = new RestTemplate();
-        // URL with URI-variable
         String resourceUrl = "http://localhost:5030/phones/{phoneId}";
         Object[] uriPhoneValues = new Object[] {String.valueOf(phoneId)};
-
         restTemplate.delete(resourceUrl,uriPhoneValues);
-       // PhoneForRest e = restTemplate.getForObject(resourceUrl, PhoneForRest.class);
     }
     //добавление телефона
     @Override

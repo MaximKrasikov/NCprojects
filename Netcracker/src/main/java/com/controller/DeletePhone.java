@@ -35,9 +35,8 @@ public class DeletePhone {
 
     @RequestMapping(value = {"/deletephone"}, method = RequestMethod.POST)
     public String deletePhone(@ModelAttribute("delete") Long phoneId) {
-        Phones phones= phoneService.findById(phoneId);
-        //Model_Char model_char= modelService.findByName(phones.getModelName());
         phoneRepository.deletePhoneFromPhone(phoneId);
+        //удаление из рест
         phoneService.deletePhone(phoneId);
         return "redirect:/phones";
     }
@@ -47,7 +46,8 @@ public class DeletePhone {
         Optional<Phones> prePhone = phones.findById(phoneId);
         Phones phone = prePhone.get();
         phoneRepository.deletePhone(phone);
-
+        //удаление из рест
+        phoneService.deletePhone(phoneId);
         return "redirect:/phones";
     }
 
@@ -57,6 +57,8 @@ public class DeletePhone {
             if(request.getParameterValues("phoneId")!=null) {
                 for (String phone : request.getParameterValues("phoneId")) {
                     phoneRepository.deletePhoneFromPhone(Long.valueOf(phone));
+                    //удаление из рест
+                    phoneService.deletePhone(Long.valueOf(phone));
                 }
             }
             return "redirect:/phones";

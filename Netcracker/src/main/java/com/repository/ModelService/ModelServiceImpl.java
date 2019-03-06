@@ -21,7 +21,6 @@ public class ModelServiceImpl implements ModelService {
 
     static final String URL_PHONE_DELETE = "http://localhost:5030";//Cracker
 
-
     public ModelServiceImpl(ModelRepository modelRep) {
         this.modelRep = modelRep;
     }
