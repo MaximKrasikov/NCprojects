@@ -4,13 +4,19 @@ package com.repository.PhoneService;
 import com.entities.Phones;
 import com.entities.Pictures;
 import com.repository.PhoneRepository;
+import com.repository.PhoneRepositoryForRest;
+import com.restentities.PhoneForRest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Admin on 02.12.2018.
@@ -19,70 +25,56 @@ import java.util.List;
 public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRep;
+    @Autowired
+    private PhoneRepositoryForRest phoneRepositoryForRest;
 
-    static final String URL_CREATE_PHONE = "http://localhost:8080/phone/";
-    static final String URL_UPDATE_PHONE = "http://localhost:8080/phone/";
-    static final String URL_PHONE_PREFIX = "http://localhost:8080/phone/";
-
-    /*
-    Сторонний магазин будет посылать запросы на главный магазин с просьбой на создание/изменение/удаление телефона
-    String modelName,long priceMin,long priceMax
-    */
+    static final String URL_PHONE_POST = "http://localhost:5030";//Cracker
+    static final String URL_PHONE_UPDATE = "http://localhost:5030/phone";//Cracker
+    static final String  URL_PHONE_PREFIX = "http://localhost:5030/phone";//Cracker
+/*==================================REST================================================*/
     @Override
-    public Phones createPhone(Phones phone) {
-        //Model_Char model, long price, String color
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Accept", MediaType.APPLICATION_XML_VALUE);
-        headers.setContentType(MediaType.APPLICATION_XML);
-
+    public void createPhone(Phones phones) {
         RestTemplate restTemplate = new RestTemplate();
-        // Data attached to the request.
-        HttpEntity<Phones> requestBody = new HttpEntity<>(phone, headers);
-        // Send request with POST method.
-        ResponseEntity<Phones> result = restTemplate.postForEntity(URL_CREATE_PHONE, requestBody, Phones.class);
-        if (result.getStatusCode() == HttpStatus.CREATED) {
-            Phones e = result.getBody();
-            System.out.println("(Client Side) Phone Created: "+ e.getPhone_id()+" Name: "+e.getModelName());
-            return e;
+        PhoneForRest phoneForRest= new PhoneForRest(phones);
+        HttpEntity<PhoneForRest> requestBody = new HttpEntity<>(phoneForRest);
+        Set<String> urlSet = new HashSet<String>();
+        urlSet.add(URL_PHONE_POST);
+        for (String URL_PHONE : urlSet) {
+            try {
+                PhoneForRest e = restTemplate.postForObject(URL_PHONE_POST, requestBody, PhoneForRest.class);
+                if (e != null)  {
+                    phoneRepositoryForRest.save(e);
+                }
+            } catch (Exception e) {
+                System.out.println("I am falling!");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
-        return  null;
     }
     @Override
-    public Phones updatePhoneFromRest(Phones updateInfo) {
+    public void deletePhone(long phoneId) {
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = "http://localhost:5030/phones/{phoneId}";
+        Object[] uriPhoneValues = new Object[] {String.valueOf(phoneId)};
+        restTemplate.delete(resourceUrl,uriPhoneValues);
+    }
+
+    @Override
+    public void updatePhone(Phones phone) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 
         RestTemplate restTemplate = new RestTemplate();
-        // Data attached to the request.
-        HttpEntity<Phones> requestBody = new HttpEntity<>(updateInfo, headers);
-        // Send request with PUT method.
-        restTemplate.exchange(URL_UPDATE_PHONE, HttpMethod.PUT,  requestBody, Void.class);
-        String resourceUrl = URL_PHONE_PREFIX + "/" + updateInfo.getPhone_id().toString();
-
-        Phones e = restTemplate.getForObject(resourceUrl, Phones.class);
-
-        if (e != null) {
-            System.out.println("(Client side) Phone after update: ");
-            System.out.println(e.toString());
-            return  e;
-        }
-        return null;
-    }
-    @Override
-    public void deletePhoneFromRest(Phones phone) {
-        RestTemplate restTemplate = new RestTemplate();
-        String resourceUrl = "http://localhost:8080/phone/{id}";
-        Object[] uriValues = new Object[] { phone.getPhone_id().toString() };
-        restTemplate.delete(resourceUrl, uriValues);
-        Phones e = restTemplate.getForObject(resourceUrl, Phones.class);
-        if (e != null) {
-            System.out.println("(Client side) Phone after delete: ");
-            System.out.println("Phone: " + e.getPhone_id() + " - " + e.getModelName());
-        } else {
-            System.out.println("Phone not found!");
-        }
+        String resourceUrl = "http://localhost:5030/phone/{phoneId}";
+        Object[] uriPhoneValues = new Object[]{String.valueOf(phone.getPhone_id())};
+        PhoneForRest phoneForRest = new PhoneForRest(phone);
+        HttpEntity<PhoneForRest> requestBody = new HttpEntity<>(phoneForRest, headers);
+        //(String url, @Nullable Object request, Object... uriVariables)
+        restTemplate.put(resourceUrl, requestBody, uriPhoneValues);//new Object[]{}
     }
 
+    /*=========================================REST===============================================*/
     //добавление телефона
     @Override
     public Phones addPhone(Phones phone) {
@@ -132,13 +124,13 @@ public class PhoneServiceImpl implements PhoneService {
     public void savePhone(Phones phone) {
         phoneRep.save(phone);
     }
-
+/*
     @Override
     public void updatePhone(Phones currentPhone) {
         int index = phoneRep.findAll().indexOf(currentPhone);
         phoneRep.findAll().set(index, currentPhone);
     }
-
+*/
     @Override
     public void deletePhoneById(long id) {
         for (Iterator<Phones> iterator = phoneRep.findAll().iterator(); iterator.hasNext(); ) {

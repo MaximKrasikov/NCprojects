@@ -1,6 +1,7 @@
 package com.init;
 
 import com.entities.*;
+import com.repository.ModelRepositoryForRest;
 import com.repository.ModelService.ModelServiceImpl;
 import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureService.PictureServiceImpl;
@@ -17,7 +18,10 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -36,6 +40,8 @@ public class DataInit implements ApplicationRunner {
     private UserServiceImpl serviceUser;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    ModelRepositoryForRest modelRepositoryForRest;
 
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -77,6 +83,7 @@ public class DataInit implements ApplicationRunner {
             serviceModel.save(model);
         }
 
+
         Pictures pic_1 = new Pictures(m_1, "black", m_1.getName(), servicePicture.loadImage("/images/alcatel.jpeg"));
         Pictures pic_2 = new Pictures(m_2, "white", m_2.getName(), servicePicture.loadImage("/images/meizu.jpeg"));
         Pictures pic_3 = new Pictures(m_3, "yellow", m_3.getName(), servicePicture.loadImage("/images/xiaomi.jpeg"));
@@ -98,12 +105,12 @@ public class DataInit implements ApplicationRunner {
             servicePicture.save(picture);
         }
 
-        Phones p1 = new Phones(m_1, 120000.0, "black","брать или не брать хз");
-        Phones p2 = new Phones(m_2, 34000.0, "white","брать или не брать кто знает?");
+        Phones p1 = new Phones(m_1, 120000, "black","брать или не брать хз");
+        Phones p2 = new Phones(m_2, 34000, "white","брать или не брать кто знает?");
         //добавление нескольких телефонов к одной модели
-        Phones p3 = new Phones(m_3, 15000.0, "yellow", "Можно найти и лучше");
-        Phones p4 = new Phones(m_4, 15000.0, "white","крэкер, так сказать");
-        Phones p5 = new Phones(m_4, 15000.0, "black","дешевый, практичный");
+        Phones p3 = new Phones(m_3, 15000, "yellow", "Можно найти и лучше");
+        Phones p4 = new Phones(m_4, 15000, "white","крэкер, так сказать");
+        Phones p5 = new Phones(m_4, 15000, "black","дешевый, практичный");
 
         phones.add(p1);
         phones.add(p2);

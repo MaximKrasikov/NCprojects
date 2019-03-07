@@ -6,6 +6,7 @@ import com.entities.Pictures;
 import com.forms.PhoneForm;
 import com.repository.ModelRepository;
 import com.repository.PhoneRepository;
+import com.repository.PhoneService.PhoneService;
 import com.repository.PictureService.PictureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +37,9 @@ public class AddPhone {
     private ModelRepository modelRepository;
     @Autowired
     private PictureServiceImpl picturesRepository;
+    @Autowired
+    PhoneService phoneService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -51,7 +55,7 @@ public class AddPhone {
     public String savePhone(Model model, @ModelAttribute("phoneForm") PhoneForm phoneForm) throws IOException, URISyntaxException, SQLException {
         String model_name = phoneForm.getModel_name();
         String color_name = phoneForm.getColor_name();
-        Double price = phoneForm.getPrice();
+        long price = phoneForm.getPrice();
         Double size = phoneForm.getSize();
         Double diagonal = phoneForm.getDiagonal();
         String description = phoneForm.getDescription();
@@ -75,6 +79,7 @@ public class AddPhone {
             p = new Phones(m, price, color_name,comment);
             picturesRepository.searchForPicturesList(picList, p);
             phoneRepository.save(p);
+            phoneService.createPhone(p);
         } else {
             m = modelRepository.findByName(model_name).get(0);
             phoneRepository.findByModel(m);

@@ -15,7 +15,7 @@ public class PhoneForm {
     private Long phone_id;
     private String model_name;
     private String color_name;
-    private Double price;
+    private long price;
     private List<MultipartFile> pictures;
     private Double size;
     private Double diagonal;
