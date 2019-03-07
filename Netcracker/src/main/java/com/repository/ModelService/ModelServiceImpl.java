@@ -2,7 +2,6 @@ package com.repository.ModelService;
 
 import com.entities.Model_Char;
 import com.repository.ModelRepository;
-import com.repository.ModelRepositoryForRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,10 @@ import java.util.List;
 public class ModelServiceImpl implements ModelService {
     @Autowired
     private ModelRepository modelRep;
-    @Autowired
+
+    /*@Autowired
     ModelRepositoryForRest modelRepositoryForRest;
+    */
 
     static final String URL_PHONE_DELETE = "http://localhost:5030";//Cracker
 
@@ -27,8 +28,7 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public Model_Char addModel(Model_Char model) {
-        Model_Char savedModel = modelRep.saveAndFlush(model);
-        return savedModel;
+        return modelRep.saveAndFlush(model);
     }
 
     @Override

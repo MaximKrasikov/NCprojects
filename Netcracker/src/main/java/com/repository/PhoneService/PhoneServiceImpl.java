@@ -4,7 +4,6 @@ package com.repository.PhoneService;
 import com.entities.Phones;
 import com.entities.Pictures;
 import com.repository.PhoneRepository;
-import com.repository.PhoneRepositoryForRest;
 import com.restentities.PhoneForRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -25,13 +24,16 @@ import java.util.Set;
 public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRep;
-    @Autowired
+
+   /* @Autowired
     private PhoneRepositoryForRest phoneRepositoryForRest;
+    */
 
     static final String URL_PHONE_POST = "http://localhost:5030";//Cracker
     static final String URL_PHONE_UPDATE = "http://localhost:5030/phone";//Cracker
     static final String  URL_PHONE_PREFIX = "http://localhost:5030/phone";//Cracker
 /*==================================REST================================================*/
+
     @Override
     public void createPhone(Phones phones) {
         RestTemplate restTemplate = new RestTemplate();
@@ -42,9 +44,6 @@ public class PhoneServiceImpl implements PhoneService {
         for (String URL_PHONE : urlSet) {
             try {
                 PhoneForRest e = restTemplate.postForObject(URL_PHONE_POST, requestBody, PhoneForRest.class);
-                if (e != null)  {
-                    phoneRepositoryForRest.save(e);
-                }
             } catch (Exception e) {
                 System.out.println("I am falling!");
                 System.out.println(e.getMessage());
@@ -73,14 +72,13 @@ public class PhoneServiceImpl implements PhoneService {
         //(String url, @Nullable Object request, Object... uriVariables)
         restTemplate.put(resourceUrl, requestBody, uriPhoneValues);//new Object[]{}
     }
-
     /*=========================================REST===============================================*/
     //добавление телефона
     @Override
     public Phones addPhone(Phones phone) {
-        Phones savedPhone = phoneRep.saveAndFlush(phone);
-        return savedPhone;
+        return  phoneRep.saveAndFlush(phone);
     }
+
     public Pictures getPicture(Phones phone){
         return phone.getPictures().get(0);
     }
