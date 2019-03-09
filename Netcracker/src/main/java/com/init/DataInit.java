@@ -1,7 +1,6 @@
 package com.init;
 
 import com.entities.*;
-import com.repository.ModelRepositoryForRest;
 import com.repository.ModelService.ModelServiceImpl;
 import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureService.PictureServiceImpl;
@@ -40,8 +39,6 @@ public class DataInit implements ApplicationRunner {
     private UserServiceImpl serviceUser;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    ModelRepositoryForRest modelRepositoryForRest;
 
     private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 

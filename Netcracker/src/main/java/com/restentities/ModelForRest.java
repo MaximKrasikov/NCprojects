@@ -8,7 +8,6 @@ import jdk.nashorn.internal.objects.annotations.Setter;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,27 +17,18 @@ import java.util.Set;
  */
 @Setter
 @Getter
-@Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ModelForRest {
-    @Id
-    @Column(name = "ID", nullable = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long modelId= null;
 
-    @Column(name = "NAME", length = 64, nullable = true)
     private String  modelName;
 
-    @OneToMany(mappedBy = "model", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<PhoneForRest> phones;
 
-    @OneToMany(mappedBy = "model", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<PictureForRest> pictures;
 
-    @Column(name = "PRICE_MIN", nullable = false)
     private long priceMin;
 
-    @Column(name = "PRICE_MAX", nullable = false)
     private long priceMax;
 
     public ModelForRest(String modelName,long priceMin,long priceMax) {
