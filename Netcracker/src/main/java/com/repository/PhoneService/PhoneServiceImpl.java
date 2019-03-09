@@ -25,10 +25,6 @@ public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRep;
 
-   /* @Autowired
-    private PhoneRepositoryForRest phoneRepositoryForRest;
-    */
-
     static final String URL_PHONE_POST = "http://localhost:5030";//Cracker
     static final String URL_PHONE_UPDATE = "http://localhost:5030/phone";//Cracker
     static final String  URL_PHONE_PREFIX = "http://localhost:5030/phone";//Cracker
@@ -43,7 +39,7 @@ public class PhoneServiceImpl implements PhoneService {
         urlSet.add(URL_PHONE_POST);
         for (String URL_PHONE : urlSet) {
             try {
-                PhoneForRest e = restTemplate.postForObject(URL_PHONE_POST, requestBody, PhoneForRest.class);
+                PhoneForRest e = restTemplate.postForObject(URL_PHONE, requestBody, PhoneForRest.class);
             } catch (Exception e) {
                 System.out.println("I am falling!");
                 System.out.println(e.getMessage());

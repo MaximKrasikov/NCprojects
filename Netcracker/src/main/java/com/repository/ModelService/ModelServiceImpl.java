@@ -16,10 +16,6 @@ public class ModelServiceImpl implements ModelService {
     @Autowired
     private ModelRepository modelRep;
 
-    /*@Autowired
-    ModelRepositoryForRest modelRepositoryForRest;
-    */
-
     static final String URL_PHONE_DELETE = "http://localhost:5030";//Cracker
 
     public ModelServiceImpl(ModelRepository modelRep) {

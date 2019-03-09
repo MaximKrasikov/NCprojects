@@ -22,7 +22,7 @@ public class PhoneForRest {
 
     private long price;
 
-    String link= "http://localhost:8080/index";
+    String link;
 
     private String color=null;
 
@@ -45,6 +45,7 @@ public class PhoneForRest {
         this.color = p.getColor();
         this.model= new ModelForRest(p.getModelName(),p.getPrice(), p.getPrice());
         this.price = p.getPrice();
+        this.link = "http://localhost:8080/phonepage/infphone?phoneId="+p.getPhone_id();
         //need to set model after
     }
     @Override

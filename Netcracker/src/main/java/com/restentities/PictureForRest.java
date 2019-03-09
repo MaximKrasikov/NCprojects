@@ -11,11 +11,11 @@ import lombok.Setter;
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PictureForRest {
-    private Long id= null;
+    private Long id;
 
     private String name;
 
-    private String color=null;
+    private String color;
 
     private PhoneForRest phone;
 

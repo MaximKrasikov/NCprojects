@@ -22,8 +22,6 @@ import java.util.List;
 public class ModelRest {
     @Autowired
     ModelRepository modelRepository;
-    @Autowired
-    PhoneService phoneService;
 
     //главный магазин запрашивает модель
     @RequestMapping(value = "/models", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.ALL_VALUE )

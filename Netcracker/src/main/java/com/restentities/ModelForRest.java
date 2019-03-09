@@ -3,10 +3,9 @@ package com.restentities;
 import com.entities.Model_Char;
 import com.entities.Phones;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
 import lombok.Getter;
 import lombok.Setter;
+
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,11 +14,11 @@ import java.util.Set;
 /**
  * Created by Admin on 03.03.2019.
  */
-@Setter
 @Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ModelForRest {
-    private Long modelId= null;
+    private Long modelId;
 
     private String  modelName;
 
