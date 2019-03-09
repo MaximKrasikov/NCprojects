@@ -1,6 +1,7 @@
 package com.repository.PhoneService;
 
 import com.entities.Phones;
+import com.entities.entity_rest.PhoneForRest;
 
 import java.util.List;
 
@@ -25,4 +26,5 @@ public interface PhoneService {
     void deleteAllPhones();
     void deletePhone(Phones phone);
     void deletePhoneFromPhone(Long phoneId);
+
 }

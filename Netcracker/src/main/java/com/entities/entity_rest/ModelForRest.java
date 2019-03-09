@@ -1,32 +1,26 @@
-package com.restentities;
+package com.entities.entity_rest;
 
-import com.entities.Model_Char;
-import com.entities.Phones;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Admin on 03.03.2019.
- */
-@Setter
 @Getter
+@Setter
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name= "MODEL_FOR_REST")
 public class ModelForRest {
     @Id
-    @Column(name = "ID", nullable = true)
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long modelId= null;
+    private Long modelId;
 
-    @Column(name = "NAME", length = 64, nullable = true)
+    @Column(name = "NAME", length = 64, nullable = false)
     private String  modelName;
 
     @OneToMany(mappedBy = "model", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
@@ -49,31 +43,6 @@ public class ModelForRest {
     public ModelForRest() {
     }
 
-    public ModelForRest(Model_Char e) {
-        //this.modelId = e.getId();
-        this.modelName = e.getName();
-        Long maxprice = (long) 0;
-        for (Phones p:e.getPhones()) {
-            if (p.getPrice() > maxprice) {
-                maxprice = p.getPrice();
-            }
-        }
-        Long minprice = maxprice;
-        for (Phones p:e.getPhones()) {
-            if (p.getPrice() < minprice) {
-                minprice = p.getPrice();
-            }
-        }
-        this.priceMax = maxprice;
-        this.priceMin = minprice;
-        this.phones = new HashSet<PhoneForRest>();
-        for (Phones p:e.getPhones())  {
-            PhoneForRest pfr = new PhoneForRest(p);
-            //	pfr.setModel(this);
-            this.phones.add(pfr);
-        }
-    }
-
     @Override
     public String toString() {
         return "Model{" +
@@ -84,5 +53,4 @@ public class ModelForRest {
                 ", modelId=" + modelId +
                 '}';
     }
-
 }
