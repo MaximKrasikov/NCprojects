@@ -10,7 +10,7 @@ import java.util.List;
 public interface PhoneService {
     public void createPhone(Phones phones);
     void updatePhone(Phones currentPhone);
-    void deletePhone( long phoneId);
+    void deletePhone(Long phoneId);
 
 
     Phones addPhone(Phones phone);

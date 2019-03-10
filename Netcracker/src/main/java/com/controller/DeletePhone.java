@@ -35,9 +35,9 @@ public class DeletePhone {
 
     @RequestMapping(value = {"/deletephone"}, method = RequestMethod.POST)
     public String deletePhone(@ModelAttribute("delete") Long phoneId) {
-        phoneRepository.deletePhoneFromPhone(phoneId);
         //удаление из рест
         phoneService.deletePhone(phoneId);
+        phoneRepository.deletePhoneFromPhone(phoneId);
         return "redirect:/phones";
     }
 
@@ -45,9 +45,9 @@ public class DeletePhone {
     public String deletePhoneFromPhonePage(@RequestParam(name="phoneId")long phoneId) {
         Optional<Phones> prePhone = phones.findById(phoneId);
         Phones phone = prePhone.get();
-        phoneRepository.deletePhone(phone);
         //удаление из рест
         phoneService.deletePhone(phoneId);
+        phoneRepository.deletePhone(phone);
         return "redirect:/phones";
     }
 
@@ -56,9 +56,9 @@ public class DeletePhone {
         try {
             if(request.getParameterValues("phoneId")!=null) {
                 for (String phone : request.getParameterValues("phoneId")) {
-                    phoneRepository.deletePhoneFromPhone(Long.valueOf(phone));
                     //удаление из рест
                     phoneService.deletePhone(Long.valueOf(phone));
+                    phoneRepository.deletePhoneFromPhone(Long.valueOf(phone));
                 }
             }
             return "redirect:/phones";
