@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
-
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,8 +21,6 @@ public class ModelForRest {
     private String  modelName;
 
     private Set<PhoneForRest> phones;
-
-    private List<PictureForRest> pictures;
 
     private long priceMin;
 
@@ -58,7 +54,6 @@ public class ModelForRest {
         this.phones = new HashSet<PhoneForRest>();
         for (Phones p:e.getPhones())  {
             PhoneForRest pfr = new PhoneForRest(p);
-            //	pfr.setModel(this);
             this.phones.add(pfr);
         }
     }
