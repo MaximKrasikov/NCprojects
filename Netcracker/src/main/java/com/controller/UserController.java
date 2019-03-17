@@ -71,5 +71,4 @@ public class UserController {
         users.save(user);
         return "redirect:/users";
     }
-
 }

@@ -1,6 +1,7 @@
 package com.init;
 
 import com.entities.*;
+import com.forms.GreetServer;
 import com.repository.ModelService.ModelServiceImpl;
 import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureService.PictureServiceImpl;
@@ -122,10 +123,15 @@ public class DataInit implements ApplicationRunner {
         return phones;
     }
 
+    public void startChatServer() throws IOException {
+        GreetServer server=new GreetServer();
+        server.start(5555);
+    }
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
         autentication();
         getModelsAndPhones();
-    }
+        startChatServer();
 
+    }
 }
