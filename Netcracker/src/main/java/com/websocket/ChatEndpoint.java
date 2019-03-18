@@ -1,6 +1,6 @@
 package com.websocket;
 
-import com.forms.Message;
+import com.forms.ChatMessage;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -45,14 +45,14 @@ public class ChatEndpoint {
         chatEndpoints.add(this);
         users.put(session.getId(), username);
 
-        Message message = new Message();
+        ChatMessage message = new ChatMessage();
         message.setFrom(username);
         message.setContent("Connected!");
         broadcast(message);
     }
 
     @OnMessage
-    public void onMessage(Session session, Message message) throws IOException, EncodeException {
+    public void onMessage(Session session, ChatMessage message) throws IOException, EncodeException {
         message.setFrom(users.get(session.getId()));
         broadcast(message);
     }
@@ -60,7 +60,7 @@ public class ChatEndpoint {
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
         chatEndpoints.remove(this);
-        Message message = new Message();
+        ChatMessage message = new ChatMessage();
         message.setFrom(users.get(session.getId()));
         message.setContent("Disconnected!");
         broadcast(message);
@@ -71,7 +71,7 @@ public class ChatEndpoint {
         // Do error handling here
     }
 
-    private static void broadcast(Message message) throws IOException, EncodeException {
+    private static void broadcast(ChatMessage message) throws IOException, EncodeException {
         chatEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
                 try {

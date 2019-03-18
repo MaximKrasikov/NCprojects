@@ -6,7 +6,7 @@ import lombok.Data;
  * Created by Admin on 13.03.2019.
  */
 @Data
-public class Message {
+public class ChatMessage {
     private String from;
     private String to;
     private String content;

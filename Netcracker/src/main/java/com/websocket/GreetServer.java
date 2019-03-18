@@ -1,4 +1,4 @@
-package com.forms;
+package com.websocket;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,9 +16,10 @@ public class GreetServer {
     public void start(int port) {
         try {
             serverSocket = new ServerSocket(port);
-            while (true)
-                new EchoClientHandler(serverSocket.accept()).start();
-
+            while (true) {
+                new EchoClientHandler(serverSocket.accept()).run();
+                //new EchoClientHandler(serverSocket.accept()).start();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -32,7 +33,7 @@ public class GreetServer {
             e.printStackTrace();
         }
     }
-    private static class EchoClientHandler extends Thread {
+    public static class EchoClientHandler extends Thread {
         private Socket clientSocket;
         private PrintWriter out;
         private BufferedReader in;
@@ -51,6 +52,7 @@ public class GreetServer {
                         break;
                     }
                     out.println(inputLine);
+                    System.out.println(inputLine);
                 }
 
                 in.close();

@@ -1,6 +1,6 @@
 package com.websocket;
 
-import com.forms.Message;
+import com.forms.ChatMessage;
 import com.google.gson.Gson;
 
 import javax.websocket.DecodeException;
@@ -10,11 +10,11 @@ import javax.websocket.EndpointConfig;
 /**
  * Created by Admin on 13.03.2019.
  */
-public class MessageDecoder implements Decoder.Text<Message> {
+public class MessageDecoder implements Decoder.Text<ChatMessage> {
     @Override
-    public Message decode(String s) throws DecodeException {
+    public ChatMessage decode(String s) throws DecodeException {
         Gson gson = new Gson();
-        Message message = gson.fromJson(s, Message.class);
+        ChatMessage message = gson.fromJson(s, ChatMessage.class);
         return message;
     }
 
