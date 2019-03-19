@@ -19,19 +19,6 @@ import java.net.URISyntaxException;
 public class WebSocketController { @MessageMapping("/chat.sendMessage")
 @SendTo("/topic/publicChatRoom")
 public ChatMessage sendMessage(@Payload ChatMessage chatMessage) throws URISyntaxException {
-
-        /*final ChatEndpoint clientEndPoint = new ChatEndpoint(new URI("ws://localhost:8080/chat"));
-        clientEndPoint.addMessageHandler(new ChatEndpoint.MessageHandler() {
-            public void handleMessage(String message) {
-                JsonObject jsonObject = Json.createReader(new StringReader(message)).readObject();
-                String userName = jsonObject.getString("user");
-                if (!"bot".equals(userName)) {
-                    clientEndPoint.sendMessage(getMessage("Hello " + userName +", How are you?"));
-                    // other dirty bot logic goes here.. :)
-                }
-            }
-        });
-        */
     return chatMessage;
 }
     private static String getMessage(String message) {

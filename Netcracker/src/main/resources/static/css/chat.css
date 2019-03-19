@@ -1,121 +1,66 @@
 * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    margin: auto;
+    padding: 0px;
 }
 
 html, body {
-    height: 100%;
-    overflow: hidden;
+    width:90%;
+    height:90%;
+    background: #eeeeda;
 }
 
-#login-page {
-    text-align: center;
+.panel {
+    border: 2px solid #0078ae;
+    border-radius: 5px;
+    width:100%;
 }
 
-.nickname  {
-    color:blue;margin-right:20px;
-}
-.hidden {
-    display: none;
-}
-
-.user-container {
-    float: right;
-    margin-right:5px;
+.message-area {
+    height: 70%;
+    resize: none;
+    box-sizing: border-box;
 }
 
-#login-container {
-    background: #f4f6f6 ;
-    border: 2px solid #ccc;
-    width: 100%;
-    max-width: 500px;
-    display: inline-block;
-    margin-top: 42px;
-    vertical-align: middle;
-    position: relative;
-    padding: 35px 55px 35px;
-    min-height: 250px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    margin-top: -160px;
+.input-area {
+    background: #0078ae;
+    box-shadow: inset 0 0 10px #00568c;
 }
 
-
-#chat-container {
-    position: relative;
-    height: 100%;
+.input-area input {
+    margin: 0.5em 0em 0.5em 0.5em;
 }
 
-#chat-container #messageForm {
-    padding: 20px;
+.text-field {
+    border: 1px solid grey;
+    padding: 0.2em;
+    box-shadow: 0 0 5px #000000;
 }
 
-#chat-container {
-    border: 2px solid #d5dbdb;
-    background-color:  #d5dbdb ;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-
-    margin-top: 30px;
-    height: calc(100% - 60px);
-    max-height: 600px;
-    position: relative;
-
+.button {
+    border: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    width: 60px;
+    background: orange;
+    box-shadow: inset 0 0 10px #000000;
+    font-weight: bold;
 }
 
-#chat-container ul {
-    list-style-type: none;
-    background-color: #fff;
-    margin: 0;
-    overflow: auto;
-    overflow-y: scroll;
-    padding: 0 20px 0px 20px;
-    height: calc(100% - 150px);
+.button:hover {
+    background: yellow;
 }
 
-#chat-container #messageForm {
-    padding: 20px;
+h1 {
+    font-size: 1.5em;
+    padding: 5px;
+    margin: 5px;
 }
 
-#chat-container ul li {
-    line-height: 1.5rem;
-    padding: 10px 20px;
-    margin: 0;
-    border-bottom: 1px solid #f4f4f4;
+#userName {
+    width: 20%;
 }
 
-#chat-container ul li p {
-    margin: 0;
-}
-
-#chat-container .event-message {
-    width: 100%;
-    text-align: center;
-    clear: both;
-}
-
-#chat-container .event-message p {
-    color: #777;
-    font-size: 14px;
-    word-wrap: break-word;
-}
-
-#chat-container .chat-message {
-    position: relative;
-}
-
-#messageForm .input-message  {
-    float: left;
-    width: calc(100% - 85px);
-}
-
-.connecting {
-    text-align: center;
-    color: #777;
-    width: 100%;
+#messageInput {
+    min-width: 60%;
+    max-width: 80%;
 }
