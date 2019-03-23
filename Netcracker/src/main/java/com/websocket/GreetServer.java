@@ -17,8 +17,8 @@ public class GreetServer {
         try {
             serverSocket = new ServerSocket(port);
             while (true) {
-                new EchoClientHandler(serverSocket.accept()).run();
-                //new EchoClientHandler(serverSocket.accept()).start();
+                //new EchoClientHandler(serverSocket.accept()).run();
+                new EchoClientHandler(serverSocket.accept()).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
