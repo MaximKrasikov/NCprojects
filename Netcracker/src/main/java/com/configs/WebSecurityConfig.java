@@ -25,7 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return encoder;
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/css/**", "/img/**","/index","/chat","/loginchat", "/registration","/h2-console/**","/phonepage/**","/models","/infphone/**").permitAll().anyRequest()

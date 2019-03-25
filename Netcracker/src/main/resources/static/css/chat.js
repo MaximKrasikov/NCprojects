@@ -9,39 +9,23 @@ var connectingElement = document.querySelector('#connecting');
 var stompClient = null;
 var username = null;
 
-/*
 function connect() {
     username = document.querySelector('#username').innerText.trim();
-    var socket = new SockJS('/greeting');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, onConnected, onError);
-}
-*/
-
-function connect() {
-    username = document.querySelector('#username').innerText.trim();
-        var socket = new WebSocket('ws://localhost:5030/greeting');
+        var socket = new SockJS('ws://localhost:5030/chat');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, onConnected, onError);
-/*
-    stompClient.connect({}, function(frame) {
-         stompClient.subscribe("/user/queue/errors", function(message) {
-             alert("Error " + message.body);
-         });
-
-        stompClient.subscribe("/user/queue/reply", function(message) {
-             alert("Message " + message.body);
-         });
-     }, function(error) {
-         alert("STOMP error " + error);
-     });
-*/
-
+         /*stompClient.connect({}, function(frame) {
+                        setConnected(true);
+                        console.log('Connected: ' + frame);
+                        stompClient.subscribe('/topic/publicChatRoom', function(greeting){
+                            showGreeting(JSON.parse(greeting.body).content);
+                        });
+                    });*/
  }
 
 function disconnect() {
-    if (ws != null) {
-        ws.close();
+    if (stompClient != null) {
+        stompClient.close();
     }
     setConnected(false);
     console.log("Disconnected");
@@ -57,6 +41,7 @@ function onConnected() {
         JSON.stringify({sender: username, type: 'JOIN'})
     )
     connectingElement.classList.add('hidden');
+    console.log("OnConnected");
 }
 
 
@@ -78,6 +63,7 @@ function sendMessage(event) {
         messageInput.value = '';
     }
     event.preventDefault();
+    console.log("SendMes");
 }
 
 
