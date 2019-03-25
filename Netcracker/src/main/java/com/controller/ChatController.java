@@ -2,6 +2,7 @@ package com.controller;
 
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import java.net.URISyntaxException;
  * Created by Admin on 21.03.2019.
  */
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 public class ChatController {
     @Autowired
     private UserRepository users;
@@ -28,13 +30,14 @@ public class ChatController {
         }
         //final ChatEndpoint clientEndPoint = new ChatEndpoint(new URI("ws://localhost:5030/chat"));
         model.addAttribute("username", username);
-        return "chat.html";
+        return "chat";
     }
 
     @RequestMapping(path = "/loginchat", method = RequestMethod.GET)
     public String showLoginPage() {
         return "loginchat";
     }
+
     @RequestMapping(path = "/loginchat", method = RequestMethod.POST)
     public String doLogin(HttpServletRequest request, @RequestParam(defaultValue = "") String username) {
         username = username.trim();

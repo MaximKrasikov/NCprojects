@@ -1,5 +1,5 @@
-
 'use strict';
+
 
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
@@ -9,23 +9,17 @@ var connectingElement = document.querySelector('#connecting');
 var stompClient = null;
 var username = null;
 
+
 function connect() {
     username = document.querySelector('#username').innerText.trim();
-        var socket = new SockJS('ws://localhost:5030/chat');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, onConnected, onError);
-         /*stompClient.connect({}, function(frame) {
-                        setConnected(true);
-                        console.log('Connected: ' + frame);
-                        stompClient.subscribe('/topic/publicChatRoom', function(greeting){
-                            showGreeting(JSON.parse(greeting.body).content);
-                        });
-                    });*/
- }
+    var socket = new SockJS('/greeting');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, onConnected, onError);
+}
 
 function disconnect() {
-    if (stompClient != null) {
-        stompClient.close();
+    if (ws != null) {
+        ws.close();
     }
     setConnected(false);
     console.log("Disconnected");
@@ -41,7 +35,6 @@ function onConnected() {
         JSON.stringify({sender: username, type: 'JOIN'})
     )
     connectingElement.classList.add('hidden');
-    console.log("OnConnected");
 }
 
 
@@ -63,7 +56,6 @@ function sendMessage(event) {
         messageInput.value = '';
     }
     event.preventDefault();
-    console.log("SendMes");
 }
 
 

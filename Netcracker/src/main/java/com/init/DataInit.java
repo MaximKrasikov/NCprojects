@@ -131,6 +131,6 @@ public class DataInit implements ApplicationRunner {
     public void run(ApplicationArguments applicationArguments) throws Exception {
         autentication();
         getModelsAndPhones();
-      // startChatServer();
+        startChatServer();
     }
 }
