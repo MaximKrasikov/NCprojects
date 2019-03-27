@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder(){
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
-    }
+}
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

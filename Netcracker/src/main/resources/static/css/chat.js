@@ -1,6 +1,5 @@
+
 'use strict';
-
-
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
@@ -45,6 +44,7 @@ function onError(error) {
 
 
 function sendMessage(event) {
+    username = document.querySelector('#username').innerText.trim();
     var messageContent = messageInput.value.trim();
     if(messageContent && stompClient) {
         var chatMessage = {
