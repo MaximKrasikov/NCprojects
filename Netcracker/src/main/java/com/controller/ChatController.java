@@ -23,12 +23,9 @@ public class ChatController {
     @RequestMapping("/chat")
     public String index( HttpServletRequest request, org.springframework.ui.Model model) throws URISyntaxException {
         String username = (String) request.getSession().getAttribute("username");
-        //User user = users.findByUsername(principal.getName());
-        //String username= user.getUsername();
         if (username == null || username.isEmpty()) {
             return "redirect:/loginchat";
         }
-        //final ChatEndpoint clientEndPoint = new ChatEndpoint(new URI("ws://localhost:5030/chat"));
         model.addAttribute("username", username);
         return "chat";
     }

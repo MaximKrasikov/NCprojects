@@ -1,16 +1,16 @@
 package com.controller;
 
 import com.forms.ChatMessage;
-import com.websocket.GreetServer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URISyntaxException;
 
 /**
@@ -18,25 +18,23 @@ import java.net.URISyntaxException;
  */
 @Controller
 public class WebSocketController {
-    @Autowired
-    private SimpMessageSendingOperations messagingTemplate;
-    private GreetServer greetServer;
+    private ServerSocket serverSocket;
+    private PrintWriter out;
+    private Socket clientSocket;
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/publicChatRoom")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) throws URISyntaxException, IOException {
-        //описать логику взаимодействия с клиентом
-        greetServer.getMessage();
         return chatMessage;
     }
+
     //подписка на тему
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/publicChatRoom")
     public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        // Add username in web socket session
-        chatMessage.setFrom("admin");
-        headerAccessor.getSessionAttributes().put("username",chatMessage.getFrom());
+        headerAccessor.getSessionAttributes().put("username",chatMessage.getSender());
         return chatMessage;
     }
+
 }
 

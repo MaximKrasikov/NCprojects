@@ -5,7 +5,6 @@ import com.repository.ModelService.ModelServiceImpl;
 import com.repository.PhoneService.PhoneServiceImpl;
 import com.repository.PictureService.PictureServiceImpl;
 import com.repository.UserService.UserServiceImpl;
-import com.websocket.GreetServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -123,14 +122,9 @@ public class DataInit implements ApplicationRunner {
         return phones;
     }
 
-    public void startChatServer() throws IOException {
-        GreetServer server=new GreetServer();
-        server.start(5555);
-    }
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
         autentication();
         getModelsAndPhones();
-        startChatServer();
     }
 }
