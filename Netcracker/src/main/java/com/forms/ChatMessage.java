@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class ChatMessage {
-    private String from;
+    private String sender;
     private String to;
     private String content;
     private MessageType type;
@@ -28,12 +28,12 @@ public class ChatMessage {
         return super.toString();
     }
 
-    public String getFrom() {
-        return from;
+    public String getSender() {
+        return sender;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public String getTo() {

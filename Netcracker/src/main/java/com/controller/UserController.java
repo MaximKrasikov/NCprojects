@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URISyntaxException;
+
 /**
  * Created by Admin on 06.02.2019.
  */
@@ -72,4 +75,10 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @RequestMapping("/chat")
+    public String index(HttpServletRequest request, org.springframework.ui.Model model) throws URISyntaxException {
+        String username= "adminMaxim";
+        model.addAttribute("username", username);
+        return "chat";
+    }
 }

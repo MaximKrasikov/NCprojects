@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -48,8 +49,11 @@ public class AddPhone {
     public String addphone(Model model) {
         PhoneForm phoneForm = new PhoneForm();
         model.addAttribute("phoneForm", phoneForm);
+        List list = new  LinkedList<String>();
+        Object object= new Object();
         return "addphone";
     }
+
 
     @RequestMapping(value = {"/addphone"}, method = RequestMethod.POST)
     public String savePhone(Model model, @ModelAttribute("phoneForm") PhoneForm phoneForm) throws IOException, URISyntaxException, SQLException {

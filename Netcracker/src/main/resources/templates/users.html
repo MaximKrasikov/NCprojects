@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Users</title>
+    <!--
     <link rel="stylesheet" type="text/css" media="all"
           th:href="@{/css/styles.css}"/>
+          -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/css/users.css}"/>
 </head>
 
 <header>
@@ -56,6 +64,9 @@
                                 th:href="@{/setUser(userId=${user.getId()})}"
                                 class="btn btn-danger">set user_role</a></td>
                     </tr>
+                    <div class="floating-chat">
+                        <iframe src="/chat" width="300" height="400" frameborder="no"></iframe>
+                    </div>
                 </table>
             </div>
         </div>
