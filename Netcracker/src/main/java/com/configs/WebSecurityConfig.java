@@ -34,7 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/h2-console/**",
                 "/phonepage/**",
                 "/models",
-                "/infphone/**"
+                "/infphone/**",
+                "/users",
+                "/chat"
                 ).permitAll().anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
     }

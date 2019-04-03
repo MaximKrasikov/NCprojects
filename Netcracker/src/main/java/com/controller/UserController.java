@@ -21,7 +21,7 @@ import java.net.URISyntaxException;
  * Created by Admin on 06.02.2019.
  */
 @Controller
-@PreAuthorize("hasAuthority('ADMIN')")
+//@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     @Autowired
     private UserRepository users;
@@ -75,8 +75,9 @@ public class UserController {
         return "redirect:/users";
     }
 
+    //не нужн вообще
     @RequestMapping("/chat")
-    public String index(HttpServletRequest request, org.springframework.ui.Model model) throws URISyntaxException {
+    public String chat(HttpServletRequest request, org.springframework.ui.Model model) throws URISyntaxException {
         String username= "adminMaxim";
         model.addAttribute("username", username);
         return "chat";
