@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="Access-Control-Allow-Origin" content="*" />
+    <meta name="Access-Control-Allow-Headers" content="*" />
     <title>Spring Boot WebSocket</title>
-    <link rel="stylesheet" th:href="@{/css/chat.css}" />
+    <link rel="stylesheet"  th:href="@{/css/chat.css}" />
 
     <link rel="stylesheet"
           href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
@@ -19,7 +21,7 @@
     <div class="chat-header">
         <div class="user-container">
             <span id="username" th:utext="${username}"></span>
-            <a th:href="@{/logout}">Logout</a>
+            <a th:href="@{/logoutchat}">Logout</a>
         </div>
         <h3>Чат с главным Cracker</h3>
     </div>

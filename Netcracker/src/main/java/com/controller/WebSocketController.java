@@ -35,6 +35,13 @@ public class WebSocketController {
         headerAccessor.getSessionAttributes().put("username",chatMessage.getSender());
         return chatMessage;
     }
+    @MessageMapping("/secured/chat")
+    @SendTo("/secured/history")
+    public ChatMessage send(ChatMessage msg) throws Exception {
+        return new ChatMessage(
+                msg.getSender(),
+                msg.getContent());
+    }
 
 }
 

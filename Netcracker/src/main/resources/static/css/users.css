@@ -1,7 +1,108 @@
+header {
+	background: linear-gradient(to left, #008080, #000000);
+	text-align: center;
+	opacity: 0.85;
+	padding: 10px 0;
+	height: 120px;
+	color: #FFFFFF;
+	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.35), 0 6px 20px 0
+		rgba(0, 0, 0, 0.4);
+}
 .floating-chat{
 	padding: 0;
 	position: fixed; bottom: 0; right: 0; height: 410px;
 }
 .floating-chat{
 	height: 800px;
+}
+.header-row {
+	width: 100;
+	margin-top: 25px;
+}
+.header-left {
+	height: 100px;
+	width: 40%;
+	float: left;
+	text-align: center;
+}
+.header-middle {
+	height: 100px;
+	width: 20%;
+	display: inline-block;
+	text-align: center;
+}
+.header-right {
+	height: 100px;
+	width: 40%;
+	float: right;
+	text-align: center;
+
+}
+
+.header-right a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.row {
+	width: 100;
+}
+
+.col-1-2 {
+	width: 35%;
+	float: left;
+	overflow: hidden;
+}
+
+.col-2-2 {
+	width: 65%;
+	float: right;
+}
+
+.content {
+	margin-left: 15%;
+	margin-top: 40px;
+}
+
+h1 {
+	font-size: 320%;
+	color: #ffffff;
+	margin-top: 5px;
+}
+
+h2 {
+	color: #3a3a3a;
+}
+
+h3 {
+	color: #3a3a3a;
+}
+
+h4 {
+	color: #3a3a3a;
+}
+p {
+	margin-top: 0.15em;
+	margin-bottom: 0.15em;
+	margin-right: 20px;
+}
+
+a {
+	color: #008080;
+	text-decoration: none;
+}
+a:hover {
+	color: #008080;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+	color: #000000;
+	border-color: #000000;
+	background-color: rgba(255, 255, 255, 0.65);
+}
+
+table th, table td {
+	padding: 5px;
 }

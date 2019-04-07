@@ -17,6 +17,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Autowired
     private HttpHandshakeInterceptor handshakeInterceptor;
 
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/cracker").setAllowedOrigins("*").withSockJS().setInterceptors(handshakeInterceptor);

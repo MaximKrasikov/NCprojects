@@ -34,16 +34,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/h2-console/**",
                 "/phonepage/**",
                 "/models",
-                "/infphone/**",
-                "/users",
-                "/chat"
+                "/infphone/**"
                 ).permitAll().anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
+
+        http
+                .headers()
+                .frameOptions()
+                .sameOrigin();
+
+
+        http.csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userSevice)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userSevice).passwordEncoder(passwordEncoder());
     }
 }

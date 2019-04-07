@@ -2,37 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Users</title>
-    <!--
-    <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/styles.css}"/>
-          -->
-
+    <title>Пользователи</title>
     <link rel="stylesheet"
           href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
           integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
           crossorigin="anonymous">
-
+<!--
     <link rel="stylesheet" type="text/css" media="all"
           th:href="@{/css/users.css}"/>
+          -->
+
 </head>
 
 <header>
-    <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
-    <h1>Phones</h1>
-    <p>
-        <a th:href="@{/phones}">Магазин</a>
-    </p>
-    <p>
-        <a th:if="${isUser}" th:href="@{/basket}">Корзина</a>
-    </p>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
+    <div class="header-row">
+        <div class="header-left">
+            <a th:href="@{/phones}"><img
+                    th:src="@{/img/logo.png}" width="100" height="70" align="left"/></a>
+            <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+        <div class="header-middle">
+            <h1>Phones</h1>
+        </div>
+        <div class="header-right">
+            <p>
+                <a th:href="@{/phones}">Магазин</a>
+            </p>
+            <p>
+                <a th:if="${isUser}" th:href="@{/basket}">Корзина</a>
+            </p>
+        </div>
+    </div>
 </header>
 
 <body>
 <div class="row">
+    <div class="col-1-2">
+        <div class="content">
+            <hr>
+            <h2>Управление пользователями.</h2>
+            <p>Управляйте пользователями и доступом их к магазину.</p>
+        </div>
+    </div>
     <div class="col-2-2">
         <div class="content">
             <hr>
@@ -66,13 +80,13 @@
                                 th:href="@{/setUser(userId=${user.getId()})}"
                                 class="btn btn-danger">set user_role</a></td>
                     </tr>
-                    <div class="floating-chat">
-                        <iframe src="http://localhost:5030/chat" width="300" height="600" frameborder="no"></iframe>
-                    </div>
                 </table>
             </div>
         </div>
     </div>
+</div>
+<div class="floating-chat">
+    <iframe src="http://localhost:8080/chat" width="300" height="300" frameborder="no"></iframe>
 </div>
 </body>
 </html>
