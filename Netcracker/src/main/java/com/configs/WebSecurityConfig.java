@@ -27,7 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**",
+        http.headers()
+                .frameOptions().disable().and().authorizeRequests().antMatchers("/css/**",
                 "/img/**",
                 "/index",
                 "/registration",
@@ -37,14 +38,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/infphone/**"
                 ).permitAll().anyRequest()
                 .authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
-
+/*
         http
                 .headers()
                 .frameOptions()
                 .sameOrigin();
+                */
+     /*   http
+                .headers()
+                .frameOptions().disable().and();
+                */
 
 
-        http.csrf().disable();
+         http.csrf().disable();
+
     }
 
     @Override

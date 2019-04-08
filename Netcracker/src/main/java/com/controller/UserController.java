@@ -18,7 +18,7 @@ import java.net.URISyntaxException;
  * Created by Admin on 06.02.2019.
  */
 @Controller
-@CrossOrigin(origins = "http://localhost:5030")
+@CrossOrigin(origins = "http://localhost:8080")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     @Autowired
@@ -72,7 +72,7 @@ public class UserController {
         users.save(user);
         return "redirect:/users";
     }
-
+    //@CrossOrigin
     @RequestMapping("/chat")
     public String chat(HttpServletRequest request, org.springframework.ui.Model model) throws URISyntaxException {
         String username = (String) request.getSession().getAttribute("username");
@@ -82,13 +82,13 @@ public class UserController {
         model.addAttribute("username", username);
         return "chat.html";
     }
-
+    //@CrossOrigin
     @RequestMapping(path = "/loginchat", method = RequestMethod.GET)
     public String showLoginPage() {
         return "loginchat";
     }
 
-    @CrossOrigin
+    //@CrossOrigin
     @RequestMapping(path = "/loginchat", method = RequestMethod.POST)
     public String doLogin(HttpServletRequest request, @RequestParam(defaultValue = "") String username) {
         username = username.trim();
@@ -100,11 +100,11 @@ public class UserController {
 
         return "redirect:/chat";
     }
-
+  //  @CrossOrigin
     @RequestMapping(path = "/logoutchat")
     public String logoutchat(HttpServletRequest request) {
         request.getSession(true).invalidate();
 
-        return "redirect:/loginchat";//
+        return "redirect:/loginchat";
     }
 }
