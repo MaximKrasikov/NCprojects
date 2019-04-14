@@ -8,9 +8,6 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URISyntaxException;
 
 /**
@@ -18,9 +15,6 @@ import java.net.URISyntaxException;
  */
 @Controller
 public class WebSocketController {
-    private ServerSocket serverSocket;
-    private PrintWriter out;
-    private Socket clientSocket;
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/publicChatRoom")
@@ -35,13 +29,5 @@ public class WebSocketController {
         headerAccessor.getSessionAttributes().put("username",chatMessage.getSender());
         return chatMessage;
     }
-    @MessageMapping("/secured/chat")
-    @SendTo("/secured/history")
-    public ChatMessage send(ChatMessage msg) throws Exception {
-        return new ChatMessage(
-                msg.getSender(),
-                msg.getContent());
-    }
-
 }
 

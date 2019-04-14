@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserServiceImpl userSevice;
@@ -24,11 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
 }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.headers()
-                .frameOptions().disable().and().authorizeRequests().antMatchers("/css/**",
+        http.authorizeRequests().antMatchers("/css/**",
                 "/img/**",
                 "/index",
                 "/registration",
@@ -37,23 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/models",
                 "/infphone/**"
                 ).permitAll().anyRequest()
-                .authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
-/*
+                .authenticated().and().formLogin().loginPage("/login").permitAll()
+                .and().logout().permitAll();
+
         http
                 .headers()
-                .frameOptions()
-                .sameOrigin();
-                */
-     /*   http
-                .headers()
-                .frameOptions().disable().and();
-                */
-
-
-         http.csrf().disable();
-
+                .frameOptions().sameOrigin();
     }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userSevice).passwordEncoder(passwordEncoder());

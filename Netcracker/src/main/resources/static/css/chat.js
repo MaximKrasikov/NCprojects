@@ -8,15 +8,17 @@ var connectingElement = document.querySelector('#connecting');
 var stompClient = null;
 var username = null;
 
-/*var webSocketServer= new WebSocketServer.Server({
-    port:8080
-})
-*/
+
 function connect() {
+    var headerName = "${_csrf.headerName}";
+    var token = "${_csrf.token}";
+    var headers = {};
+    headers[headerName] = token;
+
     username = document.querySelector('#username').innerText.trim();
-     var socket= new SockJS('http://localhost:5030/cracker');
+     var socket= new SockJS('http://localhost:5030/karasy');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, onConnected, onError);
+    stompClient.connect(headers,{}, onConnected, onError);
 }
 
 function disconnect() {

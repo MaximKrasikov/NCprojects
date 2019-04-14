@@ -9,16 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.net.URISyntaxException;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Admin on 06.02.2019.
  */
 @Controller
-@CrossOrigin(origins = "http://localhost:8080")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     @Autowired
@@ -71,40 +70,5 @@ public class UserController {
         user.removeRole(Role.USER);
         users.save(user);
         return "redirect:/users";
-    }
-    //@CrossOrigin
-    @RequestMapping("/chat")
-    public String chat(HttpServletRequest request, org.springframework.ui.Model model) throws URISyntaxException {
-        String username = (String) request.getSession().getAttribute("username");
-        if (username == null || username.isEmpty()) {
-            return "redirect:/loginchat";
-        }
-        model.addAttribute("username", username);
-        return "chat.html";
-    }
-    //@CrossOrigin
-    @RequestMapping(path = "/loginchat", method = RequestMethod.GET)
-    public String showLoginPage() {
-        return "loginchat";
-    }
-
-    //@CrossOrigin
-    @RequestMapping(path = "/loginchat", method = RequestMethod.POST)
-    public String doLogin(HttpServletRequest request, @RequestParam(defaultValue = "") String username) {
-        username = username.trim();
-
-        if (username.isEmpty()) {
-            return "loginchat";
-        }
-        request.getSession().setAttribute("username", username);
-
-        return "redirect:/chat";
-    }
-  //  @CrossOrigin
-    @RequestMapping(path = "/logoutchat")
-    public String logoutchat(HttpServletRequest request) {
-        request.getSession(true).invalidate();
-
-        return "redirect:/loginchat";
     }
 }
