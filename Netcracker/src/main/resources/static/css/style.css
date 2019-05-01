@@ -1,13 +1,13 @@
 header {
-  background: linear-gradient(to top, #9DAFB3, #000000);
-  text-align: center;
-  opacity: 0.85;
-  padding: 20px 0;
-  height: 200px;
-  color: #FFFFFF;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.35), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+	background: linear-gradient(to left, #FCFCFC, #222020);
+	text-align: center;
+	opacity: 0.85;
+	padding: 10px 0;
+	height: 120px;
+	color: #FFFFFF;
+	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.35), 0 6px 20px 0
+		rgba(0, 0, 0, 0.4);
 }
-
 
 footer {
   background: linear-gradient(to bottom, #9DAFB3, #000000);

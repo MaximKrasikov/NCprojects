@@ -4,65 +4,88 @@
     <meta charset="UTF-8"/>
     <title>Index page</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/style.css}"/>
+          th:href="@{/css/index.css}"/>
 </head>
 <header>
-    <p>Добро пожаловать в магазин телефонов</p>
-    <h1>Phones</h1>
+    <div class="header-row">
+        <div class="header-left">
+            <a th:href="@{/phones}"><img
+                    th:src="@{/img/tigerlogo.png}" width="200" height="100" align="left"/></a>
+        </div>
+        <div class="header-middle">
+        </div>
+        <div class="header-right">
+            <!-- тут будет меню быстрого доступа-->
+        </div>
+    </div>
 </header>
 
 <body>
-<div class="col-1-2">
-    <div class="content">
-        <h2>Функционал репозитория</h2>
-        <div class="header-right">
-            <p>
-                Чтобы совершить покупку, вам необходимо войти!
-            </p>
-            <p>
-                Если вы зарегистрированы, нажмите кнопку ВОЙТИ
-            </p>
+<div class="row">
+    <div class="col-1-2">
+        <div class="content">
+            <hr>
+            <h2>Функционал репозитория</h2>
             <p>
                 <a th:href="@{/phones}">Войти</a>
             </p>
+            <div class="map">
+                <iframe width=100% height=400px
+                        src="https://www.google.com/maps/d/embed?mid=1v1XTOP10Z6Gdiqznml9355TcewfC7bzd"></iframe>
+            </div>
+            <hr>
+            <div class="youtube">
+                <iframe width=100% height=400px
+                        src="https://www.youtube.com/embed/koqaUFPfTGE" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 </div>
-<h2 align="middle">All Phones</h2>
-<div align="middle" , overflow="scroll">
-    <table border="0">
-        <tr>
-            <th>id</th>
-            <th>model</th>
-            <th>color</th>
-            <th>price</th>
-            <th>size</th>
-            <th>diagonal</th>
-            <th>description</th>
-            <th>creation date</th>
-            <th>picture</th>
-        </tr>
-        <tr th:each="phone : ${phones}">
-            <td th:utext="${phone.getPhone_id()}">...</td>
-            <td th:utext="${phone.getModelName()}">...</td>
-            <td th:utext="${phone.getColor()}">...</td>
-            <td th:utext="${phone.getPrice()}">...</td>
-            <td th:utext="${phone.getSize()}">...</td>
-            <td th:utext="${phone.getDiagonal()}">...</td>
-            <td th:utext="${phone.getDescription()}">...</td>
-            <td th:utext="${phone.getCreation_date()}">...</td>
-            <td th:each="phone:${phone.getPictures()}">
-                <img width="100" height="100"
-                     th:src="@{'data:image/jpeg;base64,'+${phone.encodeImage()}}"
-                     alt=""/></td>
-            <td>
-                <form th:action="@{/login}" th:object="${phoneForm}" method="POST">
-                    <a th:href="@{basket/addtobasket(phoneId=${phone.getPhone_id()})}"
-                       class="btn btn-danger">AddToBasket</a>
-                </form>
-            </td>
-        </tr>
-    </table>
+
+<div class="col-2-2">
+    <div class="content">
+        <hr>
+        <h2 align="left">Продукт</h2>
+        <table border="0">
+            <tr>
+                <th>id</th>
+                <th>model</th>
+                <th>color</th>
+                <th>price</th>
+                <th>size</th>
+                <th>diagonal</th>
+                <th>description</th>
+                <th>creation date</th>
+                <th>picture</th>
+            </tr>
+            <tr th:each="phone : ${phones}">
+                <td th:utext="${phone.getPhone_id()}">...</td>
+                <td th:utext="${phone.getModelName()}">...</td>
+                <td th:utext="${phone.getColor()}">...</td>
+                <td th:utext="${phone.getPrice()}">...</td>
+                <td th:utext="${phone.getSize()}">...</td>
+                <td th:utext="${phone.getDiagonal()}">...</td>
+                <td th:utext="${phone.getDescription()}">...</td>
+                <td th:utext="${phone.getCreation_date()}">...</td>
+                <td th:each="phone:${phone.getPictures()}">
+                    <img width="100" height="100"
+                         th:src="@{'data:image/jpeg;base64,'+${phone.encodeImage()}}"
+                         alt=""/></td>
+                <td>
+                    <form th:action="@{/login}" th:object="${phoneForm}" method="POST">
+                        <a th:href="@{basket/addtobasket(phoneId=${phone.getPhone_id()})}"
+                           class="btn btn-danger">AddToBasket</a>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <p align="right">Group project for NC. March 2019.
+        <p>
+    </div>
 </div>
 </body>
 </html>

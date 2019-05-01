@@ -60,6 +60,7 @@ public class DataInit implements ApplicationRunner {
     }
 
     public  List<Phones> getModelsAndPhones() throws ParseException, IOException, SQLException, URISyntaxException {
+
         List<Model_Char> models = new ArrayList<>();
         List<Phones> phones = new ArrayList<>();
         List<Pictures> pics = new ArrayList<>();
