@@ -51,7 +51,7 @@ body {
 	margin: 0;
 	font-family: 'Calibri', serif;
 	font-size: 96%;
-	background: url("/img/users.jpg") no-repeat;
+	background: url("/img/socialphones.jpg") no-repeat;
                 background-size:  cover;/* Современные браузеры */
 	padding-bottom: 40px;
 	min-height: 100%;
@@ -68,7 +68,11 @@ body {
 }
 
 .col-2-2 {
-	width: 65%;
+	width: 30%;
+	float: right;
+}
+.col-3-2 {
+	width: 35%;
 	float: right;
 }
 
@@ -78,7 +82,7 @@ body {
 }
 
 h1 {
-	font-size: 320%;
+	font-size: 200%;
 	color: #ffffff;
 	margin-top: 5px;
 }
@@ -103,11 +107,11 @@ p {
 }
 
 a {
-	color: 	#ffffff;
+	color: 	#D4BCBC;
 	text-decoration: none;
 }
 a:hover {
-	color: 	#ffffff;
+	color: 	#211F1F;
 	text-decoration: underline;
 }
 

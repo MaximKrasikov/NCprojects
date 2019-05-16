@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Index page</title>
@@ -9,8 +9,12 @@
 <header>
     <div class="header-row">
         <div class="header-left">
-            <a th:href="@{/phones}"><img
-                    th:src="@{/img/tigerlogo.png}" width="200" height="100" align="left"/></a>
+            <div sec:authorize="isAuthenticated()">
+                <form th:action="@{/login}" method="POST">
+                    <a th:href="@{/loginpage}"><img
+                            th:src="@{/img/logokarasy.png}" width="200" height="100" align="left"/></a>
+                </form>
+            </div>
         </div>
         <div class="header-middle">
         </div>
@@ -26,9 +30,6 @@
         <div class="content">
             <hr>
             <h2>Функционал репозитория</h2>
-            <p>
-                <a th:href="@{/phones}">Войти</a>
-            </p>
             <div class="map">
                 <iframe width=100% height=400px
                         src="https://www.google.com/maps/d/embed?mid=1v1XTOP10Z6Gdiqznml9355TcewfC7bzd"></iframe>

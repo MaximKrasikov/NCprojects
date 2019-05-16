@@ -118,7 +118,7 @@ public class DataInit implements ApplicationRunner {
 
         for (Phones p : phones) {
             servicePhone.addPhone(p);
-            servicePhone.save(p);
+            servicePhone.savePhone(p);
         }
         return phones;
     }

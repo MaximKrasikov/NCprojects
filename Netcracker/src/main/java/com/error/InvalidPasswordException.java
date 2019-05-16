@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by Admin on 22.02.2019.
  */
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "invalid password")
+@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Please, check Runtime Ex")
 @SuppressWarnings("serial")
 public class InvalidPasswordException extends RuntimeException {
 

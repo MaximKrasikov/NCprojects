@@ -4,14 +4,19 @@
     <meta charset="UTF-8"/>
     <title>Basket</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/style.css}"/>
+          th:href="@{/css/bascket.css}"/>
 </head>
 
 <header>
     <div class="header-row">
-        <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
+        <div class="header-left">
+            <a th:href="@{/phones}"><img
+                    th:src="@{/img/logokarasy.png}" width="100" height="70" align="left"/></a>
+        </div>
         <div class="header-middle">
-            <h1>Phones</h1>
+            <h1>Корзина</h1>
+        </div>
+        <div class="header-right">
         </div>
     </div>
 </header>
@@ -21,26 +26,31 @@
         <div class="row">
             <div class="col-1-2">
                 <div class="content">
+                    <h3>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</h3>
                     <hr>
                     <h2>Личный кабинет</h2>
-                    <p th:utext="${user.getUsername()}">...</p>
-                    <p>Покупок в корзине:
-                    <p th:utext="${user.getNumberOfPhones()}">0</p>
-                    <h2>Функционал</h2>
-                    <p>
+                    <h3>
+                        <p>Покупок в корзине:
+                        <p th:utext="${user.getNumberOfPhones()}">0</p>
+                    </h3>
+                    <h2>Дополнительно</h2>
+                    <h3>
                         <a th:if="${isAdmin}" th:href="@{/users}">Список пользователей</a>
-                    </p>
-                    <p>
+                    </h3>
+                    <h3>
                         <a th:href="@{/phones}">Магазин</a>
-                    </p>
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" value="Sign Out"/>
-                    </form>
+                    </h3>
+                    <br> <br> <a href="http://localhost:5030"><img
+                        th:src="@{/img/partner.png}" width="400"></a>
+                    <h3>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Sign Out"/>
+                        </form>
+                    </h3>
                 </div>
             </div>
             <div class="col-2-2">
                 <div class="content">
-                    <hr>
                     <h2>Корзина</h2>
                     <div>
                         <table border="0">

@@ -2,43 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Index page</title>
-    <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/style.css}"/>
+    <title>Registration page</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/loginpage.css}"/>
+    <link rel="icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script th:src="@{/css/pwstrength.js}"></script>
 </head>
-<header>
-    <div class="header-row">
-        <div class="header-left">
-            <p>Добро пожаловать!</p>
-        </div>
-        <div class="header-middle">
-            <h1>Phones</h1>
-        </div>
-        <div class="header-right"></div>
-    </div>
-</header>
 <body>
-<div class="row">
-    <div class="col-1-2">
-        <div class="content">
-            <hr>
-            <h2>Регистрация нового пользователя.</h2>
-            <div th:if="${param.error}">Неправильный логин или пароль</div>
-            <div th:if="${param.logout}">Вы вышли из системы</div>
-            <div th:if="${checkDb}">Пользователь с таким именем уже существует.</div>
-            <div>Пароль должен содержать 8-30 символов.
-                Пароль не должен содержать пробелов и должен содержать минимум 1 цифру
-            </div>
-            <form th:action="@{/registration}" method="post">
-                Login: <br>
-                <input type="text" name="username" placeholder="username"/> <br>
-                Password: <br>
-                <input type="password" name="password" placeholder="password"/> <br>
-                Confirm: <br>
-                <input type="password" name="matchingPassword" placeholder="confirm password"/> <br>
-                <script type="text/javascript">
+<div class="vladmaxi-top">
+    <a href="http://localhost:5050" target="_blank">Главный партнер</a>
+        <span class="right">
+        </span>
+    <div class="clr"></div>
+</div>
+
+<div id="login">
+    <div th:if="${param.error}">Неправильный логин или пароль</div>
+    <div th:if="${param.logout}">Вы вышли из системы</div>
+    <div th:if="${checkDb}">Пользователь с таким именем уже существует.</div>
+    <div>Пароль должен содержать 8-30 символов.
+        Пароль не должен содержать пробелов и должен содержать минимум 1 цифру
+    </div>
+    <form th:action="@{/registration}" method="post">
+        <fieldset class="clearfix">
+            <p><span class="fontawesome-user"></span>
+                <input type="text" name="username" placeholder="username"/></p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p><span class="fontawesome-lock"></span>
+                <input type="password" name="password" placeholder="password"/></p> <!-- JS because of IE support; better: placeholder="Password" -->
+            <p><span class="fontawesome-lock"></span>
+                <input type="password" name="matchingPassword" placeholder="confirm"/></p>
+            <script type="text/javascript">
                         $(document).ready(function () {
                             options = {
                                 common: {minChar:8},
@@ -59,15 +53,10 @@
                             $('#password').pwstrength(options);
                         });
                 </script>
-                <br>
-                <br>
-                <input type="submit" value="Sign In"/>
-            </form>
-            <form th:action="@{/login}">
-                <input type="submit" value="login"/>
-            </form>
-        </div>
-    </div>
+            <p><input type="submit" value="ЗАРЕГИСТРИРОВАТЬСЯ"></p>
+        </fieldset>
+    </form>
+    <p>Есть аккаунт? &nbsp;&nbsp;<a th:href="@{/loginpage}">Авторизация</a><span class="fontawesome-arrow-right"></span></p>
 </div>
 </body>
 </html>

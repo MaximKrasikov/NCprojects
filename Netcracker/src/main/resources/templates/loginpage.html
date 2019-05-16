@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login Form</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/loginpage.css}"/>
+	<link rel="icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="vladmaxi-top">
+        <a href="http://localhost:5050" target="_blank">Главный партнер</a>
+        <span class="right">
+        </span>
+    <div class="clr"></div>
+    </div>
+
+    <div id="login">
+        <div th:if="${param.error}">Неверный логин или пароль.</div>
+        <div th:if="${param.logout}">Вы вышли из системы.</div>
+        <form th:action="@{/loginpage}" method="post">
+            <fieldset class="clearfix">
+                <p><span class="fontawesome-user"></span>
+                    <input type="text" name="username" placeholder="username"/></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                <p><span class="fontawesome-lock"></span>
+                    <input type="password" name="password" placeholder="password"/></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                <p><input type="submit" value="ВОЙТИ"></p>
+            </fieldset>
+        </form>
+        <p>Нет аккаунта? &nbsp;&nbsp;<a th:href="@{/registration}">Регистрация</a><span class="fontawesome-arrow-right"></span></p>
+    </div>
+</body>
+</html>

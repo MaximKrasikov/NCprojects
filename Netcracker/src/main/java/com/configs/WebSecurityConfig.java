@@ -20,28 +20,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserServiceImpl userSevice;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
-}
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**",
-                "/img/**",
-                "/index/**",
-                "/registration",
-                "/h2-console/**",
-                "/phonepage/**",
-                "/models",
-                "/infphone/**"
+        http
+                .anonymous()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/css/**",
+                        "/img/**",
+                        "/index",
+                        "/registration",
+                        "/h2-console/**",
+                        "/phonepage/**",
+                        "/models",
+                        "/infphone/**",
+                        "/phones/**",
+                        "/phoneId"
                 ).permitAll().anyRequest()
-                .authenticated().and().formLogin().loginPage("/login").permitAll()
+                .authenticated().and().formLogin().loginPage("/loginpage").permitAll()
                 .and().logout().permitAll();
 
         http
                 .headers()
                 .frameOptions().sameOrigin();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userSevice).passwordEncoder(passwordEncoder());

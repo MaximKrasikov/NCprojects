@@ -16,7 +16,7 @@
                     th:src="@{/img/logokarasy.png}" width="100" height="70" align="left"/></a>
         </div>
         <div class="header-middle">
-            <h1>Phones</h1>
+            <h1>Администрация</h1>
         </div>
         <div class="header-right">
             <!-- тут будет меню быстрого доступа-->
@@ -28,13 +28,17 @@
 <div class="row">
     <div class="col-1-2">
         <div class="content">
+            <h3>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</h3>
             <hr>
             <h2>Управление пользователями</h2>
-            <p>Управляйте пользователями и доступом их к магазину</p>
-            <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
+            <h3>Управляйте пользователями и доступом их к магазину</h3>
+            <br> <br> <a href="http://localhost:5030"><img
+                th:src="@{/img/partner.png}" width="400"></a>
+            <h3>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </h3>
         </div>
     </div>
 
@@ -48,7 +52,6 @@
 
     <div class="col-2-2">
         <div class="content">
-            <hr>
             <h2>Список пользователей</h2>
             <p th:if="${deletingAdmin}">Удаление прав главного админа невозможно.</p>
             <div>

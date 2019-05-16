@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -49,14 +48,13 @@ public class AddPhone {
     public String addphone(Model model) {
         PhoneForm phoneForm = new PhoneForm();
         model.addAttribute("phoneForm", phoneForm);
-        List list = new  LinkedList<String>();
-        Object object= new Object();
         return "addphone";
     }
 
 
     @RequestMapping(value = {"/addphone"}, method = RequestMethod.POST)
     public String savePhone(Model model, @ModelAttribute("phoneForm") PhoneForm phoneForm) throws IOException, URISyntaxException, SQLException {
+
         String model_name = phoneForm.getModel_name();
         String color_name = phoneForm.getColor_name();
         long price = phoneForm.getPrice();
@@ -68,7 +66,7 @@ public class AddPhone {
         Model_Char m;
         Phones p;
         List<Pictures> picList = new ArrayList<>();
-        if (phoneRepository.findPhoneById(phoneForm.getPhone_id()) == null) {//если телефон по id телефона не найден
+        if (phoneRepository.findPhoneById(phoneForm.getPhone_id()) == null && modelRepository.findByName(model_name).isEmpty()) {//если телефон по id телефона не найден
             m = new Model_Char(model_name, diagonal, size, description);
             modelRepository.save(m);
 

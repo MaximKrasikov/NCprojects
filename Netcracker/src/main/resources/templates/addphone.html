@@ -4,64 +4,99 @@
     <meta charset="UTF-8"/>
     <title>Add phone</title>
     <link rel="stylesheet" type="text/css" media="all"
-          th:href="@{/css/style.css}"/>
+          th:href="@{/css/addphone.css}"/>
 </head>
 
 <header>
-    <p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
-    <h1>Добавление продукта</h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-    <div class="header-right">
-        <p>
-            <a th:href="@{/users}">Список пользователей</a>
-        </p>
-        <p>
-            <a th:href="@{/phones}">Магазин</a>
-        </p>
+    <div class="header-row">
+        <div class="header-left">
+            <a th:href="@{/phones}"><img
+                    th:src="@{/img/logokarasy.png}" width="100" height="70" align="left"/></a>
+        </div>
+        <div class="header-middle">
+            <h1>Добавление продукта</h1>
+        </div>
+        <div class="header-right">
+        </div>
     </div>
 </header>
 <body>
-<!--Добавление ролей-->
+
 <div sec:authorize="isAuthenticated()">
     <div sec:authorize="hasRole('ROLE_ADMIN')">
-<div class="row">
-    <div class="col-1-2">
-        <div class="content">
-            <h2>Добавление позиции</h2>
-            <form th:action="@{/addphone}"
-                  th:object="${phoneForm}" method="POST" enctype="multipart/form-data">
-                <table>
-                    Model:
-                    <input type="text" th:field="*{model_name}"/>
-                    <br/>
-                    Color:
-                    <input type="text" th:field="*{color_name}"/>
-                    <br/>
-                    Price:
-                    <input type="text" th:field="*{price}"/>
-                    <br/>
-                    Size:
-                    <input type="text" th:field="*{size}"/>
-                    <br/>
-                    Diagonal:
-                    <input type="text" th:field="*{diagonal}"/>
-                    <br/>
-                    Description:
-                    <input type="text" th:field="*{description}"/>
-                    <br/>
-                    Picture:
-                    <input type="file" multiple accept="image/*,image/jpeg" th:field="*{pictures}"/>
-                    <br/>
-                    <input type="submit" value="Create"/>
-                </table>
-            </form>
+        <div class="row">
+            <div class="col-1-2">
+                <div class="content">
+                    <hr>
+                    <h2>Добавление позиции</h2>
+                    <form th:action="@{/addphone}"
+                          th:object="${phoneForm}" method="POST" enctype="multipart/form-data">
+                        <table>
+                            <h3>
+                                Model:
+                                <input type="text" th:field="*{model_name}"/>
+                                <br/>
+                            </h3>
+                            <h3>
+                                Color:
+                                <input type="text" th:field="*{color_name}"/>
+                                <br/>
+                            </h3>
+                            <h3>
+                                Price:
+                                <input type="text" th:field="*{price}"/>
+                                <br/>
+                            </h3>
+                            <h3>
+                                Size:
+                                <input type="text" th:field="*{size}"/>
+                                <br/>
+                            </h3>
+                            <h3>
+                                Diagonal:
+                                <input type="text" th:field="*{diagonal}"/>
+                                <br/>
+                            </h3>
+                            <h3>
+                                Description:
+                                <input type="text" th:field="*{description}"/>
+                                <br/>
+                            </h3>
+                            <h3>
+                                Picture:
+                                <input type="file" multiple accept="image/*,image/jpeg" th:field="*{pictures}"/>
+                                <br/>
+                            </h3>
+                            <input type="submit" value="Create"/>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="col-2-2">
+                <div class="content">
+                    <hr>
+                    <h2>Дополнительно:</h2>
+                    <h3>
+                        <a th:href="@{/users}">Список пользователей</a>
+                    </h3>
+                    <h3>
+                        <a th:href="@{/phones}">Магазин</a>
+                    </h3>
+                    <br> <br> <a href="http://localhost:5030"><img
+                        th:src="@{/img/partner.png}" width="400"></a>
+                    <h3>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Sign Out"/>
+                        </form>
+                    </h3>
+                </div>
+                <div class="footer">
+                    <p align="right">Group project for NC. March 2019.
+                    <p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-</div>
-</div>
-</body>
 </body>
 </html>

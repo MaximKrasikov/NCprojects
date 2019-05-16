@@ -6,6 +6,7 @@ package com.controller;
 
 import com.entities.Phones;
 import com.entities.User;
+import com.repository.ModelRepository;
 import com.repository.PhoneRepository;
 import com.repository.PictureService.PictureServiceImpl;
 import com.repository.UserRepository;
@@ -26,6 +27,8 @@ import java.util.List;
 public class ServerController {
     @Autowired
     private PhoneRepository phoneRepository;
+    @Autowired
+    private ModelRepository modelRepository;
     @Autowired
     PictureServiceImpl pictureService;
     @Autowired

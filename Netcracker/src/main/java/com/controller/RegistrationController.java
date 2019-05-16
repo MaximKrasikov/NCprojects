@@ -69,9 +69,10 @@ public class RegistrationController extends PasswordConstraintValidator {
         user.setRoles(Collections.singleton(Role.USER));
         users.save(user);
 
-        return "redirect:/login";
+        return "redirect:/loginpage";
     }
 
+    /*==========================================обработка ошибок===========================================================*/
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "IOException exception! check arguments!")
     @ExceptionHandler(value= {IOException.class, SQLException.class})
     public void handleIOException() {
